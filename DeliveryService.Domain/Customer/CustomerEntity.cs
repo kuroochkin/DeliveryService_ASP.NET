@@ -13,6 +13,8 @@ public class CustomerEntity
 
 	public DateTime BirthDay { get; }
 
+	public int CountOrder { get; set; }
+
 	public CustomerEntity(Guid id, string firstName, string lastName)
 	{
 		Id = id;

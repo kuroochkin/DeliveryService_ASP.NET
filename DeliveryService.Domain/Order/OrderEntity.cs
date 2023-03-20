@@ -1,6 +1,5 @@
-﻿
-
-using DeliveryService.Domain.Courier;
+﻿using DeliveryService.Domain.Courier;
+using DeliveryService.Domain.Customer;
 using DeliveryService.Domain.Product;
 
 namespace DeliveryService.Domain.Order;
@@ -15,6 +14,8 @@ public class OrderEntity
 	public DateTime End { get; set; }
 
 	public CourierEntity Courier { get; set; } = null!;
+
+	public CustomerEntity Customer{ get; set; } = null!;
 
 	public IReadOnlyList<ProductEntity> Order => _products.AsReadOnly();
 }
