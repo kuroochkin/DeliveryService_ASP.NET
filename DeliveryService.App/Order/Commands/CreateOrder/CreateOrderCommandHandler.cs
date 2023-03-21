@@ -37,7 +37,7 @@ public class CreateOrderCommandHandler
 			return Errors.Customer.NotFound;
 		}
 
-		var order = new OrderEntity(courier, customer);
+		var order = new OrderEntity(courier, customer, request.Description);
 
 		if(await _unitOfWork.Orders.Add(order))
 		{
