@@ -13,17 +13,25 @@ public class OrderEntity
 
 	public DateTime End { get; set; }
 
+	public string Description { get; set; }
+
+	//public bool IsDelivered { get; set; }
+
 	public CourierEntity Courier { get; set; } = null!;
 
 	public CustomerEntity Customer{ get; set; } = null!;
 
 	public IReadOnlyList<ProductEntity> Order => _products.AsReadOnly();
 
-	public OrderEntity(CourierEntity courier, CustomerEntity customer)
+	public OrderEntity(
+		CourierEntity courier, 
+		CustomerEntity customer,
+		string description)
 	{
 		Id = Guid.NewGuid();
 		Created = DateTime.Now;
 		End = DateTime.Now.AddMinutes(30);
+		Description = description;
 		Courier = courier;
 		Customer = customer;
 	}

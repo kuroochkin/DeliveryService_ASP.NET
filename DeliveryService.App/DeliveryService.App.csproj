@@ -16,8 +16,4 @@
     <ProjectReference Include="..\DeliveryService.Domain\DeliveryService.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Courier\Commands\AddCourier\" />
-  </ItemGroup>
-
 </Project>

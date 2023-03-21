@@ -21,11 +21,12 @@ public class CourierEntity
 
 	public IReadOnlyList<OrderEntity> Orders => _orders.AsReadOnly();
 
-	public CourierEntity(Guid id, string firstName, string lastName)
+	public CourierEntity(string firstName, string lastName, string patronymic)
 	{
-		Id = id;
+		Id = Guid.NewGuid();
 		FirstName = firstName;
 		LastName = lastName;
+		Patronymic = patronymic;
 	}
 
 	public CourierEntity()
