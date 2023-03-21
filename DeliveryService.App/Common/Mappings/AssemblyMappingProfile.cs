@@ -10,6 +10,7 @@ public class AssemblyMappingProfile : Profile
 
 	private void ApplyMappingsFromAssembly(Assembly assembly)
 	{
+		// Находим интерфейсы, которые зависят от IMapWith<>
 		var types = assembly.GetExportedTypes()
 			.Where(type => type.GetInterfaces()
 				.Any(i => i.IsGenericType &&
