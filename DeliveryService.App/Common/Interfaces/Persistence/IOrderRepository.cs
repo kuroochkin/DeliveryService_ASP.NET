@@ -1,6 +1,8 @@
-﻿namespace DeliveryService.App.Common.Interfaces.Persistence;
+﻿using DeliveryService.Domain.Order;
 
-public interface IOrderRepository
+namespace DeliveryService.App.Common.Interfaces.Persistence;
+
+public interface IOrderRepository : IGenericRepository<OrderEntity>
 {
 
 }

@@ -1,6 +1,8 @@
-﻿namespace DeliveryService.App.Common.Interfaces.Persistence;
+﻿using DeliveryService.Domain.Customer;
 
-public interface ICustomerRepository
+namespace DeliveryService.App.Common.Interfaces.Persistence;
+
+public interface ICustomerRepository : IGenericRepository<CustomerEntity>
 {
     
 }

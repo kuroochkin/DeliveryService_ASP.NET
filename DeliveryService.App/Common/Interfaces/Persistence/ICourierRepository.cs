@@ -1,5 +1,7 @@
-﻿namespace DeliveryService.App.Common.Interfaces.Persistence;
+﻿using DeliveryService.Domain.Courier;
 
-public interface ICourierRepository
+namespace DeliveryService.App.Common.Interfaces.Persistence;
+
+public interface ICourierRepository : IGenericRepository<CourierEntity>
 {
 }
