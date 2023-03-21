@@ -1,8 +1,12 @@
 ﻿
+using DeliveryService.Domain.Order;
+
 namespace DeliveryService.Domain.Customer;
 
 public class CustomerEntity
 {
+	private List<OrderEntity> _orders = new();
+	
 	public Guid Id { get; }
 
 	public string LastName { get; }
@@ -12,6 +16,10 @@ public class CustomerEntity
 	public string? Patronymic { get; }
 
 	public DateTime BirthDay { get; }
+
+	public int CountOrder { get; set; }
+
+	public IReadOnlyList<OrderEntity> Orders => _orders.AsReadOnly();
 
 	public CustomerEntity(Guid id, string firstName, string lastName)
 	{
@@ -23,6 +31,11 @@ public class CustomerEntity
 	public CustomerEntity()
 	{
 
+	}
+
+	public void AddOrder(OrderEntity order)
+	{
+		_orders.Add(order);
 	}
 
 	public string GetFullName()
