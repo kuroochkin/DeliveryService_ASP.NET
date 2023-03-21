@@ -17,8 +17,6 @@ public class OrderConfiguration : IEntityTypeConfiguration<OrderEntity>
 
 		builder.HasKey(order => order.Id);
 
-		
-		
 		builder.Property(order => order.Created);
 		builder.Property(order => order.End);
 
