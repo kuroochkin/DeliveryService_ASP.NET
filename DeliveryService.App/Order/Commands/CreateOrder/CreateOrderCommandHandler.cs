@@ -11,6 +11,11 @@ public class CreateOrderCommandHandler
 {
 	private readonly IUnitOfWork _unitOfWork;
 
+	public CreateOrderCommandHandler(IUnitOfWork unitOfWork)
+	{
+		_unitOfWork = unitOfWork;
+	}
+
 	public async Task<ErrorOr<bool>> Handle(
 		CreateOrderCommand request, 
 		CancellationToken cancellationToken)
@@ -37,7 +42,12 @@ public class CreateOrderCommandHandler
 			return Errors.Customer.NotFound;
 		}
 
-		var order = new OrderEntity(courier, customer, request.Description);
+		var order = new OrderEntity()
+		{
+			Courier = courier,
+			Customer = customer,
+			Description = request.Description,
+		};
 
 		if(await _unitOfWork.Orders.Add(order))
 		{

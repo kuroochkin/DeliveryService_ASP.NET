@@ -37,11 +37,13 @@ public class GetOrderDetailsQueryHandler
 			new CourierVm(
 				order.Courier.Id.ToString(),
 				order.Courier.LastName,
-				order.Courier.FirstName),
+				order.Courier.FirstName,
+				order.Courier.Patronymic),
 			new CustomerVm(
-				order.Courier.Id.ToString(),
-				order.Courier.LastName,
-				order.Courier.FirstName));
+				order.Customer.Id.ToString(),
+				order.Customer.LastName,
+				order.Customer.FirstName,
+				order.Customer.Patronymic));
 
 		return orderInfo;	
 	}
