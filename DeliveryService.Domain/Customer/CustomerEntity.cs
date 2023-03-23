@@ -21,11 +21,14 @@ public class CustomerEntity
 
 	public IReadOnlyList<OrderEntity> Orders => _orders.AsReadOnly();
 
-	public CustomerEntity(Guid id, string firstName, string lastName)
+	public CustomerEntity(string lastName, string firstName, string patronymic)
 	{
-		Id = id;
+		Id = Guid.NewGuid();
 		FirstName = firstName;
 		LastName = lastName;
+		Patronymic = patronymic;
+		BirthDay = DateTime.Now;
+		CountOrder = 0;
 	}
 
 	public CustomerEntity()
@@ -36,6 +39,7 @@ public class CustomerEntity
 	public void AddOrder(OrderEntity order)
 	{
 		_orders.Add(order);
+		CountOrder++;
 	}
 
 	public string GetFullName()

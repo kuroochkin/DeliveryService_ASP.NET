@@ -1,21 +1,22 @@
-﻿namespace DeliveryService.App.Order.Queries.GetOrderDetails;
+﻿namespace DeliveryService.Contracts.Order.Get;
 
-public record OrderDetailsVm(
+public record GetOrderDetailsResponse(
 	string OrderId,
 	string Description,
 	DateTime Created,
-	CourierVm Courier,
-	CustomerVm Customer
+	CourierResponse Courier,
+	CustomerResponse Customer
 	);
 
-public record CourierVm(
+public record CourierResponse(
 	string CourierId,
 	string LastName,
 	string FirstName,
 	string Patronymic);
 
-public record CustomerVm(
+public record CustomerResponse(
 	string CustomerId,
 	string LastName,
 	string FirstName,
 	string Patronymic);
+

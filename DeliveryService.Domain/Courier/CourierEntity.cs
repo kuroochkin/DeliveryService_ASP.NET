@@ -21,12 +21,14 @@ public class CourierEntity
 
 	public IReadOnlyList<OrderEntity> Orders => _orders.AsReadOnly();
 
-	public CourierEntity(string firstName, string lastName, string patronymic)
+	public CourierEntity(string lastName, string firstName, string patronymic)
 	{
 		Id = Guid.NewGuid();
 		FirstName = firstName;
 		LastName = lastName;
 		Patronymic = patronymic;
+		BirthDay = DateTime.Now;
+		CountOrder = 0;
 	}
 
 	public CourierEntity()
@@ -37,6 +39,7 @@ public class CourierEntity
 	public void AddOrder(OrderEntity order)
 	{
 		_orders.Add(order);
+		CountOrder++;
 	}
 
 	public string GetFullName()

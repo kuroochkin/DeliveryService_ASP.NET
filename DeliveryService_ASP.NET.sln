@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32819.101
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeliveryService_ASP.NET", "DeliveryService_ASP.NET\DeliveryService_ASP.NET.csproj", "{EB0E37BF-379C-45FE-BC77-B600F4E971F4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeliveryService.API", "DeliveryService_ASP.NET\DeliveryService.API.csproj", "{EB0E37BF-379C-45FE-BC77-B600F4E971F4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{C4E7D0C8-C6E2-481A-8214-4D2CADC6F311}"
 EndProject
@@ -11,11 +11,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{7FCA4D67-5A3E-476F-B125-A2E1C2AE835D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeliveryService.Domain", "DeliveryService.Domain\DeliveryService.Domain.csproj", "{031787A0-BF82-4C88-BC50-1585A38B8239}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeliveryService.Domain", "DeliveryService.Domain\DeliveryService.Domain.csproj", "{031787A0-BF82-4C88-BC50-1585A38B8239}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeliveryService.infrastructure", "DeliveryService.infrastructure\DeliveryService.infrastructure.csproj", "{2ED1AD2D-0740-410E-895D-9842D10A221A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeliveryService.infrastructure", "DeliveryService.infrastructure\DeliveryService.infrastructure.csproj", "{2ED1AD2D-0740-410E-895D-9842D10A221A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeliveryService.App", "DeliveryService.App\DeliveryService.App.csproj", "{EB23172B-1FE1-4281-AC50-4F560A18F5D0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeliveryService.App", "DeliveryService.App\DeliveryService.App.csproj", "{EB23172B-1FE1-4281-AC50-4F560A18F5D0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeliveryService.Contracts", "DeliveryService.Contracts\DeliveryService.Contracts.csproj", "{B02B938D-8CA0-4CD0-B31A-B3167D7B4605}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{EB23172B-1FE1-4281-AC50-4F560A18F5D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EB23172B-1FE1-4281-AC50-4F560A18F5D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EB23172B-1FE1-4281-AC50-4F560A18F5D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B02B938D-8CA0-4CD0-B31A-B3167D7B4605}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B02B938D-8CA0-4CD0-B31A-B3167D7B4605}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B02B938D-8CA0-4CD0-B31A-B3167D7B4605}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B02B938D-8CA0-4CD0-B31A-B3167D7B4605}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -48,6 +54,7 @@ Global
 		{031787A0-BF82-4C88-BC50-1585A38B8239} = {C4E7D0C8-C6E2-481A-8214-4D2CADC6F311}
 		{2ED1AD2D-0740-410E-895D-9842D10A221A} = {EDB841FB-9A89-4E15-8BF2-6CF7A63475AA}
 		{EB23172B-1FE1-4281-AC50-4F560A18F5D0} = {C4E7D0C8-C6E2-481A-8214-4D2CADC6F311}
+		{B02B938D-8CA0-4CD0-B31A-B3167D7B4605} = {7FCA4D67-5A3E-476F-B125-A2E1C2AE835D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8C515027-DD6A-4FB2-A343-04CC8DDFD87E}

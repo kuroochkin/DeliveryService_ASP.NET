@@ -23,16 +23,10 @@ public class OrderEntity
 
 	public IReadOnlyList<ProductEntity> Order => _products.AsReadOnly();
 
-	public OrderEntity(
-		CourierEntity courier, 
-		CustomerEntity customer,
-		string description)
+	public OrderEntity()
 	{
 		Id = Guid.NewGuid();
 		Created = DateTime.Now;
 		End = DateTime.Now.AddMinutes(30);
-		Description = description;
-		Courier = courier;
-		Customer = customer;
 	}
 }
