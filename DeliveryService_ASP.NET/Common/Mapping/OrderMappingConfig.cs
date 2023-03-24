@@ -13,7 +13,6 @@ namespace DeliveryService.API.Common.Mapping
 			config.NewConfig<OrderDetailsVm, GetOrderDetailsResponse>();
 
 			config.NewConfig<CreateOrderRequest, CreateOrderCommand>()
-				.Map(dest => dest.CourierId, src => src.CourierId)
 				.Map(dest => dest.CustomerId, src => src.CustomerId)
 				.Map(dest => dest.Description, src => src.Description);
 		}

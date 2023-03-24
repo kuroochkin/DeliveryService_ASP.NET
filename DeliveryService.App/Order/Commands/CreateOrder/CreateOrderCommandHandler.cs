@@ -3,6 +3,7 @@ using DeliveryService.App.Common.Interfaces.Persistence;
 using DeliveryService.Domain.Order;
 using ErrorOr;
 using MediatR;
+using static DeliveryService.Domain.Order.OrderEntity;
 
 namespace DeliveryService.App.Courier.Commands.AddCourier.AddOrder;
 
@@ -20,20 +21,10 @@ public class CreateOrderCommandHandler
 		CreateOrderCommand request, 
 		CancellationToken cancellationToken)
 	{
-		if (!Guid.TryParse(request.CourierId, out var courierId))
-		{
-			return Errors.Courier.InvalidId;
-		}
 
 		if (!Guid.TryParse(request.CustomerId, out var customerId))
 		{
 			return Errors.Customer.InvalidId;
-		}
-
-		var courier = await _unitOfWork.Couriers.FindById(courierId);
-		if(courier is null)
-		{
-			return Errors.Courier.NotFound;
 		}
 
 		var customer = await _unitOfWork.Customers.FindById(customerId);
@@ -44,14 +35,13 @@ public class CreateOrderCommandHandler
 
 		var order = new OrderEntity()
 		{
-			Courier = courier,
 			Customer = customer,
 			Description = request.Description,
+			Status = OrderStatus.Create
 		};
 
 		if(await _unitOfWork.Orders.Add(order))
 		{
-			courier.AddOrder(order);
 			customer.AddOrder(order);
 
 			return await _unitOfWork.CompleteAsync();
