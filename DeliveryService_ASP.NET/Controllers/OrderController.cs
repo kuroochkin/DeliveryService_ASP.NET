@@ -4,6 +4,7 @@ using DeliveryService.Contracts.Order;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using DeliveryService.App.Order.Commands.ConfirmOrder;
+using DeliveryService.App.Order.Commands.CompleteOrder;
 
 namespace DeliveryService.API.Controllers
 {
@@ -44,5 +45,20 @@ namespace DeliveryService.API.Controllers
 				errors => Problem("Ошибка")
 				);
 		}
+
+		[HttpPost("comlete")]
+		public async Task<IActionResult> CompleteOrder(CompleteOrderRequest request)
+		{
+			var command = _mapper.Map<CompleteOrderCommand>(request);
+
+			var result = await _mediator.Send(command);
+
+			return result.Match(
+				coursesResult => Ok(result.Value),
+				errors => Problem("Ошибка")
+				);
+		}
+
+
 	}
 }

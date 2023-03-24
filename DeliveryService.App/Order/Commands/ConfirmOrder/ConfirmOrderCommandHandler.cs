@@ -17,7 +17,9 @@ public class ConfirmOrderCommandHandler
 		_unitOfWork = unitOfWork;
 	}
 
-	public async Task<ErrorOr<bool>> Handle(ConfirmOrderCommand request, CancellationToken cancellationToken)
+	public async Task<ErrorOr<bool>> Handle
+		(ConfirmOrderCommand request, 
+		CancellationToken cancellationToken)
 	{
 		if (!Guid.TryParse(request.CourierId, out var courierId))
 		{
@@ -28,6 +30,7 @@ public class ConfirmOrderCommandHandler
 		{
 			return Errors.Order.InvalidId;
 		}
+
 
 		var courier = await _unitOfWork.Couriers.FindById(courierId);
 		if (courier is null)
@@ -40,6 +43,9 @@ public class ConfirmOrderCommandHandler
 		{
 			return Errors.Order.NotFound;
 		}
+
+		if (order.Status != OrderStatus.Create)
+			return false;
 
 		//Добавляем курьера в заказ
 		order.Courier = courier;

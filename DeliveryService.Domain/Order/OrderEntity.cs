@@ -20,7 +20,7 @@ public class OrderEntity
 	{
 		Create,
 		Progress,
-		End,
+		Complete,
 	};
 
 	[NotMapped]
