@@ -3,7 +3,7 @@ using DeliveryService.App.Courier.Commands.AddCourier.AddOrder;
 using DeliveryService.Contracts.Order;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-
+using DeliveryService.App.Order.Commands.ConfirmOrder;
 
 namespace DeliveryService.API.Controllers
 {
@@ -23,6 +23,19 @@ namespace DeliveryService.API.Controllers
 		public async Task<IActionResult> CreateOrder(CreateOrderRequest request)
 		{
 			var command = _mapper.Map<CreateOrderCommand>(request);
+
+			var result = await _mediator.Send(command);
+
+			return result.Match(
+				coursesResult => Ok(result.Value),
+				errors => Problem("Ошибка")
+				);
+		}
+
+		[HttpPost("confirm")]
+		public async Task<IActionResult> ConfirmOrder(ConfirmOrderRequest request)
+		{
+			var command = _mapper.Map<ConfirmOrderCommand>(request);
 
 			var result = await _mediator.Send(command);
 
