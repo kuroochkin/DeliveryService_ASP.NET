@@ -1,6 +1,7 @@
 ﻿using DeliveryService.Domain.Courier;
 using DeliveryService.Domain.Customer;
 using DeliveryService.Domain.Product;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DeliveryService.Domain.Order;
 
@@ -15,9 +16,23 @@ public class OrderEntity
 
 	public string Description { get; set; }
 
-	//public bool IsDelivered { get; set; }
+	public enum OrderStatus
+	{
+		Create,
+		Progress,
+		Complete,
+	};
 
-	public CourierEntity Courier { get; set; } = null!;
+	[NotMapped]
+	public OrderStatus Status { get; set; }
+
+	public string OrdStatus
+	{
+		get { return Status.ToString(); }
+		set { }
+	}
+
+	public CourierEntity? Courier { get; set; }
 
 	public CustomerEntity Customer{ get; set; } = null!;
 
@@ -27,6 +42,5 @@ public class OrderEntity
 	{
 		Id = Guid.NewGuid();
 		Created = DateTime.Now;
-		End = DateTime.Now.AddMinutes(30);
 	}
 }
