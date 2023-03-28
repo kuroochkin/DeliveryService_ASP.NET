@@ -5,18 +5,15 @@ public record GetOrderDetailsResponse(
 	string Description,
 	DateTime Created,
 	CourierResponse Courier,
-	CustomerResponse Customer
-	);
+	CustomerResponse Customer);
 
 public record CourierResponse(
 	string CourierId,
 	string LastName,
-	string FirstName,
-	string Patronymic);
+	string FirstName);
 
 public record CustomerResponse(
 	string CustomerId,
 	string LastName,
-	string FirstName,
-	string Patronymic);
+	string FirstName);
 

@@ -11,7 +11,12 @@ namespace DeliveryService.API.Common.Mapping
 	{
 		public void Register(TypeAdapterConfig config)
 		{
-			config.NewConfig<OrderDetailsVm, GetOrderDetailsResponse>();
+			config.NewConfig<OrderDetailsVm, GetOrderDetailsResponse>()
+				.Map(dest => dest.OrderId, src => src.OrderId)
+				.Map(dest => dest.Courier, src => src.Courier)
+				.Map(dest => dest.Customer, src => src.Customer)
+				.Map(dest => dest.Created, src => src.Created)
+				.Map(dest => dest.Description, src => src.Description);
 
 			config.NewConfig<CreateOrderRequest, CreateOrderCommand>()
 				.Map(dest => dest.CustomerId, src => src.CustomerId)

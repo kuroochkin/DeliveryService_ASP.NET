@@ -1,9 +1,12 @@
-﻿namespace DeliveryService.App.Order.Queries.GetOrderDetails;
+﻿using static DeliveryService.Domain.Order.OrderEntity;
+
+namespace DeliveryService.App.Order.Queries.GetOrderDetails;
 
 public record OrderDetailsVm(
 	string OrderId,
 	string Description,
 	DateTime Created,
+	OrderStatus Status,
 	CourierVm Courier,
 	CustomerVm Customer
 	);
@@ -11,11 +14,9 @@ public record OrderDetailsVm(
 public record CourierVm(
 	string CourierId,
 	string LastName,
-	string FirstName,
-	string Patronymic);
+	string FirstName);
 
 public record CustomerVm(
 	string CustomerId,
 	string LastName,
-	string FirstName,
-	string Patronymic);
+	string FirstName);

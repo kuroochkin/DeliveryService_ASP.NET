@@ -40,9 +40,10 @@ public class CreateOrderCommandHandler
 			Status = OrderStatus.Create
 		};
 
-		if(await _unitOfWork.Orders.Add(order))
+		if(await _unitOfWork.Orders.Add(order))	
 		{
 			customer.AddOrder(order);
+			
 
 			return await _unitOfWork.CompleteAsync();
 		}

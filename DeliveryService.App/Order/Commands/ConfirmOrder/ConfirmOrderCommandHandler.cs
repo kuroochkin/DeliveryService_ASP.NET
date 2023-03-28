@@ -44,6 +44,8 @@ public class ConfirmOrderCommandHandler
 			return Errors.Order.NotFound;
 		}
 
+		
+
 		if (order.Status != OrderStatus.Create)
 			return false;
 
@@ -55,6 +57,8 @@ public class ConfirmOrderCommandHandler
 
 		//Добавляем заказ в копилку заказов курьера
 		courier.AddOrder(order);
+
+		_unitOfWork.Orders.Update(order);
 
 		return await _unitOfWork.CompleteAsync();
 	}

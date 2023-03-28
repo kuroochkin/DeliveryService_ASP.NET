@@ -8,8 +8,8 @@ public static class DependencyInjection
 	{
 		services.AddControllers();
 		services.AddSwaggerGen();
-
 		services.AddMappings();
+
 		return services;
 	}
 }
