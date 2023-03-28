@@ -18,7 +18,7 @@ public class UnitOfWork : IUnitOfWork, IDisposable
 		Customers = customers;
 		Orders = orders;
 		Products = products;
-		User = users;
+		Users = users;
 	}
 
 	public ICourierRepository Couriers { get; }
@@ -29,7 +29,7 @@ public class UnitOfWork : IUnitOfWork, IDisposable
 
 	public IProductRepository Products { get; }
 
-	public IUserRepository User { get; }
+	public IUserRepository Users { get; }
 
 	public async Task<bool> CompleteAsync()
 	{
