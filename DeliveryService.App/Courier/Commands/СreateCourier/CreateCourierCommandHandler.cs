@@ -18,15 +18,15 @@ public class CreateCourierCommandHandler
 
 	public async Task<ErrorOr<bool>> Handle(СreateCourierCommand request, CancellationToken cancellationToken)
 	{
-		var courier = new CourierEntity(
-			request.LastName,
-			request.FirstName,
-			request.Patromymic);
+		//var courier = new CourierEntity(
+		//	request.LastName,
+		//	request.FirstName,
+		//	request.Patromymic);
 
-		if (await _unitOfWork.Couriers.Add(courier))
-		{
-			return await _unitOfWork.CompleteAsync();
-		}
+		//if (await _unitOfWork.Couriers.Add(courier))
+		//{
+		//	return await _unitOfWork.CompleteAsync();
+		//}
 
 		return false;
 

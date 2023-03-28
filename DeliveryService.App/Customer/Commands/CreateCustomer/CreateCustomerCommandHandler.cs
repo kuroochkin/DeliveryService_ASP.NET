@@ -21,15 +21,15 @@ public class CreateCustomerCommandHandler
 		(СreateCustomerCommand request, 
 		CancellationToken cancellationToken)
 	{
-		var customer = new CustomerEntity(
-			request.LastName,
-			request.FirstName,
-			request.Patromymic);
+		//var customer = new CustomerEntity(
+		//	request.LastName,
+		//	request.FirstName,
+		//	request.Patromymic);
 
-		if (await _unitOfWork.Customers.Add(customer))
-		{
-			return await _unitOfWork.CompleteAsync();
-		}
+		//if (await _unitOfWork.Customers.Add(customer))
+		//{
+		//	return await _unitOfWork.CompleteAsync();
+		//}
 
 		return false;
 	}
