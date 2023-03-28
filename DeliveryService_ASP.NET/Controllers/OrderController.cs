@@ -24,10 +24,10 @@ namespace DeliveryService.API.Controllers
 			_mapper = mapper;
 		}
 
-		[HttpGet("oneOrders")]
-		public async Task<IActionResult> GetAllOrders(GetOrderDetailsRequest request)
+		[HttpGet("DetailsOrder/{orderId}")]
+		public async Task<IActionResult> GetDetailsOrder(string orderId)
 		{
-			var query = new GetOrderDetailsQuery(request.OrderId);
+			var query = new GetOrderDetailsQuery(orderId);
 			
 			var orderResult = await _mediator.Send(query);
 

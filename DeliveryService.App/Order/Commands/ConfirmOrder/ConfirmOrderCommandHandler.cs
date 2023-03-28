@@ -44,8 +44,6 @@ public class ConfirmOrderCommandHandler
 			return Errors.Order.NotFound;
 		}
 
-		
-
 		if (order.Status != OrderStatus.Create)
 			return false;
 

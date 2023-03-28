@@ -37,7 +37,7 @@ public class GetOrderDetailsQueryHandler
 			order.Created,
 			order.Status,
 			new CourierVm(
-				order.Courier.Id.ToString(),
+				order.Courier.Id.ToString(), // тут падает null
 				order.Courier.LastName,
 				order.Courier.FirstName
 				),
