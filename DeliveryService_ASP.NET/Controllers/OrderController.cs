@@ -5,6 +5,10 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using DeliveryService.App.Order.Commands.ConfirmOrder;
 using DeliveryService.App.Order.Commands.CompleteOrder;
+using System.Data;
+using Microsoft.AspNetCore.Authorization;
+using DeliveryService.App.Order.Queries.GetOrderDetails;
+using DeliveryService.Contracts.Order.Get;
 
 namespace DeliveryService.API.Controllers
 {
@@ -20,7 +24,21 @@ namespace DeliveryService.API.Controllers
 			_mapper = mapper;
 		}
 
+		[HttpGet("oneOrders")]
+		public async Task<IActionResult> GetAllOrders(GetOrderDetailsRequest request)
+		{
+			var query = new GetOrderDetailsQuery(request.OrderId);
+			
+			var orderResult = await _mediator.Send(query);
+
+			return orderResult.Match(
+				order => Ok(_mapper.Map<GetOrderDetailsResponse>(order)),
+				errors => Problem("Ошибка")
+			);
+		}
+
 		[HttpPost("create")]
+		//[Authorize(Roles = "Customer")]
 		public async Task<IActionResult> CreateOrder(CreateOrderRequest request)
 		{
 			var command = _mapper.Map<CreateOrderCommand>(request);
