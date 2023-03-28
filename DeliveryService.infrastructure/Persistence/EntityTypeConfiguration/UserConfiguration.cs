@@ -20,7 +20,7 @@ namespace DeliveryService.infrastructure.Persistence.EntityTypeConfiguration
 			builder.Property(user => user.FirstName);
 			builder.Property(user => user.Email);
 			builder.Property(user => user.Password).IsRequired();
-			builder.Property(user => user.Type).IsRequired();
+			builder.Property(user => user.GetUserTypeToString).IsRequired();
 		}
 	}
 }
