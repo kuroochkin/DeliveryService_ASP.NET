@@ -11,7 +11,7 @@ public class UserEntity
 
 	public string Email { get; }
 
-	public UserType Type { get; }
+	public UserType Type { get;}
 
 	public UserEntity(string firstName, string lastName, string password, string email, UserType userType)
 	{
@@ -28,19 +28,10 @@ public class UserEntity
 
 	}
 
-	public UserType GetTypeUser => Type;
-
-	public string GetUserTypeToString()
+	public string GetUserTypeToString
 	{
-		switch (Type)
-		{
-			case UserType.Courier:
-				return "courier";
-			case UserType.Customer:
-				return "customer";
-		}
-
-		return "";
+		get { return Type.ToString(); }
+		set { }
 	}
 }
 
