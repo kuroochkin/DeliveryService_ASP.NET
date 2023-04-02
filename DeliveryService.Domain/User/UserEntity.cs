@@ -11,7 +11,7 @@ public class UserEntity
 
 	public string Email { get; }
 
-	public UserType Type { get;}
+	public UserType Type { get;  }
 
 	public UserEntity(string firstName, string lastName, string password, string email, UserType userType)
 	{
@@ -34,10 +34,11 @@ public class UserEntity
 		set { }
 	}
 }
+	
 
 public enum UserType
 {
-	Courier,
-	Customer
+	Customer,
+	Courier
 }
 

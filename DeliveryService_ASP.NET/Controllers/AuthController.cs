@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DeliveryService.API.Controllers;
 
+[ApiController]
 [Route("api/auth")]
 [AllowAnonymous]
 public class AuthController : Controller

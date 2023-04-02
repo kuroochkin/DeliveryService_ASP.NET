@@ -24,7 +24,7 @@ namespace DeliveryService.App.Auth.Queries.Login
 			(LoginQuery request, 
 			CancellationToken cancellationToken)
 		{
-			var user = await _unitOfWork.Users.FindUserByEmail(request.Email);
+			var user = await _unitOfWork.Users.FindUserByRegisteredEmail(request.Email);
 			if(user is not null)
 			{
 				if(user.Password == request.Password)
