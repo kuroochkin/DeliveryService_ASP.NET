@@ -9,6 +9,7 @@ public static class DependencyInjection
 		services.AddControllers();
 		services.AddSwaggerGen();
 		services.AddMappings();
+		services.AddEndpointsApiExplorer();
 
 		return services;
 	}

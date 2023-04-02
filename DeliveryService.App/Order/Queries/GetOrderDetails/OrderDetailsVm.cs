@@ -11,6 +11,14 @@ public record OrderDetailsVm(
 	CustomerVm Customer
 	);
 
+public record OrderDetailsWithoutCourierVm(
+	string OrderId,
+	string Description,
+	DateTime Created,
+	OrderStatus Status,
+	CustomerVm Customer
+	);
+
 public record CourierVm(
 	string CourierId,
 	string LastName,

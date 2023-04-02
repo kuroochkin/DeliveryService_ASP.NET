@@ -12,6 +12,7 @@ using DeliveryService.Contracts.Order.Get;
 
 namespace DeliveryService.API.Controllers
 {
+	[ApiController]
 	[Route("api/order")]
 	public class OrderController : Controller
 	{
@@ -24,7 +25,7 @@ namespace DeliveryService.API.Controllers
 			_mapper = mapper;
 		}
 
-		[HttpGet("DetailsOrder/{orderId}")]
+		[HttpGet("detailsOrder/{orderId}")]
 		public async Task<IActionResult> GetDetailsOrder(string orderId)
 		{
 			var query = new GetOrderDetailsQuery(orderId);

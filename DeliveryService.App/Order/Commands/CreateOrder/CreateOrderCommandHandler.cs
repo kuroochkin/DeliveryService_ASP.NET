@@ -35,10 +35,12 @@ public class CreateOrderCommandHandler
 
 		var order = new OrderEntity()
 		{
-			Customer = customer,
 			Description = request.Description,
-			Status = OrderStatus.Create
+			Status = OrderStatus.Create,
+			Customer = customer
 		};
+
+	
 
 		if(await _unitOfWork.Orders.Add(order))	
 		{

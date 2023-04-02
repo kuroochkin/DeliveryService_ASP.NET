@@ -38,7 +38,7 @@ public class ConfirmOrderCommandHandler
 			return Errors.Courier.NotFound;
 		}
 
-		var order = await _unitOfWork.Orders.FindById(orderId);
+		var order = await _unitOfWork.Orders.FindOrderWithCustomer(orderId);
 		if (order is null)
 		{
 			return Errors.Order.NotFound;
@@ -55,8 +55,6 @@ public class ConfirmOrderCommandHandler
 
 		//Добавляем заказ в копилку заказов курьера
 		courier.AddOrder(order);
-
-		_unitOfWork.Orders.Update(order);
 
 		return await _unitOfWork.CompleteAsync();
 	}
