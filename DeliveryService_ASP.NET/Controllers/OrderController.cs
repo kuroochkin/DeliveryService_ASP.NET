@@ -5,9 +5,14 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using DeliveryService.App.Order.Commands.ConfirmOrder;
 using DeliveryService.App.Order.Commands.CompleteOrder;
+using System.Data;
+using Microsoft.AspNetCore.Authorization;
+using DeliveryService.App.Order.Queries.GetOrderDetails;
+using DeliveryService.Contracts.Order.Get;
 
 namespace DeliveryService.API.Controllers
 {
+	[ApiController]
 	[Route("api/order")]
 	public class OrderController : Controller
 	{
@@ -20,7 +25,21 @@ namespace DeliveryService.API.Controllers
 			_mapper = mapper;
 		}
 
+		[HttpGet("detailsOrder/{orderId}")]
+		public async Task<IActionResult> GetDetailsOrder(string orderId)
+		{
+			var query = new GetOrderDetailsQuery(orderId);
+			
+			var orderResult = await _mediator.Send(query);
+
+			return orderResult.Match(
+				order => Ok(_mapper.Map<GetOrderDetailsResponse>(order)),
+				errors => Problem("Ошибка")
+			);
+		}
+
 		[HttpPost("create")]
+		[Authorize(Roles = "Customer")]
 		public async Task<IActionResult> CreateOrder(CreateOrderRequest request)
 		{
 			var command = _mapper.Map<CreateOrderCommand>(request);
@@ -34,6 +53,7 @@ namespace DeliveryService.API.Controllers
 		}
 
 		[HttpPost("confirm")]
+		[Authorize(Roles = "Courier")]
 		public async Task<IActionResult> ConfirmOrder(ConfirmOrderRequest request)
 		{
 			var command = _mapper.Map<ConfirmOrderCommand>(request);
@@ -47,6 +67,7 @@ namespace DeliveryService.API.Controllers
 		}
 
 		[HttpPost("comlete")]
+		[Authorize(Roles = "Courier")]
 		public async Task<IActionResult> CompleteOrder(CompleteOrderRequest request)
 		{
 			var command = _mapper.Map<CompleteOrderCommand>(request);

@@ -6,6 +6,7 @@ public interface IUnitOfWork
 	ICustomerRepository Customers { get; }
 	IOrderRepository Orders { get; }
 	IProductRepository Products { get; }
+	IUserRepository Users { get; }
 
 	Task<bool> CompleteAsync();
 }
