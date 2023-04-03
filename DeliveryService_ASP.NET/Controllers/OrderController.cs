@@ -39,7 +39,7 @@ namespace DeliveryService.API.Controllers
 		}
 
 		[HttpPost("create")]
-		//[Authorize(Roles = "Customer")]
+		[Authorize(Roles = "Customer")]
 		public async Task<IActionResult> CreateOrder(CreateOrderRequest request)
 		{
 			var command = _mapper.Map<CreateOrderCommand>(request);
@@ -53,6 +53,7 @@ namespace DeliveryService.API.Controllers
 		}
 
 		[HttpPost("confirm")]
+		[Authorize(Roles = "Courier")]
 		public async Task<IActionResult> ConfirmOrder(ConfirmOrderRequest request)
 		{
 			var command = _mapper.Map<ConfirmOrderCommand>(request);
@@ -66,6 +67,7 @@ namespace DeliveryService.API.Controllers
 		}
 
 		[HttpPost("comlete")]
+		[Authorize(Roles = "Courier")]
 		public async Task<IActionResult> CompleteOrder(CompleteOrderRequest request)
 		{
 			var command = _mapper.Map<CompleteOrderCommand>(request);
