@@ -4,7 +4,9 @@ public record GetOrderDetailsResponse(
 	string OrderId,
 	string Description,
 	DateTime Created,
-	CourierResponse Courier,
+	DateTime End,
+	string Status,
+	CourierResponse? Courier,
 	CustomerResponse Customer);
 
 public record CourierResponse(

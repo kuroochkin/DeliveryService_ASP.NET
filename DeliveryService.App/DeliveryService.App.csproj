@@ -19,4 +19,8 @@
     <ProjectReference Include="..\DeliveryService.Domain\DeliveryService.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Order\Queries\GetOrdersUser\Courier\" />
+  </ItemGroup>
+
 </Project>

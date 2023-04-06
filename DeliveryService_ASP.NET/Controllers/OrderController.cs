@@ -9,6 +9,8 @@ using System.Data;
 using Microsoft.AspNetCore.Authorization;
 using DeliveryService.App.Order.Queries.GetOrderDetails;
 using DeliveryService.Contracts.Order.Get;
+using static DeliveryService.App.Common.Errors.Errors;
+using DeliveryService.App.Order.Queries.GetOrdersUser.Customer;
 
 namespace DeliveryService.API.Controllers
 {
@@ -38,6 +40,20 @@ namespace DeliveryService.API.Controllers
 			);
 		}
 
+		[HttpGet("customer/{customerId}")]
+		public async Task<IActionResult> GetAllOrdersByCustomerId(string customerId)
+		{
+			var query = new GetOrdersCustomerQuery(customerId);
+			
+			var orderResult = await _mediator.Send(query);
+
+			return orderResult.Match(
+				orders => Ok(_mapper.Map<GetOrdersCustomerResponse>(orders)),
+				errors => Problem("Ошибка")
+			);
+
+		}
+
 		[HttpPost("create")]
 		public async Task<IActionResult> CreateOrder(CreateOrderRequest request)
 		{
@@ -65,7 +81,6 @@ namespace DeliveryService.API.Controllers
 		}
 
 		[HttpPost("comlete")]
-		[Authorize(Roles = "Courier")]
 		public async Task<IActionResult> CompleteOrder(CompleteOrderRequest request)
 		{
 			var command = _mapper.Map<CompleteOrderCommand>(request);

@@ -6,16 +6,9 @@ public record OrderDetailsVm(
 	string OrderId,
 	string Description,
 	DateTime Created,
+	DateTime End,
 	OrderStatus Status,
-	CourierVm Courier,
-	CustomerVm Customer
-	);
-
-public record OrderDetailsWithoutCourierVm(
-	string OrderId,
-	string Description,
-	DateTime Created,
-	OrderStatus Status,
+	CourierVm? Courier,
 	CustomerVm Customer
 	);
 
