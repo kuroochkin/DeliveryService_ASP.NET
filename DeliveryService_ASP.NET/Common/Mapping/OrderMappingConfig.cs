@@ -31,6 +31,9 @@ namespace DeliveryService.API.Common.Mapping
 
 			config.NewConfig<OrdersUserVm, GetOrdersCustomerResponse>()
 				.Map(dest => dest.Orders, src => src.Orders);
+
+			config.NewConfig<OrdersUserVm, GetOrdersCourierResponse>()
+				.Map(dest => dest.Orders, src => src.Orders);
 		}
 	}
 }

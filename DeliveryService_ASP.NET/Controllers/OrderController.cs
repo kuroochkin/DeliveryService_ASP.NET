@@ -11,6 +11,7 @@ using DeliveryService.App.Order.Queries.GetOrderDetails;
 using DeliveryService.Contracts.Order.Get;
 using static DeliveryService.App.Common.Errors.Errors;
 using DeliveryService.App.Order.Queries.GetOrdersUser.Customer;
+using DeliveryService.App.Order.Queries.GetOrdersUser.Courier;
 
 namespace DeliveryService.API.Controllers
 {
@@ -49,6 +50,20 @@ namespace DeliveryService.API.Controllers
 
 			return orderResult.Match(
 				orders => Ok(_mapper.Map<GetOrdersCustomerResponse>(orders)),
+				errors => Problem("Ошибка")
+			);
+
+		}
+
+		[HttpGet("courier/{courierId}")]
+		public async Task<IActionResult> GetAllOrdersByCourierId(string courierId)
+		{
+			var query = new GetOrdersCourierQuery(courierId);
+
+			var orderResult = await _mediator.Send(query);
+
+			return orderResult.Match(
+				orders => Ok(_mapper.Map<GetOrdersCourierResponse>(orders)),
 				errors => Problem("Ошибка")
 			);
 

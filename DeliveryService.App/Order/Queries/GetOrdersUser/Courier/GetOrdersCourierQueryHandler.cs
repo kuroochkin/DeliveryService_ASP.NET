@@ -1,37 +1,37 @@
 ﻿using DeliveryService.App.Common.Errors;
 using DeliveryService.App.Common.Interfaces.Persistence;
 using DeliveryService.App.Order.Queries.GetOrderDetails;
+using DeliveryService.App.Order.Queries.GetOrdersUser.Customer;
 using ErrorOr;
 using MediatR;
-using static DeliveryService.App.Common.Errors.Errors;
 
-namespace DeliveryService.App.Order.Queries.GetOrdersUser.Customer;
+namespace DeliveryService.App.Order.Queries.GetOrdersUser.Courier;
 
-public class GetOrdersCustomerQueryHandler
-	: IRequestHandler<GetOrdersCustomerQuery, ErrorOr<OrdersUserVm>>
+public class GetOrdersCourierQueryHandler
+	: IRequestHandler<GetOrdersCourierQuery, ErrorOr<OrdersUserVm>>
 {
 	private readonly IUnitOfWork _unitOfWork;
 
-	public GetOrdersCustomerQueryHandler(IUnitOfWork unitOfWork)
+	public GetOrdersCourierQueryHandler(IUnitOfWork unitOfWork)
 	{
 		_unitOfWork = unitOfWork;
 	}
 	public async Task<ErrorOr<OrdersUserVm>> Handle(
-		GetOrdersCustomerQuery request, 
+		GetOrdersCourierQuery request,
 		CancellationToken cancellationToken)
 	{
-		if (!Guid.TryParse(request.CustomerId, out var customerId))
+		if (!Guid.TryParse(request.CourierId, out var courierId))
 		{
-			return Errors.Customer.InvalidId;
+			return Errors.Courier.InvalidId;
 		}
 
-		var customer = await _unitOfWork.Customers.FindById(customerId);
-		if(customer is null)
+		var courier = await _unitOfWork.Couriers.FindById(courierId);
+		if (courier is null)
 		{
 			return Errors.Customer.NotFound;
 		}
 
-		var orders = await _unitOfWork.Orders.FindOrdersByCustomerId(customerId);
+		var orders = await _unitOfWork.Orders.FindOrdersByCourierId(courierId);
 
 		var allOrderModel = orders.Select(order => new OrderDetailsVm(
 		order.Id.ToString(),

@@ -15,8 +15,8 @@ public class OrderRepository : GenericRepository<OrderEntity>, IOrderRepository
 	{
 		return await _context.Orders
 			.Include(order => order.Customer)
-			.Include(course => course.Courier)
-			.Where(course => course.Courier.Id == id)
+			.Include(order => order.Courier)
+			.Where(order => order.Courier.Id == id)
 			.ToListAsync();
 	}
 
@@ -25,7 +25,7 @@ public class OrderRepository : GenericRepository<OrderEntity>, IOrderRepository
 		return await _context.Orders
 			.Include(order => order.Customer)
 			.Include(order => order.Courier)
-			.Where(course => course.Customer.Id == id)
+			.Where(order => order.Customer.Id == id)
 			.ToListAsync();
 	}
 
