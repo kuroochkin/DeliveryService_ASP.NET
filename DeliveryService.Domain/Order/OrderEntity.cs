@@ -1,6 +1,7 @@
 ﻿using DeliveryService.Domain.Courier;
 using DeliveryService.Domain.Customer;
 using DeliveryService.Domain.Product;
+using DeliveryService.Domain.User;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DeliveryService.Domain.Order;
@@ -25,11 +26,21 @@ public class OrderEntity
 
 	[NotMapped]
 	public OrderStatus Status { get; set; }
+	public OrderStatus GetStatus => Status;
 
-	public string OrdStatus
+	public string GetStatusOrderToString()
 	{
-		get { return Status.ToString(); }
-		set { }
+		switch (Status)
+		{
+			case OrderStatus.Create:
+				return "Create";
+			case OrderStatus.Progress:
+				return "Progress";
+			case OrderStatus.Complete:
+				return "Complete";
+		}
+
+		return "";
 	}
 
 	public CourierEntity? Courier { get; set; }
