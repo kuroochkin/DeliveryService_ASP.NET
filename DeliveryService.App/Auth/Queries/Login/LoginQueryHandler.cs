@@ -30,7 +30,7 @@ namespace DeliveryService.App.Auth.Queries.Login
 				if(user.Password == request.Password)
 				{
 					var token = _jwtTokenGenerator.GenerateToken(user);
-					return new AuthenticationResult(token, user.GetUserTypeToString);
+					return new AuthenticationResult(token, user.Type.ToString());
 				}
 			}
 			return Errors.Auth.InvalidCredentials;

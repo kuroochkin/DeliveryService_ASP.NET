@@ -41,12 +41,10 @@ public class CreateOrderCommandHandler
 		};
 
 	
-
 		if(await _unitOfWork.Orders.Add(order))	
 		{
 			customer.AddOrder(order);
 			
-
 			return await _unitOfWork.CompleteAsync();
 		}
 

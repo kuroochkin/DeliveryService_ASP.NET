@@ -18,9 +18,9 @@ namespace DeliveryService.API.Common.Mapping
 				.Map(dest => dest.Created, src => src.Created)
 				.Map(dest => dest.Description, src => src.Description);
 
-			config.NewConfig<CreateOrderRequest, CreateOrderCommand>()
-				.Map(dest => dest.CustomerId, src => src.CustomerId)
-				.Map(dest => dest.Description, src => src.Description);
+			config.NewConfig<(CreateOrderRequest request, string customerId), CreateOrderCommand>()
+				.Map(dest => dest.CustomerId, src => src.customerId)
+				.Map(dest => dest.Description, src => src.request.Description);
 
 			config.NewConfig<ConfirmOrderRequest, ConfirmOrderCommand>()
 				.Map(dest => dest.CourierId, src => src.CourierId)

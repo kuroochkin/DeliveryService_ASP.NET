@@ -39,7 +39,6 @@ namespace DeliveryService.API.Controllers
 		}
 
 		[HttpPost("create")]
-		[Authorize(Roles = "Customer")]
 		public async Task<IActionResult> CreateOrder(CreateOrderRequest request)
 		{
 			var command = _mapper.Map<CreateOrderCommand>(request);
@@ -47,13 +46,12 @@ namespace DeliveryService.API.Controllers
 			var result = await _mediator.Send(command);
 
 			return result.Match(
-				coursesResult => Ok(result.Value),
+				orderResult => Ok(result.Value),
 				errors => Problem("Ошибка")
 				);
 		}
 
 		[HttpPost("confirm")]
-		[Authorize(Roles = "Courier")]
 		public async Task<IActionResult> ConfirmOrder(ConfirmOrderRequest request)
 		{
 			var command = _mapper.Map<ConfirmOrderCommand>(request);
@@ -61,7 +59,7 @@ namespace DeliveryService.API.Controllers
 			var result = await _mediator.Send(command);
 
 			return result.Match(
-				coursesResult => Ok(result.Value),
+				orderResult => Ok(result.Value),
 				errors => Problem("Ошибка")
 				);
 		}
@@ -75,11 +73,9 @@ namespace DeliveryService.API.Controllers
 			var result = await _mediator.Send(command);
 
 			return result.Match(
-				coursesResult => Ok(result.Value),
+				orderResult => Ok(result.Value),
 				errors => Problem("Ошибка")
 				);
 		}
-
-
 	}
 }
