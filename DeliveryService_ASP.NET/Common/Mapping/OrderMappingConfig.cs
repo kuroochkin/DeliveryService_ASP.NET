@@ -25,9 +25,9 @@ namespace DeliveryService.API.Common.Mapping
 				.Map(dest => dest.CustomerId, src => src.customerId)
 				.Map(dest => dest.Description, src => src.request.Description);
 
-			config.NewConfig<ConfirmOrderRequest, ConfirmOrderCommand>()
-				.Map(dest => dest.CourierId, src => src.CourierId)
-				.Map(dest => dest.OrderId, src => src.OrderId);
+			config.NewConfig<(ConfirmOrderRequest request, string courierId), ConfirmOrderCommand>()
+				.Map(dest => dest.CourierId, src => src.courierId)
+				.Map(dest => dest.OrderId, src => src.request.OrderId);
 
 			config.NewConfig<OrdersUserVm, GetOrdersCustomerResponse>()
 				.Map(dest => dest.Orders, src => src.Orders);

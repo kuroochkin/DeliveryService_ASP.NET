@@ -86,9 +86,12 @@ namespace DeliveryService.API.Controllers
 		}
 
 		[HttpPost("confirm")]
+		[Authorize(Roles = "Courier")]
 		public async Task<IActionResult> ConfirmOrder(ConfirmOrderRequest request)
 		{
-			var command = _mapper.Map<ConfirmOrderCommand>(request);
+			var courier = GetUserId();
+
+			var command = _mapper.Map<ConfirmOrderCommand>((request,courier));
 
 			var result = await _mediator.Send(command);
 
@@ -99,6 +102,7 @@ namespace DeliveryService.API.Controllers
 		}
 
 		[HttpPost("comlete")]
+		[Authorize(Roles = "Courier")]
 		public async Task<IActionResult> CompleteOrder(CompleteOrderRequest request)
 		{
 			var command = _mapper.Map<CompleteOrderCommand>(request);
