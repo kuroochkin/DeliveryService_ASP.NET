@@ -5,6 +5,7 @@ using System.Security.Claims;
 namespace DeliveryService.API.Controllers;
 
 [ApiController]
+[Authorize]
 public class ApiController : ControllerBase
 {
 	protected string? GetUserId()

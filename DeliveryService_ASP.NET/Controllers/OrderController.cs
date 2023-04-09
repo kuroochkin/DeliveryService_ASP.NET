@@ -17,7 +17,7 @@ namespace DeliveryService.API.Controllers
 {
 	[ApiController]
 	[Route("api/order")]
-	public class OrderController : Controller
+	public class OrderController : ApiController
 	{
 		private readonly ISender _mediator;
 		private readonly IMapper _mapper;
@@ -70,9 +70,12 @@ namespace DeliveryService.API.Controllers
 		}
 
 		[HttpPost("create")]
+		[Authorize(Roles = "Customer")]
 		public async Task<IActionResult> CreateOrder(CreateOrderRequest request)
 		{
-			var command = _mapper.Map<CreateOrderCommand>(request);
+			var customer = GetUserId();
+
+			var command = _mapper.Map<CreateOrderCommand>((request, customer));
 
 			var result = await _mediator.Send(command);
 
