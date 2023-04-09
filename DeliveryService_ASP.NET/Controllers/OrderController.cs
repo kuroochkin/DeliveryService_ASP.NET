@@ -5,13 +5,12 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using DeliveryService.App.Order.Commands.ConfirmOrder;
 using DeliveryService.App.Order.Commands.CompleteOrder;
-using System.Data;
 using Microsoft.AspNetCore.Authorization;
 using DeliveryService.App.Order.Queries.GetOrderDetails;
 using DeliveryService.Contracts.Order.Get;
-using static DeliveryService.App.Common.Errors.Errors;
-using DeliveryService.App.Order.Queries.GetOrdersUser.Customer;
-using DeliveryService.App.Order.Queries.GetOrdersUser.Courier;
+using DeliveryService.App.Order.Queries.GetOrdersUser.Customer.GelAllOrdersByCustomer;
+using DeliveryService.App.Order.Queries.GetOrdersUser.Courier.GetAllOrdersByCourier;
+using DeliveryService.App.Order.Queries.GetOrdersUser.Customer.GetOrdersByCustomerByStatus;
 
 namespace DeliveryService.API.Controllers
 {
@@ -42,6 +41,7 @@ namespace DeliveryService.API.Controllers
 		}
 
 		[HttpGet("customer/{customerId}")]
+		[Authorize(Roles = "Customer")]
 		public async Task<IActionResult> GetAllOrdersByCustomerId(string customerId)
 		{
 			var query = new GetOrdersCustomerQuery(customerId);
@@ -52,10 +52,26 @@ namespace DeliveryService.API.Controllers
 				orders => Ok(_mapper.Map<GetOrdersCustomerResponse>(orders)),
 				errors => Problem("Ошибка")
 			);
+		}
 
+		[HttpGet("customer/{orderStatus}/{customerId}")]
+		[Authorize(Roles = "Customer")]
+		public async Task<IActionResult> GetOrdersByCustomerIdByOrderStatus(
+			string customerId,
+			string orderStatus)
+		{
+			var query = new GetOrdersCustomerStatusQuery(customerId, orderStatus);
+
+			var orderResult = await _mediator.Send(query);
+
+			return orderResult.Match(
+				orders => Ok(_mapper.Map<GetOrdersCustomerResponse>(orders)),
+				errors => Problem("Ошибка")
+			);
 		}
 
 		[HttpGet("courier/{courierId}")]
+		[Authorize(Roles = "Courier")]
 		public async Task<IActionResult> GetAllOrdersByCourierId(string courierId)
 		{
 			var query = new GetOrdersCourierQuery(courierId);

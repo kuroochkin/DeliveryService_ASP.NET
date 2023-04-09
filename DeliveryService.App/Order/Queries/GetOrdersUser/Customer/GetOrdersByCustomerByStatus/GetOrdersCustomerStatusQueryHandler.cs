@@ -1,37 +1,41 @@
 ﻿using DeliveryService.App.Common.Errors;
 using DeliveryService.App.Common.Interfaces.Persistence;
 using DeliveryService.App.Order.Queries.GetOrderDetails;
-using DeliveryService.App.Order.Queries.GetOrdersUser.Customer;
 using ErrorOr;
 using MediatR;
+using static DeliveryService.Domain.Order.OrderEntity;
 
-namespace DeliveryService.App.Order.Queries.GetOrdersUser.Courier;
+namespace DeliveryService.App.Order.Queries.GetOrdersUser.Customer.GetOrdersByCustomerByStatus;
 
-public class GetOrdersCourierQueryHandler
-	: IRequestHandler<GetOrdersCourierQuery, ErrorOr<OrdersUserVm>>
+public class GetOrdersCustomerStatusQueryHandler
+	: IRequestHandler<GetOrdersCustomerStatusQuery, ErrorOr<OrdersUserVm>>
 {
 	private readonly IUnitOfWork _unitOfWork;
 
-	public GetOrdersCourierQueryHandler(IUnitOfWork unitOfWork)
+	public GetOrdersCustomerStatusQueryHandler(IUnitOfWork unitOfWork)
 	{
 		_unitOfWork = unitOfWork;
 	}
 	public async Task<ErrorOr<OrdersUserVm>> Handle(
-		GetOrdersCourierQuery request,
+		GetOrdersCustomerStatusQuery request, 
 		CancellationToken cancellationToken)
 	{
-		if (!Guid.TryParse(request.CourierId, out var courierId))
+		if (!Guid.TryParse(request.CustomerId, out var customerId))
 		{
-			return Errors.Courier.InvalidId;
+			return Errors.Customer.InvalidId;
 		}
 
-		var courier = await _unitOfWork.Couriers.FindById(courierId);
-		if (courier is null)
+		OrderStatus orderStatus = (OrderStatus)Enum.Parse(typeof(OrderStatus), request.OrderStatus);
+
+		var customer = await _unitOfWork.Customers.FindById(customerId);
+		if (customer is null)
 		{
 			return Errors.Customer.NotFound;
 		}
 
-		var orders = await _unitOfWork.Orders.FindOrdersByCourierId(courierId);
+		var orders = await _unitOfWork.Orders.FindOrdersByCustomerIdByOrderStatus(
+			customerId,
+			orderStatus);
 
 		var allOrderModel = orders.Select(order => new OrderDetailsVm(
 		order.Id.ToString(),
