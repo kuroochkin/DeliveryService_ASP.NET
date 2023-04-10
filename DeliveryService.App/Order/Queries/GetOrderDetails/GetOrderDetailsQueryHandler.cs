@@ -37,9 +37,9 @@ public class GetOrderDetailsQueryHandler
 			order.End,
 			order.Status,
 			new CourierVm(
-				order.Courier.Id.ToString(), 
-				order.Courier.LastName,
-				order.Courier.FirstName
+				order?.Courier?.Id.ToString(),
+				order?.Courier?.LastName,
+				order?.Courier?.FirstName
 				),
 			new CustomerVm(
 				order.Customer.Id.ToString(),

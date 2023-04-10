@@ -13,9 +13,9 @@ public record OrderDetailsVm(
 	);
 
 public record CourierVm(
-	string CourierId,
-	string LastName,
-	string FirstName);
+	string ?CourierId,
+	string ?LastName,
+	string ?FirstName);
 
 public record CustomerVm(
 	string CustomerId,

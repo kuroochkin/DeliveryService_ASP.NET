@@ -40,11 +40,11 @@ namespace DeliveryService.API.Controllers
 			);
 		}
 
-		[HttpGet("customer/{customerId}")]
+		[HttpGet("customer")]
 		[Authorize(Roles = "Customer")]
-		public async Task<IActionResult> GetAllOrdersByCustomerId(string customerId)
+		public async Task<IActionResult> GetAllOrdersByCustomerId()
 		{
-			var query = new GetOrdersCustomerQuery(customerId);
+			var query = new GetOrdersCustomerQuery(GetUserId());
 			
 			var orderResult = await _mediator.Send(query);
 
