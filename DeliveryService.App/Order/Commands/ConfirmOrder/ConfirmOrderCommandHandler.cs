@@ -44,7 +44,7 @@ public class ConfirmOrderCommandHandler
 			return Errors.Order.NotFound;
 		}
 
-		if (order.Status != OrderStatus.Create)
+		if (order.GetStatus != OrderStatus.Create)
 			return false;
 
 		//Добавляем курьера в заказ

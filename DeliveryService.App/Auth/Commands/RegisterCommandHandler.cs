@@ -45,7 +45,7 @@ public class RegisterCommandHandler
 		//Добавляем пользователя в коллекцию
 		await _unitOfWork.Users.Add(user);
 
-		if (user.Type == UserType.Courier)
+		if (user.GetTypeUser == UserType.Courier)
 		{
 			var courier = new CourierEntity(user.Id, user.LastName, user.FirstName);
 			await _unitOfWork.Couriers.Add(courier);
@@ -59,6 +59,6 @@ public class RegisterCommandHandler
 
 		var token = _jwtTokenGenerator.GenerateToken(user);
 
-		return new AuthenticationResult(token, user.GetUserTypeToString);
+		return new AuthenticationResult(token, user.GetUserTypeToString());
 	}
 }

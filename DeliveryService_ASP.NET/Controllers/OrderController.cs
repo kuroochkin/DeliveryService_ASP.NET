@@ -5,16 +5,18 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using DeliveryService.App.Order.Commands.ConfirmOrder;
 using DeliveryService.App.Order.Commands.CompleteOrder;
-using System.Data;
 using Microsoft.AspNetCore.Authorization;
 using DeliveryService.App.Order.Queries.GetOrderDetails;
 using DeliveryService.Contracts.Order.Get;
+using DeliveryService.App.Order.Queries.GetOrdersUser.Customer.GelAllOrdersByCustomer;
+using DeliveryService.App.Order.Queries.GetOrdersUser.Courier.GetAllOrdersByCourier;
+using DeliveryService.App.Order.Queries.GetOrdersUser.Customer.GetOrdersByCustomerByStatus;
 
 namespace DeliveryService.API.Controllers
 {
 	[ApiController]
 	[Route("api/order")]
-	public class OrderController : Controller
+	public class OrderController : ApiController
 	{
 		private readonly ISender _mediator;
 		private readonly IMapper _mapper;
@@ -38,16 +40,63 @@ namespace DeliveryService.API.Controllers
 			);
 		}
 
+		[HttpGet("customer")]
+		[Authorize(Roles = "Customer")]
+		public async Task<IActionResult> GetAllOrdersByCustomerId()
+		{
+			var query = new GetOrdersCustomerQuery(GetUserId());
+			
+			var orderResult = await _mediator.Send(query);
+
+			return orderResult.Match(
+				orders => Ok(_mapper.Map<GetOrdersCustomerResponse>(orders)),
+				errors => Problem("Ошибка")
+			);
+		}
+
+		[HttpGet("customer/{orderStatus}/{customerId}")]
+		[Authorize(Roles = "Customer")]
+		public async Task<IActionResult> GetOrdersByCustomerIdByOrderStatus(
+			string customerId,
+			string orderStatus)
+		{
+			var query = new GetOrdersCustomerStatusQuery(customerId, orderStatus);
+
+			var orderResult = await _mediator.Send(query);
+
+			return orderResult.Match(
+				orders => Ok(_mapper.Map<GetOrdersCustomerResponse>(orders)),
+				errors => Problem("Ошибка")
+			);
+		}
+
+		[HttpGet("courier/{courierId}")]
+		[Authorize(Roles = "Courier")]
+		public async Task<IActionResult> GetAllOrdersByCourierId(string courierId)
+		{
+			var query = new GetOrdersCourierQuery(courierId);
+
+			var orderResult = await _mediator.Send(query);
+
+			return orderResult.Match(
+				orders => Ok(_mapper.Map<GetOrdersCourierResponse>(orders)),
+				errors => Problem("Ошибка")
+			);
+
+		}
+
 		[HttpPost("create")]
 		[Authorize(Roles = "Customer")]
 		public async Task<IActionResult> CreateOrder(CreateOrderRequest request)
 		{
-			var command = _mapper.Map<CreateOrderCommand>(request);
+			var customer = GetUserId();
+
+			var command = _mapper.Map<CreateOrderCommand>((request, customer));
 
 			var result = await _mediator.Send(command);
 
 			return result.Match(
-				coursesResult => Ok(result.Value),
+				orderResult => Ok(result.Value),
 				errors => Problem("Ошибка")
 				);
 		}
@@ -56,12 +105,14 @@ namespace DeliveryService.API.Controllers
 		[Authorize(Roles = "Courier")]
 		public async Task<IActionResult> ConfirmOrder(ConfirmOrderRequest request)
 		{
-			var command = _mapper.Map<ConfirmOrderCommand>(request);
+			var courier = GetUserId();
+
+			var command = _mapper.Map<ConfirmOrderCommand>((request,courier));
 
 			var result = await _mediator.Send(command);
 
 			return result.Match(
-				coursesResult => Ok(result.Value),
+				orderResult => Ok(result.Value),
 				errors => Problem("Ошибка")
 				);
 		}
@@ -75,11 +126,9 @@ namespace DeliveryService.API.Controllers
 			var result = await _mediator.Send(command);
 
 			return result.Match(
-				coursesResult => Ok(result.Value),
+				orderResult => Ok(result.Value),
 				errors => Problem("Ошибка")
 				);
 		}
-
-
 	}
 }

@@ -27,7 +27,6 @@ public class GetOrderDetailsQueryHandler
 		var order = await _unitOfWork.Orders.FindOrderWithCustomerAndCourier(orderId);
 		if (order is null)
 		{
-			Console.WriteLine("order null");
 			return Errors.Order.NotFound;
 		}
 
@@ -35,11 +34,12 @@ public class GetOrderDetailsQueryHandler
 			order.Id.ToString(),
 			order.Description,
 			order.Created,
+			order.End,
 			order.Status,
 			new CourierVm(
-				order.Courier.Id.ToString(), // тут падает null
-				order.Courier.LastName,
-				order.Courier.FirstName
+				order?.Courier?.Id.ToString(),
+				order?.Courier?.LastName,
+				order?.Courier?.FirstName
 				),
 			new CustomerVm(
 				order.Customer.Id.ToString(),

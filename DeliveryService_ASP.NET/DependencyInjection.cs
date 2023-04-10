@@ -8,6 +8,8 @@ public static class DependencyInjection
 	public static IServiceCollection AddPresentation(this IServiceCollection services)
 	{
 		services.AddControllers();
+		services.AddEndpointsApiExplorer();
+		//services.AddSwaggerGen();
 		services.AddSwaggerGen(option =>
 		{
 			option.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
@@ -34,9 +36,8 @@ public static class DependencyInjection
 				}
 			});
 		});
-		services.AddMappings();
-		services.AddEndpointsApiExplorer();
 
+		services.AddMappings();
 		return services;
 	}
 }

@@ -34,7 +34,7 @@ public class CompleteOrderCommandHandler
 		}
 
 
-		if (order.Status == OrderStatus.Complete)
+		if (order.GetStatus != OrderStatus.Progress)
 			return false;
 
 		//Меняем статус заказа

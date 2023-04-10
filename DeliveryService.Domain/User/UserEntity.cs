@@ -1,4 +1,6 @@
-﻿namespace DeliveryService.Domain.User;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace DeliveryService.Domain.User;
 
 public class UserEntity
 {
@@ -28,13 +30,23 @@ public class UserEntity
 
 	}
 
-	public string GetUserTypeToString
+	public UserType GetTypeUser => Type;
+
+
+	public string GetUserTypeToString()
 	{
-		get { return Type.ToString(); }
-		set { }
+		switch (Type)
+		{
+			case UserType.Customer:
+				return "Customer";
+			case UserType.Courier:
+				return "Courier";
+		}
+
+		return "";
 	}
 }
-	
+
 
 public enum UserType
 {
