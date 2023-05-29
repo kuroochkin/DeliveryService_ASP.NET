@@ -11,6 +11,7 @@ using DeliveryService.Contracts.Order.Get;
 using DeliveryService.App.Order.Queries.GetOrdersUser.Customer.GelAllOrdersByCustomer;
 using DeliveryService.App.Order.Queries.GetOrdersUser.Courier.GetAllOrdersByCourier;
 using DeliveryService.App.Order.Queries.GetOrdersUser.Customer.GetOrdersByCustomerByStatus;
+using static DeliveryService.App.Common.Errors.Errors;
 
 namespace DeliveryService.API.Controllers
 {
@@ -26,8 +27,9 @@ namespace DeliveryService.API.Controllers
 			_mediator = mediator;
 			_mapper = mapper;
 		}
-
-		[HttpGet("detailsOrder/{orderId}")]
+		
+		//ГОТОВО!!!
+		[HttpGet("{orderId}")]
 		public async Task<IActionResult> GetDetailsOrder(string orderId)
 		{
 			var query = new GetOrderDetailsQuery(orderId);
@@ -40,11 +42,14 @@ namespace DeliveryService.API.Controllers
 			);
 		}
 
-		[HttpGet("customer")]
+		//ГОТОВО!!!
+		[HttpGet("customerOrders")]
 		[Authorize(Roles = "Customer")]
 		public async Task<IActionResult> GetAllOrdersByCustomerId()
 		{
-			var query = new GetOrdersCustomerQuery(GetUserId());
+			var customerId = GetUserId();
+
+			var query = new GetOrdersCustomerQuery(customerId);
 			
 			var orderResult = await _mediator.Send(query);
 
@@ -54,12 +59,13 @@ namespace DeliveryService.API.Controllers
 			);
 		}
 
-		[HttpGet("customer/{orderStatus}/{customerId}")]
+		//ГОТОВО!!!
+		[HttpGet("customerOrders/{orderStatus}")]
 		[Authorize(Roles = "Customer")]
-		public async Task<IActionResult> GetOrdersByCustomerIdByOrderStatus(
-			string customerId,
-			string orderStatus)
+		public async Task<IActionResult> GetOrdersByCustomerIdByOrderStatus(string orderStatus)
 		{
+			var customerId = GetUserId();
+
 			var query = new GetOrdersCustomerStatusQuery(customerId, orderStatus);
 
 			var orderResult = await _mediator.Send(query);
@@ -70,10 +76,13 @@ namespace DeliveryService.API.Controllers
 			);
 		}
 
-		[HttpGet("courier/{courierId}")]
+		//ГОТОВО!!!
+		[HttpGet("courierOrders")]
 		[Authorize(Roles = "Courier")]
-		public async Task<IActionResult> GetAllOrdersByCourierId(string courierId)
+		public async Task<IActionResult> GetAllOrdersByCourierId()
 		{
+			var courierId = GetUserId();
+
 			var query = new GetOrdersCourierQuery(courierId);
 
 			var orderResult = await _mediator.Send(query);
@@ -85,6 +94,7 @@ namespace DeliveryService.API.Controllers
 
 		}
 
+		//ГОТОВО!!!
 		[HttpPost("create")]
 		[Authorize(Roles = "Customer")]
 		public async Task<IActionResult> CreateOrder(CreateOrderRequest request)
@@ -100,6 +110,7 @@ namespace DeliveryService.API.Controllers
 				errors => Problem("Ошибка")
 				);
 		}
+
 
 		[HttpPost("confirm")]
 		[Authorize(Roles = "Courier")]
