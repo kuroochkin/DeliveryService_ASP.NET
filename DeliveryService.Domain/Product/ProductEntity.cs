@@ -8,24 +8,26 @@ namespace DeliveryService.Domain.Product
 {
 	public class ProductEntity
 	{
-		public Guid Id { get; }
+		public int Id { get; }
 
-		public string Name { get; set; }
-		public string? Description { get; set; }
+		public string Title { get; set; }
 
-		public int Count { get; set; }
+		public double Price { get; set; }
 
-		public ProductEntity(Guid id, string name, string description)
+		public string Thumbnail { get; set; }
+
+		public ProductEntity(int id, string title)
 		{
 			Id = id;
-			Name = name;
-			Description = description;
+			Title = title;
 		}
 
-		public ProductEntity(Guid id, string name)
+		public ProductEntity(int id, string name, double price, string thumbnail)
 		{
 			Id = id;
-			Name = name;
+			Title = name;
+			Price = price;
+			Thumbnail = thumbnail;
 		}
 
 		public ProductEntity()
