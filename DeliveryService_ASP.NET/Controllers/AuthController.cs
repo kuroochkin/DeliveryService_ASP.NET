@@ -22,6 +22,7 @@ public class AuthController : Controller
 		_mapper = mapper;
 	}
 
+	//ГОТОВО!!!
 	[HttpPost("register")]
 	public async Task<IActionResult> Register(RegisterRequest request)
 	{
@@ -35,6 +36,7 @@ public class AuthController : Controller
 			);
 	}
 
+	//ГОТОВО!!!
 	[HttpPost("login")]
 	public async Task<IActionResult> Login(LoginRequest request)
 	{

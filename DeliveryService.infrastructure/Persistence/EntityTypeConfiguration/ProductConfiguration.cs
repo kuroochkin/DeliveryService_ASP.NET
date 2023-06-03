@@ -12,11 +12,8 @@ public class ProductConfiguration : IEntityTypeConfiguration<ProductEntity>
 
 		builder.HasKey(product => product.Id);
 
-		builder.Property(product => product.Name);
-		builder.Property(product => product.Description);
-
-		builder.Property(product => product.Id)
-		   .IsRequired()
-		   .ValueGeneratedNever();
+		builder.Property(product => product.Title);
+		builder.Property(product => product.Price);
+		builder.Property(product => product.Thumbnail);
 	}
 }

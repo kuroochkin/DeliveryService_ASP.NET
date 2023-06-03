@@ -1,7 +1,6 @@
 ﻿using DeliveryService.App.Common.Errors;
 using DeliveryService.App.Common.Interfaces.Persistence;
 using DeliveryService.App.Order.Queries.GetOrderDetails;
-using DeliveryService.App.Order.Queries.GetOrdersUser.Customer;
 using ErrorOr;
 using MediatR;
 

@@ -113,25 +113,24 @@ namespace DeliveryService.infrastructure.Migrations
 
             modelBuilder.Entity("DeliveryService.Domain.Product.ProductEntity", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("Count")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("Name")
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
+
+                    b.Property<string>("Thumbnail")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("OrderEntityId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("OrderEntityId");
 
                     b.ToTable("Products", (string)null);
                 });
@@ -183,13 +182,6 @@ namespace DeliveryService.infrastructure.Migrations
                     b.Navigation("Customer");
                 });
 
-            modelBuilder.Entity("DeliveryService.Domain.Product.ProductEntity", b =>
-                {
-                    b.HasOne("DeliveryService.Domain.Order.OrderEntity", null)
-                        .WithMany("Order")
-                        .HasForeignKey("OrderEntityId");
-                });
-
             modelBuilder.Entity("DeliveryService.Domain.Courier.CourierEntity", b =>
                 {
                     b.Navigation("Orders");
@@ -198,11 +190,6 @@ namespace DeliveryService.infrastructure.Migrations
             modelBuilder.Entity("DeliveryService.Domain.Customer.CustomerEntity", b =>
                 {
                     b.Navigation("Orders");
-                });
-
-            modelBuilder.Entity("DeliveryService.Domain.Order.OrderEntity", b =>
-                {
-                    b.Navigation("Order");
                 });
 #pragma warning restore 612, 618
         }
