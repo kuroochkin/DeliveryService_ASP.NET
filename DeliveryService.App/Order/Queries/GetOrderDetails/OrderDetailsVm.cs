@@ -1,4 +1,5 @@
-﻿using static DeliveryService.Domain.Order.OrderEntity;
+﻿using DeliveryService.Domain.Product;
+using static DeliveryService.Domain.Order.OrderEntity;
 
 namespace DeliveryService.App.Order.Queries.GetOrderDetails;
 
@@ -9,7 +10,8 @@ public record OrderDetailsVm(
 	DateTime End,
 	OrderStatus Status,
 	CourierVm? Courier,
-	CustomerVm Customer
+	CustomerVm Customer,
+	List<ProductOrderVm> Products
 	);
 
 public record CourierVm(
@@ -21,3 +23,9 @@ public record CustomerVm(
 	string CustomerId,
 	string LastName,
 	string FirstName);
+
+public record ProductOrderVm(
+	string ProductId,
+	string Count,
+	string TotalPrice
+	);

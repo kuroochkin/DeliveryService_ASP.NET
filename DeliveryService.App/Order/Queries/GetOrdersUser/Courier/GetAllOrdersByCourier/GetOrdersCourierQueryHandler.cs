@@ -39,15 +39,22 @@ public class GetOrdersCourierQueryHandler
         order.End,
         order.Status,
         new CourierVm(
-			order?.Courier?.Id.ToString(),
-			order?.Courier?.LastName,
-			order?.Courier?.FirstName
-			),
+            order?.Courier?.Id.ToString(),
+            order?.Courier?.LastName,
+            order?.Courier?.FirstName
+            ),
         new CustomerVm(
             order.Customer.Id.ToString(),
             order.Customer.LastName,
             order.Customer.FirstName
-            )
+            ),
+        new List<ProductOrderVm>(
+            order.OrderItems.Select(product => new ProductOrderVm(
+                product.Id.ToString(),
+                product.Count.ToString(),
+                product.TotalPrice.ToString()
+                )).ToList()
+        ).ToList()
         )).ToList();
 
         var allOrdersByCustomer = new OrdersUserVm(allOrderModel);

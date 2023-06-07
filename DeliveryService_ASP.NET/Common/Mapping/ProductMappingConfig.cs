@@ -1,4 +1,5 @@
-﻿using DeliveryService.App.Order.Queries.GetOrdersUser;
+﻿using DeliveryService.App.Order.Queries.GetOrderDetails;
+using DeliveryService.App.Order.Queries.GetOrdersUser;
 using DeliveryService.App.Product.Queries;
 using DeliveryService.Contracts.Order.Get;
 using DeliveryService.Contracts.Product.Get;
@@ -18,6 +19,7 @@ namespace DeliveryService.API.Common.Mapping
 
 			config.NewConfig<ProductsVm, GetAllProductsResponse>()
 				.Map(dest => dest.Products, src => src.Products);
+
 		}
 	}
 }
