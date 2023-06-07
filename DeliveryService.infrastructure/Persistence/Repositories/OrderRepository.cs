@@ -26,6 +26,7 @@ public class OrderRepository : GenericRepository<OrderEntity>, IOrderRepository
 		return await _context.Orders
 			.Include(order => order.Customer)
 			.Include(order => order.Courier)
+			.Include(order => order.OrderItems)
 			.Where(order => order.Customer.Id == id)
 			.ToListAsync();
 	}

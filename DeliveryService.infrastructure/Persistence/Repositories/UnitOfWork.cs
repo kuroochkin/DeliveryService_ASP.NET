@@ -11,7 +11,8 @@ public class UnitOfWork : IUnitOfWork, IDisposable
 		ICustomerRepository customers, 
 		IOrderRepository orders, 
 		IProductRepository products,
-		IUserRepository users)
+		IUserRepository users,
+		IOrderItemRepository orderItems)
 	{
 		_context = context;
 		Couriers = couriers;
@@ -19,6 +20,7 @@ public class UnitOfWork : IUnitOfWork, IDisposable
 		Orders = orders;
 		Products = products;
 		Users = users;
+		OrderItems = orderItems;
 	}
 
 	public ICourierRepository Couriers { get; }
@@ -30,6 +32,7 @@ public class UnitOfWork : IUnitOfWork, IDisposable
 	public IProductRepository Products { get; }
 
 	public IUserRepository Users { get; }
+	public IOrderItemRepository OrderItems { get; }
 
 	public async Task<bool> CompleteAsync()
 	{
