@@ -38,22 +38,28 @@ public class GetOrdersCustomerStatusQueryHandler
 			orderStatus);
 
 		var allOrderModel = orders.Select(order => new OrderDetailsVm(
-		order.Id.ToString(),
-		order.Description,
-		order.Created,
-		order.End,
-		order.Status,
-		new CourierVm(
-			order?.Courier?.Id.ToString(),
-			order?.Courier?.LastName,
-			order?.Courier?.FirstName
-			),
-		new CustomerVm(
-			order.Customer.Id.ToString(),
-			order.Customer.LastName,
-			order.Customer.FirstName
-			)
-		)).ToList();
+		   order.Id.ToString(),
+		   order.Description,
+		   order.Created,
+		   order.End,
+		   order.Status,
+		   new CourierVm(
+			   order?.Courier?.Id.ToString(),
+			   order?.Courier?.LastName,
+			   order?.Courier?.FirstName
+			   ),
+		   new CustomerVm(
+			   order.Customer.Id.ToString(),
+			   order.Customer.LastName,
+			   order.Customer.FirstName
+			   ),
+		   new List<ProductOrderVm>(
+			   order.OrderItems.Select(product => new ProductOrderVm(
+				   product.Id.ToString(),
+				   product.Count.ToString(),
+				   product.TotalPrice.ToString()
+				   )).ToList()
+		   ).ToList())).ToList();
 
 		var allOrdersByCustomer = new OrdersUserVm(allOrderModel);
 

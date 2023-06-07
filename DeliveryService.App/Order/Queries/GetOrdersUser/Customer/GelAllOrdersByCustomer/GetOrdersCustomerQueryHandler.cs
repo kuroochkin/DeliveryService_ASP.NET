@@ -32,25 +32,31 @@ public class GetOrdersCustomerQueryHandler
 
         var orders = await _unitOfWork.Orders.FindOrdersByCustomerId(customerId);
 
-        var allOrderModel = orders.Select(order => new OrderDetailsVm(
-        order.Id.ToString(),
-        order.Description,
-        order.Created,
-        order.End,
-        order.Status,
-        new CourierVm(
-            order?.Courier?.Id.ToString(),
-            order?.Courier?.LastName,
-            order?.Courier?.FirstName
-            ),
-        new CustomerVm(
-            order.Customer.Id.ToString(),
-            order.Customer.LastName,
-            order.Customer.FirstName
-            )
-        )).ToList();
+		var allOrderModel = orders.Select(order => new OrderDetailsVm(
+		   order.Id.ToString(),
+		   order.Description,
+		   order.Created,
+		   order.End,
+		   order.Status,
+		   new CourierVm(
+			   order?.Courier?.Id.ToString(),
+			   order?.Courier?.LastName,
+			   order?.Courier?.FirstName
+			   ),
+		   new CustomerVm(
+			   order.Customer.Id.ToString(),
+			   order.Customer.LastName,
+			   order.Customer.FirstName
+			   ),
+		   new List<ProductOrderVm>(
+			   order.OrderItems.Select(product => new ProductOrderVm(
+				   product.ProductId.ToString(),
+				   product.Count.ToString(),
+				   product.TotalPrice.ToString()
+				   )).ToList()
+		   ).ToList())).ToList();
 
-        var allOrdersByCustomer = new OrdersUserVm(allOrderModel);
+		var allOrdersByCustomer = new OrdersUserVm(allOrderModel);
 
         return allOrdersByCustomer;
     }
