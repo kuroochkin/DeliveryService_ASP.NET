@@ -43,6 +43,15 @@ public class OrderRepository : GenericRepository<OrderEntity>, IOrderRepository
 			.ToListAsync();
 	}
 
+	public async Task<List<OrderEntity>?> FindOrdersByCreate()
+	{
+		return await _context.Orders
+			.Include(order => order.Customer)
+			.Include(order => order.Courier)
+			.Where(order => order.Status == OrderStatus.Create)
+			.ToListAsync();
+	}
+
 	public async Task<OrderEntity?> FindOrderWithCustomer(Guid id)
 	{
 		return await _context.Orders

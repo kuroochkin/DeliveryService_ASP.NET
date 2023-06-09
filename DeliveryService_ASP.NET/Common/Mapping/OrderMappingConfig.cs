@@ -39,6 +39,9 @@ public class OrderMappingConfig : IRegister
 		config.NewConfig<OrdersUserVm, GetOrdersCourierResponse>()
 			.Map(dest => dest.Orders, src => src.Orders);
 
+		config.NewConfig<OrdersUserVm, GetAllOrdersByCreateResponse>()
+			.Map(dest => dest.Orders, src => src.Orders);
+
 
 	}
 }

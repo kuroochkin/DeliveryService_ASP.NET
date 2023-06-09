@@ -12,6 +12,7 @@ using DeliveryService.App.Order.Queries.GetOrdersUser.Customer.GelAllOrdersByCus
 using DeliveryService.App.Order.Queries.GetOrdersUser.Courier.GetAllOrdersByCourier;
 using DeliveryService.App.Order.Queries.GetOrdersUser.Customer.GetOrdersByCustomerByStatus;
 using static DeliveryService.App.Common.Errors.Errors;
+using DeliveryService.App.Order.Queries.GetAllOrdersByCreate;
 
 namespace DeliveryService.API.Controllers
 {
@@ -55,6 +56,20 @@ namespace DeliveryService.API.Controllers
 
 			return orderResult.Match(
 				orders => Ok(_mapper.Map<GetOrdersCustomerResponse>(orders)),
+				errors => Problem("Ошибка")
+			);
+		}
+
+		[HttpGet("allOrdersByCreate")]
+		public async Task<IActionResult> GetAllOrdersByCreate()
+		{
+
+			var query = new GetAllOrdersByCreateQuery();
+
+			var orderResult = await _mediator.Send(query);
+
+			return orderResult.Match(
+				orders => Ok(_mapper.Map<GetAllOrdersByCreateResponse>(orders)),
 				errors => Problem("Ошибка")
 			);
 		}
