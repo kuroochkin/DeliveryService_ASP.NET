@@ -5,36 +5,37 @@ using ErrorOr;
 using MediatR;
 using static DeliveryService.Domain.Order.OrderEntity;
 
-namespace DeliveryService.App.Order.Queries.GetOrdersUser.Customer.GetOrdersByCustomerByStatus;
+namespace DeliveryService.App.Order.Queries.GetOrdersUser.Courier.GetOrdersCourierByStatus;
 
-public class GetOrdersCustomerStatusQueryHandler
-	: IRequestHandler<GetOrdersCustomerStatusQuery, ErrorOr<OrdersUserVm>>
+public class GetOrdersCourierByStatusQueryHandler
+	: IRequestHandler<GetOrdersCourierByStatusQuery, ErrorOr<OrdersUserVm>>
 {
 	private readonly IUnitOfWork _unitOfWork;
 
-	public GetOrdersCustomerStatusQueryHandler(IUnitOfWork unitOfWork)
+	public GetOrdersCourierByStatusQueryHandler(IUnitOfWork unitOfWork)
 	{
 		_unitOfWork = unitOfWork;
 	}
+
 	public async Task<ErrorOr<OrdersUserVm>> Handle(
-		GetOrdersCustomerStatusQuery request, 
+		GetOrdersCourierByStatusQuery request, 
 		CancellationToken cancellationToken)
 	{
-		if (!Guid.TryParse(request.CustomerId, out var customerId))
+		if (!Guid.TryParse(request.CourierId, out var courierId))
 		{
 			return Errors.Customer.InvalidId;
 		}
 
 		OrderStatus orderStatus = (OrderStatus)Enum.Parse(typeof(OrderStatus), request.OrderStatus);
 
-		var customer = await _unitOfWork.Customers.FindById(customerId);
-		if (customer is null)
+		var courier = await _unitOfWork.Couriers.FindById(courierId);
+		if (courier is null)
 		{
-			return Errors.Customer.NotFound;
+			return Errors.Courier.InvalidId;
 		}
 
-		var orders = await _unitOfWork.Orders.FindOrdersByCustomerIdByOrderStatus(
-			customerId,
+		var orders = await _unitOfWork.Orders.FindOrdersByCourierIdByOrderStatus(
+			courierId,
 			orderStatus);
 
 		var allOrderModel = orders.Select(order => new OrderDetailsVm(

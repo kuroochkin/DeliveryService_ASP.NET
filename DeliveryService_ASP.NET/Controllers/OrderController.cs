@@ -12,6 +12,8 @@ using DeliveryService.App.Order.Queries.GetOrdersUser.Customer.GelAllOrdersByCus
 using DeliveryService.App.Order.Queries.GetOrdersUser.Courier.GetAllOrdersByCourier;
 using DeliveryService.App.Order.Queries.GetOrdersUser.Customer.GetOrdersByCustomerByStatus;
 using static DeliveryService.App.Common.Errors.Errors;
+using DeliveryService.App.Order.Queries.GetAllOrdersByCreate;
+using DeliveryService.App.Order.Queries.GetOrdersUser.Courier.GetOrdersCourierByStatus;
 
 namespace DeliveryService.API.Controllers
 {
@@ -59,6 +61,20 @@ namespace DeliveryService.API.Controllers
 			);
 		}
 
+		[HttpGet("allOrdersByCreate")]
+		public async Task<IActionResult> GetAllOrdersByCreate()
+		{
+
+			var query = new GetAllOrdersByCreateQuery();
+
+			var orderResult = await _mediator.Send(query);
+
+			return orderResult.Match(
+				orders => Ok(_mapper.Map<GetAllOrdersByCreateResponse>(orders)),
+				errors => Problem("Ошибка")
+			);
+		}
+
 		//ГОТОВО!!!
 		[HttpGet("customerOrders/{orderStatus}")]
 		[Authorize(Roles = "Customer")]
@@ -72,6 +88,22 @@ namespace DeliveryService.API.Controllers
 
 			return orderResult.Match(
 				orders => Ok(_mapper.Map<GetOrdersCustomerResponse>(orders)),
+				errors => Problem("Ошибка")
+			);
+		}
+
+		[HttpGet("courierOrders/{orderStatus}")]
+		[Authorize(Roles = "Courier")]
+		public async Task<IActionResult> GetOrdersByCourierIdByOrderStatus(string orderStatus)
+		{
+			var courierId = GetUserId();
+
+			var query = new GetOrdersCourierByStatusQuery(courierId, orderStatus);
+
+			var orderResult = await _mediator.Send(query);
+
+			return orderResult.Match(
+				orders => Ok(_mapper.Map<GetOrdersCourierResponse>(orders)),
 				errors => Problem("Ошибка")
 			);
 		}

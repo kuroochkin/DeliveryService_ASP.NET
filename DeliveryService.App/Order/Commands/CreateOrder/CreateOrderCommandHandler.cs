@@ -1,5 +1,7 @@
-﻿using DeliveryService.App.Common.Errors;
+﻿using AutoMapper.Execution;
+using DeliveryService.App.Common.Errors;
 using DeliveryService.App.Common.Interfaces.Persistence;
+using DeliveryService.Domain;
 using DeliveryService.Domain.Order;
 using ErrorOr;
 using MediatR;
@@ -33,11 +35,19 @@ public class CreateOrderCommandHandler
 			return Errors.Customer.NotFound;
 		}
 
+		var orderItems =  request.Products.Select(product => new OrderItemEntity(
+			Convert.ToInt32(product.Count),
+			Convert.ToDouble(product.TotalPrice),
+			Convert.ToInt32(product.ProductId)
+			)).ToList();
+
+
 		var order = new OrderEntity()
 		{
 			Description = request.Description,
 			Status = OrderStatus.Create,
-			Customer = customer
+			Customer = customer,
+			OrderItems = orderItems
 		};
 
 	

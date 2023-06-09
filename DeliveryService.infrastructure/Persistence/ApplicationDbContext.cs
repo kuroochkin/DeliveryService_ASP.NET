@@ -1,4 +1,5 @@
-﻿using DeliveryService.Domain.Courier;
+﻿using DeliveryService.Domain;
+using DeliveryService.Domain.Courier;
 using DeliveryService.Domain.Customer;
 using DeliveryService.Domain.Order;
 using DeliveryService.Domain.Product;
@@ -16,6 +17,7 @@ public class ApplicationDbContext : DbContext
 	public DbSet<OrderEntity> Orders { get; set; }
 	public DbSet<ProductEntity> Products { get; set; }
 	public DbSet<UserEntity> Users { get; set; }
+	public DbSet<OrderItemEntity> OrderItems { get; set; }
 
 	public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
 	   : base(options) { }
@@ -27,6 +29,7 @@ public class ApplicationDbContext : DbContext
 		builder.ApplyConfiguration(new OrderConfiguration());
 		builder.ApplyConfiguration(new ProductConfiguration());
 		builder.ApplyConfiguration(new UserConfiguration());
+		builder.ApplyConfiguration(new OrderItemConfiguration());
 		
 		base.OnModelCreating(builder);
 	}

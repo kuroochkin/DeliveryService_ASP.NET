@@ -15,5 +15,6 @@ public class ProductConfiguration : IEntityTypeConfiguration<ProductEntity>
 		builder.Property(product => product.Title);
 		builder.Property(product => product.Price);
 		builder.Property(product => product.Thumbnail);
+
 	}
 }

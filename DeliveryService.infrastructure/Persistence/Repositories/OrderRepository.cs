@@ -26,6 +26,7 @@ public class OrderRepository : GenericRepository<OrderEntity>, IOrderRepository
 		return await _context.Orders
 			.Include(order => order.Customer)
 			.Include(order => order.Courier)
+			.Include(order => order.OrderItems)
 			.Where(order => order.Customer.Id == id)
 			.ToListAsync();
 	}
@@ -39,6 +40,27 @@ public class OrderRepository : GenericRepository<OrderEntity>, IOrderRepository
 			.Include(order => order.Courier)
 			.Where(order => order.Customer.Id == id)
 			.Where(order => order.Status == orderStatus)
+			.ToListAsync();
+	}
+
+	public async Task<List<OrderEntity>?> FindOrdersByCourierIdByOrderStatus(
+		Guid id,
+		OrderStatus orderStatus)
+	{
+		return await _context.Orders
+			.Include(order => order.Customer)
+			.Include(order => order.Courier)
+			.Where(order => order.Courier.Id == id)
+			.Where(order => order.Status == orderStatus)
+			.ToListAsync();
+	}
+
+	public async Task<List<OrderEntity>?> FindOrdersByCreate()
+	{
+		return await _context.Orders
+			.Include(order => order.Customer)
+			.Include(order => order.Courier)
+			.Where(order => order.Status == OrderStatus.Create)
 			.ToListAsync();
 	}
 

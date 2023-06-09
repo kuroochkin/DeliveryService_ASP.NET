@@ -1,11 +1,6 @@
 ﻿using DeliveryService.Domain.Order;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DeliveryService.infrastructure.Persistence.EntityTypeConfiguration;
 
@@ -24,5 +19,7 @@ public class OrderConfiguration : IEntityTypeConfiguration<OrderEntity>
 		builder.Property(order => order.Id)
 		   .IsRequired()
 		   .ValueGeneratedNever();
+
+		builder.HasMany(item => item.OrderItems);
 	}
 }

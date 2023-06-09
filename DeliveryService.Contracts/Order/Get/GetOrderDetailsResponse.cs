@@ -1,4 +1,6 @@
-﻿namespace DeliveryService.Contracts.Order.Get;
+﻿using DeliveryService.Domain.Product;
+
+namespace DeliveryService.Contracts.Order.Get;
 
 public record GetOrderDetailsResponse(
 	string OrderId,
@@ -7,7 +9,8 @@ public record GetOrderDetailsResponse(
 	DateTime End,
 	string Status,
 	CourierResponse? Courier,
-	CustomerResponse Customer);
+	CustomerResponse Customer,
+	List<ProductsOrderResponse> Products);
 
 public record CourierResponse(
 	string CourierId,
@@ -18,4 +21,10 @@ public record CustomerResponse(
 	string CustomerId,
 	string LastName,
 	string FirstName);
+
+public record ProductsOrderResponse(
+	string ProductId,
+	string Count,
+	string TotalPrice);
+
 

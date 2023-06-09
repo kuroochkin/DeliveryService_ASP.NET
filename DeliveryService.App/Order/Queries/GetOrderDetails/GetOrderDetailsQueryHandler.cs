@@ -45,8 +45,13 @@ public class GetOrderDetailsQueryHandler
 				order.Customer.Id.ToString(),
 				order.Customer.LastName,
 				order.Customer.FirstName
-				)
-			);
+				),
+			new List<ProductOrderVm>(
+				order.OrderItems.Select(product => new ProductOrderVm(
+					product.Id.ToString(),
+					product.Count.ToString(),
+					product.TotalPrice.ToString()
+			)).ToList()));
 
 		return orderInfo;	
 	}

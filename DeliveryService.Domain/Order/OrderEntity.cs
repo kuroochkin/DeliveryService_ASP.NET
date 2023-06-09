@@ -8,7 +8,6 @@ namespace DeliveryService.Domain.Order;
 
 public class OrderEntity
 {
-	//private List<ProductEntity> _products = new();
 	public Guid Id { get; }
 
 	public DateTime Created { get; set; }
@@ -45,9 +44,9 @@ public class OrderEntity
 
 	public CourierEntity? Courier { get; set; }
 
-	public CustomerEntity Customer{ get; set; } = null!;
+	public CustomerEntity Customer { get; set; } = null!;
 
-	//public IReadOnlyList<ProductEntity> Order => _products.AsReadOnly();
+	public List<OrderItemEntity> OrderItems { get; set; } = new();
 
 	public OrderEntity()
 	{
