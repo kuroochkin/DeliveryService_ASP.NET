@@ -19,4 +19,8 @@ public interface IOrderRepository : IGenericRepository<OrderEntity>
 	Task<List<OrderEntity>?> FindOrdersByCourierIdByOrderStatus(Guid id, OrderStatus orderStatus);
 
 	Task<List<OrderEntity>?> FindOrdersByCreate();
+
+	Task<List<OrderEntity>?> FindOrdersCourierByOrderProgress(Guid id);
+
+	Task<List<OrderEntity>?> FindOrdersCourierByOrderComplete(Guid id);
 }
