@@ -75,6 +75,7 @@ public class OrderRepository : GenericRepository<OrderEntity>, IOrderRepository
 			.ToListAsync();
 	}
 
+
 	public async Task<List<OrderEntity>?> FindOrdersByCreate()
 	{
 		return await _context.Orders
@@ -96,6 +97,15 @@ public class OrderRepository : GenericRepository<OrderEntity>, IOrderRepository
 		return await _context.Orders
 			.Include(order => order.Customer)
 			.Include(order => order.Courier)
+			.FirstOrDefaultAsync(order => order.Id == id);
+	}
+
+	public async Task<OrderEntity?> FindOrderWithCustomerAndCourierAndProducts(Guid id)
+	{
+		return await _context.Orders
+			.Include(order => order.Customer)
+			.Include(order => order.Courier)
+			.Include(order => order.OrderItems)
 			.FirstOrDefaultAsync(order => order.Id == id);
 	}
 }

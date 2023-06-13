@@ -15,8 +15,6 @@ public class ProductRepository : GenericRepository<ProductEntity>, IProductRepos
 	public async Task<ProductEntity?> FindProductById(int id)
 	{
 		return await _context.Products
-			.Include(product => product.Id)
-			.Include(product => product.Title)
 			.FirstOrDefaultAsync(product => product.Id == id);
 	}
 }
