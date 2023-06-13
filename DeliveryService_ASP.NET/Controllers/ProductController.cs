@@ -1,5 +1,6 @@
 ﻿using DeliveryService.App.Order.Queries.GetOrdersUser.Customer.GelAllOrdersByCustomer;
 using DeliveryService.App.Product.Queries.GetAllProducts;
+using DeliveryService.App.Product.Queries.GetProductDetails;
 using DeliveryService.Contracts.Product.Get;
 using MapsterMapper;
 using MediatR;
@@ -30,6 +31,19 @@ public class ProductController : Controller
 
 		return productResult.Match(
 			orders => Ok(_mapper.Map<GetAllProductsResponse>(orders)),
+			errors => Problem("Ошибка")
+		);
+	}
+
+	[HttpGet("{productId}")]
+	public async Task<IActionResult> GetProductById(string productId)
+	{
+		var query = new GetProductsDetailsQuery(productId);
+
+		var productResult = await _mediator.Send(query);
+
+		return productResult.Match(
+			product => Ok(_mapper.Map<GetProductDetailsResponse>(product)),
 			errors => Problem("Ошибка")
 		);
 	}

@@ -53,7 +53,9 @@ public class GetOrdersCourierCompleteQueryHandler
 			   order.OrderItems.Select(product => new ProductOrderVm(
 				   product.Id.ToString(),
 				   product.Count.ToString(),
-				   product.TotalPrice.ToString()
+				   product.TotalPrice.ToString(),
+				   product.Thumbnail,
+				   product.Title
 				   )).ToList()
 		   ).ToList())).ToList();
 

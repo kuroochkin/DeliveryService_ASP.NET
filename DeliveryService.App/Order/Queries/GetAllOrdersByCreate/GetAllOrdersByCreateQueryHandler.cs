@@ -41,7 +41,9 @@ namespace DeliveryService.App.Order.Queries.GetAllOrdersByCreate
 			   order.OrderItems.Select(product => new ProductOrderVm(
 				   product.ProductId.ToString(),
 				   product.Count.ToString(),
-				   product.TotalPrice.ToString()
+				   product.TotalPrice.ToString(),
+				   product.Thumbnail,
+				   product.Title
 				   )).ToList()
 		   ).ToList())).ToList();
 

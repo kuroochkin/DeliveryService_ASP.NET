@@ -27,5 +27,7 @@ public record CustomerVm(
 public record ProductOrderVm(
 	string ProductId,
 	string Count,
-	string TotalPrice
+	string TotalPrice,
+	string Thumbnail,
+	string Title
 	);

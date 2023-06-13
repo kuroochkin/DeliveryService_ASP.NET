@@ -24,7 +24,7 @@ public class GetOrderDetailsQueryHandler
 			return Errors.Order.InvalidId;
 		}
 
-		var order = await _unitOfWork.Orders.FindOrderWithCustomerAndCourier(orderId);
+		var order = await _unitOfWork.Orders.FindOrderWithCustomerAndCourierAndProducts(orderId);
 		if (order is null)
 		{
 			return Errors.Order.NotFound;
@@ -48,9 +48,11 @@ public class GetOrderDetailsQueryHandler
 				),
 			new List<ProductOrderVm>(
 				order.OrderItems.Select(product => new ProductOrderVm(
-					product.Id.ToString(),
+					product.ProductId.ToString(),
 					product.Count.ToString(),
-					product.TotalPrice.ToString()
+					product.TotalPrice.ToString(),
+					product.Thumbnail,
+					product.Title
 			)).ToList()));
 
 		return orderInfo;	

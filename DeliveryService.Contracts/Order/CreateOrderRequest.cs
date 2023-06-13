@@ -13,7 +13,9 @@ public record CreateOrderResponse(
 public record GetProductRequest(
 	string ProductId,
 	string TotalPrice,
-	string Count);
+	string Count,
+	string Thumbnail,
+	string Title);
 
 public record GetProductResponse(
 	string ProductId,

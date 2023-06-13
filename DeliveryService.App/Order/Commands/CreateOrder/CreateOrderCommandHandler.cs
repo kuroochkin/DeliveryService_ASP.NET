@@ -38,7 +38,9 @@ public class CreateOrderCommandHandler
 		var orderItems =  request.Products.Select(product => new OrderItemEntity(
 			Convert.ToInt32(product.Count),
 			double.Parse(product.TotalPrice),
-			Convert.ToInt32(product.ProductId)
+			Convert.ToInt32(product.ProductId),
+			product.Thumbnail,
+			product.Title
 			)).ToList();
 
 
