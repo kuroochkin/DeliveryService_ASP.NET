@@ -24,4 +24,12 @@ public class ProductRepository : GenericRepository<ProductEntity>, IProductRepos
 			.Include(product => product.Section)
 			.ToListAsync();
 	}
+
+	public async Task<List<ProductEntity>?> GetProductsBySection(Guid id)
+	{
+		return await _context.Products
+			.Include(product => product.Section)
+			.Where(product => product.Section.Id == id)
+			.ToListAsync();
+	}
 }
