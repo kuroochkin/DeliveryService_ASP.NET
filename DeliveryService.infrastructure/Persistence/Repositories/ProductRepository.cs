@@ -17,4 +17,11 @@ public class ProductRepository : GenericRepository<ProductEntity>, IProductRepos
 		return await _context.Products
 			.FirstOrDefaultAsync(product => product.Id == id);
 	}
+
+	public async Task<List<ProductEntity>?> GetAllProducts()
+	{
+		return await _context.Products
+			.Include(product => product.Section)
+			.ToListAsync();
+	}
 }

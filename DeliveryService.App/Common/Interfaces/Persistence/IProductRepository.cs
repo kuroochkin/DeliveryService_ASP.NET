@@ -5,4 +5,5 @@ namespace DeliveryService.App.Common.Interfaces.Persistence;
 public interface IProductRepository : IGenericRepository<ProductEntity>
 {
 	Task<ProductEntity?> FindProductById(int id);
+	Task<List<ProductEntity>?> GetAllProducts();
 }
