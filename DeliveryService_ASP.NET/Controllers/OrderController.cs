@@ -11,7 +11,6 @@ using DeliveryService.Contracts.Order.Get;
 using DeliveryService.App.Order.Queries.GetOrdersUser.Customer.GelAllOrdersByCustomer;
 using DeliveryService.App.Order.Queries.GetOrdersUser.Courier.GetAllOrdersByCourier;
 using DeliveryService.App.Order.Queries.GetOrdersUser.Customer.GetOrdersByCustomerByStatus;
-using static DeliveryService.App.Common.Errors.Errors;
 using DeliveryService.App.Order.Queries.GetAllOrdersByCreate;
 using DeliveryService.App.Order.Queries.GetOrdersUser.Courier.GetOrdersCourierByStatus;
 

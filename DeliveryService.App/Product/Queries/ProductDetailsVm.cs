@@ -4,5 +4,6 @@ public record ProductDetailsVm(
     string ProductId,
     string Title,
     string Price,
-    string Thumbnail
+    string Thumbnail,
+    string Section
 	);

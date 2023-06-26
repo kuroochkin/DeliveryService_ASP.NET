@@ -6,7 +6,6 @@ using DeliveryService.Domain.Product;
 using DeliveryService.Domain.User;
 using DeliveryService.infrastructure.Persistence.EntityTypeConfiguration;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace DeliveryService.infrastructure.Persistence;
 
@@ -18,6 +17,7 @@ public class ApplicationDbContext : DbContext
 	public DbSet<ProductEntity> Products { get; set; }
 	public DbSet<UserEntity> Users { get; set; }
 	public DbSet<OrderItemEntity> OrderItems { get; set; }
+	public DbSet<SectionEntity> Sections { get; set; }
 
 	public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
 	   : base(options) { }
@@ -30,6 +30,7 @@ public class ApplicationDbContext : DbContext
 		builder.ApplyConfiguration(new ProductConfiguration());
 		builder.ApplyConfiguration(new UserConfiguration());
 		builder.ApplyConfiguration(new OrderItemConfiguration());
+		builder.ApplyConfiguration(new SectionConfiguration());
 		
 		base.OnModelCreating(builder);
 	}

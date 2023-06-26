@@ -1,7 +1,5 @@
 ﻿using DeliveryService.Domain.Courier;
 using DeliveryService.Domain.Customer;
-using DeliveryService.Domain.Product;
-using DeliveryService.Domain.User;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DeliveryService.Domain.Order;
