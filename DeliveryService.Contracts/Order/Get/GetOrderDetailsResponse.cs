@@ -25,6 +25,8 @@ public record CustomerResponse(
 public record ProductsOrderResponse(
 	string ProductId,
 	string Count,
-	string TotalPrice);
+	string TotalPrice,
+	string Thumbnail,
+	string Title);
 
 

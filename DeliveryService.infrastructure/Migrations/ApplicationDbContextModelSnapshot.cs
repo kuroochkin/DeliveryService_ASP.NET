@@ -126,6 +126,14 @@ namespace DeliveryService.infrastructure.Migrations
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
+                    b.Property<string>("Thumbnail")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<double>("TotalPrice")
                         .HasColumnType("float");
 
@@ -149,6 +157,9 @@ namespace DeliveryService.infrastructure.Migrations
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
+                    b.Property<Guid?>("SectionId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Thumbnail")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -158,6 +169,8 @@ namespace DeliveryService.infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("SectionId");
 
                     b.ToTable("Products", (string)null);
                 });
@@ -192,6 +205,21 @@ namespace DeliveryService.infrastructure.Migrations
                     b.ToTable("Users", (string)null);
                 });
 
+            modelBuilder.Entity("SectionEntity", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Sections", (string)null);
+                });
+
             modelBuilder.Entity("DeliveryService.Domain.Order.OrderEntity", b =>
                 {
                     b.HasOne("DeliveryService.Domain.Courier.CourierEntity", "Courier")
@@ -218,7 +246,7 @@ namespace DeliveryService.infrastructure.Migrations
                         .IsRequired();
 
                     b.HasOne("DeliveryService.Domain.Product.ProductEntity", "Product")
-                        .WithMany("OrderItems")
+                        .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -226,6 +254,15 @@ namespace DeliveryService.infrastructure.Migrations
                     b.Navigation("Order");
 
                     b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("DeliveryService.Domain.Product.ProductEntity", b =>
+                {
+                    b.HasOne("SectionEntity", "Section")
+                        .WithMany()
+                        .HasForeignKey("SectionId");
+
+                    b.Navigation("Section");
                 });
 
             modelBuilder.Entity("DeliveryService.Domain.Courier.CourierEntity", b =>
@@ -239,11 +276,6 @@ namespace DeliveryService.infrastructure.Migrations
                 });
 
             modelBuilder.Entity("DeliveryService.Domain.Order.OrderEntity", b =>
-                {
-                    b.Navigation("OrderItems");
-                });
-
-            modelBuilder.Entity("DeliveryService.Domain.Product.ProductEntity", b =>
                 {
                     b.Navigation("OrderItems");
                 });

@@ -1,6 +1,5 @@
 ﻿using DeliveryService.App.Common.Interfaces.Persistence;
 using DeliveryService.Domain;
-using DeliveryService.Domain.Customer;
 
 namespace DeliveryService.infrastructure.Persistence.Repositories;
 

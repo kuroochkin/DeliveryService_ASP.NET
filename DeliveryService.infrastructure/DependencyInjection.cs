@@ -25,6 +25,7 @@ public static class DependencyInjection
 		services.AddScoped<IProductRepository, ProductRepository>();
 		services.AddScoped<IUserRepository, UserRepository>();
 		services.AddScoped<IOrderItemRepository, OrderItemRepository>();
+		services.AddScoped<ISectionRepository, SectionRepository>();
 		services.AddScoped<IUnitOfWork, UnitOfWork>();
 		
 
@@ -34,7 +35,6 @@ public static class DependencyInjection
 		{
 			options.UseSqlServer(configuration.GetConnectionString("SqlServer"));
 		});
-
 
 		return services;
 	}
@@ -46,7 +46,6 @@ public static class DependencyInjection
 		configuration.Bind(JwtSettings.SectionName, jwtSettings);
 		services.AddSingleton(Options.Create(jwtSettings));
 
-		
 		services.AddSingleton<IJwtTokenGenerator, JwtTokenGenerator>();
 
 		services.AddAuthentication(defaultScheme: JwtBearerDefaults.AuthenticationScheme)

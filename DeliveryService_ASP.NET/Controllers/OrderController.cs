@@ -11,7 +11,6 @@ using DeliveryService.Contracts.Order.Get;
 using DeliveryService.App.Order.Queries.GetOrdersUser.Customer.GelAllOrdersByCustomer;
 using DeliveryService.App.Order.Queries.GetOrdersUser.Courier.GetAllOrdersByCourier;
 using DeliveryService.App.Order.Queries.GetOrdersUser.Customer.GetOrdersByCustomerByStatus;
-using static DeliveryService.App.Common.Errors.Errors;
 using DeliveryService.App.Order.Queries.GetAllOrdersByCreate;
 using DeliveryService.App.Order.Queries.GetOrdersUser.Courier.GetOrdersCourierByStatus;
 
@@ -92,13 +91,29 @@ namespace DeliveryService.API.Controllers
 			);
 		}
 
-		[HttpGet("courierOrders/{orderStatus}")]
+		[HttpGet("courierOrders/Progress")]
 		[Authorize(Roles = "Courier")]
-		public async Task<IActionResult> GetOrdersByCourierIdByOrderStatus(string orderStatus)
+		public async Task<IActionResult> GetOrdersCourierByOrderProgress()
 		{
 			var courierId = GetUserId();
 
-			var query = new GetOrdersCourierByStatusQuery(courierId, orderStatus);
+			var query = new GetOrdersCourierProgressQuery(courierId);
+
+			var orderResult = await _mediator.Send(query);
+
+			return orderResult.Match(
+				orders => Ok(_mapper.Map<GetOrdersCourierResponse>(orders)),
+				errors => Problem("Ошибка")
+			);
+		}
+
+		[HttpGet("courierOrders/Complete")]
+		[Authorize(Roles = "Courier")]
+		public async Task<IActionResult> GetOrdersCourierByOrderComplete()
+		{
+			var courierId = GetUserId();
+
+			var query = new GetOrdersCourierCompleteQuery(courierId);
 
 			var orderResult = await _mediator.Send(query);
 
@@ -160,7 +175,7 @@ namespace DeliveryService.API.Controllers
 				);
 		}
 
-		[HttpPost("comlete")]
+		[HttpPost("complete")]
 		[Authorize(Roles = "Courier")]
 		public async Task<IActionResult> CompleteOrder(CompleteOrderRequest request)
 		{

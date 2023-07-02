@@ -52,7 +52,9 @@ public class GetOrdersCustomerQueryHandler
 			   order.OrderItems.Select(product => new ProductOrderVm(
 				   product.ProductId.ToString(),
 				   product.Count.ToString(),
-				   product.TotalPrice.ToString()
+				   product.TotalPrice.ToString(),
+				   product.Thumbnail,
+				   product.Title
 				   )).ToList()
 		   ).ToList())).ToList();
 

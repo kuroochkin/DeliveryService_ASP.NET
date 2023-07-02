@@ -17,7 +17,7 @@ public class GetAllProductsQueryHandler
 		GetAllProductsQuery request, 
 		CancellationToken cancellationToken)
 	{
-		var products = await _unitOfWork.Products.GetAll();
+		var products = await _unitOfWork.Products.GetAllProducts();
 		if(products is null)
 		{
 			return new ErrorOr<ProductsVm>();
@@ -27,7 +27,8 @@ public class GetAllProductsQueryHandler
 		product.Id.ToString(),
 		product.Title,
 		product.Price.ToString(),
-		product.Thumbnail
+		product.Thumbnail,
+		product.Section.Name
 		)).ToList();
 
 		var allProd = new ProductsVm(allProducts);

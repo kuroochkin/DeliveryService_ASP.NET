@@ -10,6 +10,8 @@ public interface IOrderRepository : IGenericRepository<OrderEntity>
 
 	Task<OrderEntity?> FindOrderWithCustomerAndCourier(Guid id);
 
+	Task<OrderEntity?> FindOrderWithCustomerAndCourierAndProducts(Guid id);
+
 	Task<List<OrderEntity>?> FindOrdersByCustomerId(Guid id);
 
 	Task<List<OrderEntity>?> FindOrdersByCourierId(Guid id);
@@ -19,4 +21,8 @@ public interface IOrderRepository : IGenericRepository<OrderEntity>
 	Task<List<OrderEntity>?> FindOrdersByCourierIdByOrderStatus(Guid id, OrderStatus orderStatus);
 
 	Task<List<OrderEntity>?> FindOrdersByCreate();
+
+	Task<List<OrderEntity>?> FindOrdersCourierByOrderProgress(Guid id);
+
+	Task<List<OrderEntity>?> FindOrdersCourierByOrderComplete(Guid id);
 }

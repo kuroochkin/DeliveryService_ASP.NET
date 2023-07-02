@@ -3,22 +3,21 @@ using DeliveryService.App.Common.Interfaces.Persistence;
 using DeliveryService.App.Order.Queries.GetOrderDetails;
 using ErrorOr;
 using MediatR;
-using static DeliveryService.Domain.Order.OrderEntity;
 
 namespace DeliveryService.App.Order.Queries.GetOrdersUser.Courier.GetOrdersCourierByStatus;
 
-public class GetOrdersCourierByStatusQueryHandler
-	: IRequestHandler<GetOrdersCourierByStatusQuery, ErrorOr<OrdersUserVm>>
+public class GetOrdersCourierCompleteQueryHandler
+	: IRequestHandler<GetOrdersCourierCompleteQuery, ErrorOr<OrdersUserVm>>
 {
 	private readonly IUnitOfWork _unitOfWork;
 
-	public GetOrdersCourierByStatusQueryHandler(IUnitOfWork unitOfWork)
+	public GetOrdersCourierCompleteQueryHandler(IUnitOfWork unitOfWork)
 	{
 		_unitOfWork = unitOfWork;
 	}
 
 	public async Task<ErrorOr<OrdersUserVm>> Handle(
-		GetOrdersCourierByStatusQuery request, 
+		GetOrdersCourierCompleteQuery request,
 		CancellationToken cancellationToken)
 	{
 		if (!Guid.TryParse(request.CourierId, out var courierId))
@@ -26,17 +25,13 @@ public class GetOrdersCourierByStatusQueryHandler
 			return Errors.Customer.InvalidId;
 		}
 
-		OrderStatus orderStatus = (OrderStatus)Enum.Parse(typeof(OrderStatus), request.OrderStatus);
-
 		var courier = await _unitOfWork.Couriers.FindById(courierId);
 		if (courier is null)
 		{
 			return Errors.Courier.InvalidId;
 		}
 
-		var orders = await _unitOfWork.Orders.FindOrdersByCourierIdByOrderStatus(
-			courierId,
-			orderStatus);
+		var orders = await _unitOfWork.Orders.FindOrdersCourierByOrderComplete(courierId);
 
 		var allOrderModel = orders.Select(order => new OrderDetailsVm(
 		   order.Id.ToString(),
@@ -58,7 +53,9 @@ public class GetOrdersCourierByStatusQueryHandler
 			   order.OrderItems.Select(product => new ProductOrderVm(
 				   product.Id.ToString(),
 				   product.Count.ToString(),
-				   product.TotalPrice.ToString()
+				   product.TotalPrice.ToString(),
+				   product.Thumbnail,
+				   product.Title
 				   )).ToList()
 		   ).ToList())).ToList();
 

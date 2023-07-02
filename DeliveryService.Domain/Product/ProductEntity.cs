@@ -1,44 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace DeliveryService.Domain.Product
+namespace DeliveryService.Domain.Product;
+
+public class ProductEntity
 {
-	public class ProductEntity
+	public int Id { get; }
+
+	public string Title { get; set; }
+
+	public double Price { get; set; }
+
+	public string Thumbnail { get; set; }
+
+	public SectionEntity? Section { get; set; }
+
+	public ProductEntity(int id, string title)
 	{
-		public int Id { get; }
+		Id = id;
+		Title = title;
+	}
 
-		public string Title { get; set; }
+	public ProductEntity(int id, string name, double price, string thumbnail, SectionEntity section)
+	{
+		Id = id;
+		Title = name;
+		Price = price;
+		Thumbnail = thumbnail;
+		Section = section;
+	}
 
-		public double Price { get; set; }
-
-		public string Thumbnail { get; set; }
-
-		public ProductEntity(int id, string title)
-		{
-			Id = id;
-			Title = title;
-		}
-
-		public ProductEntity(int id, string name, double price, string thumbnail)
-		{
-			Id = id;
-			Title = name;
-			Price = price;
-			Thumbnail = thumbnail;
-		}
-
-		public ProductEntity()
-		{
-
-		}
-
-
-
-
-
+	public ProductEntity()
+	{
 
 	}
 }

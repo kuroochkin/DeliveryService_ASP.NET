@@ -1,5 +1,4 @@
-﻿using DeliveryService.Domain.Courier;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
 using DeliveryService.Domain;
 
@@ -14,6 +13,5 @@ public class OrderItemConfiguration: IEntityTypeConfiguration<OrderItemEntity>
 
 		builder.Property(item => item.Count);
 		builder.Property(item => item.TotalPrice);
-
 	}
 }
