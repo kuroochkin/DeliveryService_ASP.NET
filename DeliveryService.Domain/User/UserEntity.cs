@@ -9,9 +9,13 @@ public class UserEntity
 
 	public string FirstName { get; }
 
-	public string Password { get; }
+	public string Password { get; set; }
 
 	public string Email { get; }
+
+	public string PhoneNumber { get; }
+
+	public string City { get; set; }
 
 	public UserType Type { get;  }
 
