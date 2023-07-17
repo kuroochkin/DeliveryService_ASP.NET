@@ -9,7 +9,7 @@ namespace DeliveryService.API.Controllers;
 
 [ApiController]
 [Route("api/sections")]
-public class SectionController : Controller // : ApiController
+public class SectionController : ApiController
 {
 	private readonly ISender _mediator;
 	private readonly IMapper _mapper;

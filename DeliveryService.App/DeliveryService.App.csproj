@@ -20,4 +20,8 @@
     <ProjectReference Include="..\DeliveryService.Domain\DeliveryService.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Customer\Commands\" />
+  </ItemGroup>
+
 </Project>
