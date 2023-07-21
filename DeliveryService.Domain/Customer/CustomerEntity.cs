@@ -8,13 +8,13 @@ public class CustomerEntity
 	
 	public Guid Id { get; }
 
-	public string LastName { get; }
+	public string LastName { get; set; }
 
-	public string FirstName { get; }
+	public string FirstName { get; set; }
 
-	public string? Patronymic { get; }
+	public string? Patronymic { get; set; }
 
-	public DateTime BirthDay { get; }
+	public DateTime BirthDay { get; set; }
 
 	public int CountOrder { get; set; }
 

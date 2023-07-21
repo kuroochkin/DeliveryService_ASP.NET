@@ -1,4 +1,4 @@
-﻿using DeliveryService.App.Auth.Commands;
+﻿using DeliveryService.App.Auth.Commands.Register;
 using DeliveryService.App.Auth.Common;
 using DeliveryService.Contracts.Auth;
 using Mapster;

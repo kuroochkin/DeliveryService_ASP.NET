@@ -1,4 +1,4 @@
-﻿using DeliveryService.App.Auth.Commands;
+﻿using DeliveryService.App.Auth.Commands.Register;
 using DeliveryService.App.Auth.Queries.Login;
 using DeliveryService.Contracts.Auth;
 using MapsterMapper;
