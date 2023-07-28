@@ -30,4 +30,8 @@
     <ProjectReference Include="..\DeliveryService.infrastructure\DeliveryService.infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ClientDelivery\src\components\maps\" />
+  </ItemGroup>
+
 </Project>

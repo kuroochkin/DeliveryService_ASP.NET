@@ -1,0 +1,33 @@
+.Button {
+    display: inline-block;
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    cursor: pointer;
+    padding: 10px 20px;
+    border: 1px solid #018dc4;
+    -webkit-border-radius: 12px;
+    border-radius: 12px;
+    font-family: "Roboto","Helvetica","Arial",sans-serif;
+    color: rgba(255,255,255,0.9);
+    -o-text-overflow: clip;
+    text-overflow: clip;
+    background: #1976d2;
+    -webkit-box-shadow: 2px 2px 2px 0 rgba(0,0,0,0.2) ;
+    box-shadow: 2px 2px 2px 0 rgba(0,0,0,0.2) ;
+    text-shadow: -1px -1px 0 rgba(15,73,168,0.66) ;
+  }
+
+  .box {
+    box-sizing: content-box;
+    padding: 100px 40px;
+    width: 20%;
+    height: 30%;
+    right: 550px;
+    bottom: 170px;
+    position: fixed;
+    border-radius: 60px;
+    font: normal 16px/1 Impact, Charcoal, sans-serif;
+    text-align: center;
+    background: #476a8f;
+  }
