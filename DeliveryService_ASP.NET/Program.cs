@@ -33,7 +33,7 @@ var app = builder.Build();
 
 	app.UseCors("AllowAllHeaders");
 
-	app.UseHttpsRedirection();
+	//app.UseHttpsRedirection();
 
 	app.UseAuthentication();
 	app.UseAuthorization();

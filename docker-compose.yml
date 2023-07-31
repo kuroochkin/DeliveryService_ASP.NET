@@ -1,0 +1,10 @@
+version: '3.4'
+
+services:
+  deliveryservice.api:
+    image: ${DOCKER_REGISTRY-}deliveryserviceapi
+    build:
+      context: .
+      dockerfile: DeliveryService_ASP.NET/Dockerfile
+    ports:
+      - 5000:80 
