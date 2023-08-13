@@ -14,8 +14,8 @@ public class ProductConfiguration : IEntityTypeConfiguration<ProductEntity>
 
 		builder.Property(product => product.Title);
 		builder.Property(product => product.Price);
-		builder.Property(product => product.Thumbnail);
-
+		
+		builder.HasOne(product => product.StorageFile);
 		builder.HasOne(product => product.Section);
 	}
 }

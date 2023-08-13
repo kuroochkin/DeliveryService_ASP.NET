@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using DeliveryService.Domain.StorageFile;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DeliveryService.Domain.Product;
 
@@ -10,7 +11,7 @@ public class ProductEntity
 
 	public double Price { get; set; }
 
-	public string Thumbnail { get; set; }
+	public StorageFileEntity StorageFile { get; set; } = new(); 
 
 	public SectionEntity? Section { get; set; }
 
@@ -20,12 +21,11 @@ public class ProductEntity
 		Title = title;
 	}
 
-	public ProductEntity(int id, string name, double price, string thumbnail, SectionEntity section)
+	public ProductEntity(int id, string name, double price, SectionEntity section)
 	{
 		Id = id;
 		Title = name;
 		Price = price;
-		Thumbnail = thumbnail;
 		Section = section;
 	}
 
