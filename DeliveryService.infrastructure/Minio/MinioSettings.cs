@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace DeliveryService.infrastructure.Minio;
 
-namespace DeliveryService.infrastructure.Minio
+public class MinioSettings
 {
-	internal class MinioSettings
-	{
-	}
+	public const string SectionName = "S3Options";
+
+	public string ServiceUrl { get; set; } 
+
+	public string AccessKey { get; set; }
+
+	public string SecretKey { get; set; }
 }

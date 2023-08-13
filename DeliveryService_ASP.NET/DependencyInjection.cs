@@ -9,7 +9,6 @@ public static class DependencyInjection
 	{
 		services.AddControllers();
 		services.AddEndpointsApiExplorer();
-		//services.AddSwaggerGen();
 		services.AddSwaggerGen(option =>
 		{
 			option.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
