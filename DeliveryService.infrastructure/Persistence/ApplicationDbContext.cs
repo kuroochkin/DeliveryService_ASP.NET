@@ -3,6 +3,7 @@ using DeliveryService.Domain.Courier;
 using DeliveryService.Domain.Customer;
 using DeliveryService.Domain.Order;
 using DeliveryService.Domain.Product;
+using DeliveryService.Domain.StorageFile;
 using DeliveryService.Domain.User;
 using DeliveryService.infrastructure.Persistence.EntityTypeConfiguration;
 using Microsoft.EntityFrameworkCore;
@@ -18,6 +19,7 @@ public class ApplicationDbContext : DbContext
 	public DbSet<UserEntity> Users { get; set; }
 	public DbSet<OrderItemEntity> OrderItems { get; set; }
 	public DbSet<SectionEntity> Sections { get; set; }
+	public DbSet<StorageFileEntity> StorageFiles { get; set; }
 
 	public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
 	   : base(options) { }
@@ -31,6 +33,7 @@ public class ApplicationDbContext : DbContext
 		builder.ApplyConfiguration(new UserConfiguration());
 		builder.ApplyConfiguration(new OrderItemConfiguration());
 		builder.ApplyConfiguration(new SectionConfiguration());
+		builder.ApplyConfiguration(new StorageFileConfiguration());
 		
 		base.OnModelCreating(builder);
 	}

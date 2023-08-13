@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DeliveryService.infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230714144352_newUser")]
-    partial class newUser
+    [Migration("20230813160710_StorageFile")]
+    partial class StorageFile
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -162,9 +162,8 @@ namespace DeliveryService.infrastructure.Migrations
                     b.Property<Guid?>("SectionId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Thumbnail")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<Guid?>("StorageFileFileId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -174,7 +173,35 @@ namespace DeliveryService.infrastructure.Migrations
 
                     b.HasIndex("SectionId");
 
+                    b.HasIndex("StorageFileFileId");
+
                     b.ToTable("Products", (string)null);
+                });
+
+            modelBuilder.Entity("DeliveryService.Domain.StorageFile.StorageFileEntity", b =>
+                {
+                    b.Property<Guid>("FileId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("BucketName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FileName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FilePath")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Length")
+                        .HasColumnType("int");
+
+                    b.HasKey("FileId");
+
+                    b.ToTable("StorageFiles", (string)null);
                 });
 
             modelBuilder.Entity("DeliveryService.Domain.User.UserEntity", b =>
@@ -272,7 +299,13 @@ namespace DeliveryService.infrastructure.Migrations
                         .WithMany()
                         .HasForeignKey("SectionId");
 
+                    b.HasOne("DeliveryService.Domain.StorageFile.StorageFileEntity", "StorageFile")
+                        .WithMany()
+                        .HasForeignKey("StorageFileFileId");
+
                     b.Navigation("Section");
+
+                    b.Navigation("StorageFile");
                 });
 
             modelBuilder.Entity("DeliveryService.Domain.Courier.CourierEntity", b =>

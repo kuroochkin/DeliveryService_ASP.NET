@@ -1,12 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.EntityFrameworkCore;
+using DeliveryService.Domain.StorageFile;
 
-namespace DeliveryService.infrastructure.Persistence.EntityTypeConfiguration
+namespace DeliveryService.infrastructure.Persistence.EntityTypeConfiguration;
+
+
+public class StorageFileConfiguration : IEntityTypeConfiguration<StorageFileEntity>
 {
-	internal class StorageFileConfiguration
+	public void Configure(EntityTypeBuilder<StorageFileEntity> builder)
 	{
+		builder.ToTable("StorageFiles");
+		builder.HasKey(file => file.FileId);
+		builder.Property(file => file.FilePath);
+		builder.Property(file => file.BucketName);
+		builder.Property(file => file.Length);
+		builder.Property(file => file.FileName);
 	}
 }

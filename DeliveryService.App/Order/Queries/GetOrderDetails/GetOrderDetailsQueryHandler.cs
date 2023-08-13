@@ -30,15 +30,6 @@ public class GetOrderDetailsQueryHandler
 		{
 			return Errors.Order.NotFound;
 		}
-		
-		MinioClient minioClient = new MinioClient()
-							  .WithEndpoint("play.min.io")
-							  .WithCredentials("minio", "minio123")
-							  .WithSSL()
-							  .Build();
-
-		MakeBucketArgs args = new MakeBucketArgs();
-		await minioClient.MakeBucketAsync(args);
 
 		var orderInfo = new OrderDetailsVm(
 			order.Id.ToString(),

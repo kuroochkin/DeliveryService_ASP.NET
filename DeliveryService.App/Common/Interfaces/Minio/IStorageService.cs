@@ -1,6 +1,8 @@
-﻿namespace DeliveryService.App.Common.Interfaces.Minio;
+﻿using Minio.DataModel;
+
+namespace DeliveryService.App.Common.Interfaces.Minio;
 
 public interface IStorageService
 {
-	void GetBucket(string bucketName);
+	Task<Stream> GetStreamAsync(Guid fileId, Bucket bucket);
 }

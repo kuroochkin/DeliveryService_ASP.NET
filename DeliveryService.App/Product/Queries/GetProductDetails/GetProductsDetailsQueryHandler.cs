@@ -34,7 +34,7 @@ public class GetProductsDetailsQueryHandler
 		_product.Id.ToString(),
 		_product.Title,
 		_product.Price.ToString(),
-		_product.Thumbnail,
+		_product.StorageFile.FileId.ToString(),
 		_product.Section.Name
 		);
 

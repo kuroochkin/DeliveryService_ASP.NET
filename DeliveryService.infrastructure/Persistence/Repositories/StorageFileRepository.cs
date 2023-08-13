@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DeliveryService.App.Common.Interfaces.Persistence;
+using DeliveryService.Domain.StorageFile;
 
-namespace DeliveryService.infrastructure.Persistence.Repositories
+namespace DeliveryService.infrastructure.Persistence.Repositories;
+
+public class StorageFileRepository : GenericRepository<StorageFileEntity>, IStorageFileRepository
 {
-	internal class StorageFileRepository
+	public StorageFileRepository(ApplicationDbContext context) : base(context)
 	{
 	}
 }

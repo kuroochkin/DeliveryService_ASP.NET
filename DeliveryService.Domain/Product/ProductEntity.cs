@@ -11,7 +11,7 @@ public class ProductEntity
 
 	public double Price { get; set; }
 
-	public StorageFileEntity StorageFile { get; set; } = new(); 
+	public StorageFileEntity? StorageFile { get; set; }
 
 	public SectionEntity? Section { get; set; }
 

@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace DeliveryService.Domain.StorageFile;
 
-namespace DeliveryService.Domain.StorageFile
+public class StorageFileEntity
 {
-	internal class StorageFileEntity
-	{
-	}
+	public Guid FileId { get; set; }
+
+	public int Length { get; set; }
+
+	public string BucketName { get; set; }
+
+	public string FileName { get; set; }
+
+	public string FilePath { get; set; }
 }
