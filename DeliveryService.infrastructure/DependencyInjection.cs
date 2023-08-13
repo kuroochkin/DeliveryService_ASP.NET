@@ -1,4 +1,5 @@
-﻿using DeliveryService.App.Common.Interfaces.Auth;
+﻿using Amazon.S3;
+using DeliveryService.App.Common.Interfaces.Auth;
 using DeliveryService.App.Common.Interfaces.Persistence;
 using DeliveryService.infrastructure.Auth;
 using DeliveryService.infrastructure.Persistence;
@@ -31,6 +32,8 @@ public static class DependencyInjection
 
 		services.AddAuth(configuration);
 
+		services.AddMinio();
+
 		services.AddDbContext<ApplicationDbContext>(options =>
 		{
 			options.UseSqlServer(configuration.GetConnectionString("SqlServer"));
@@ -62,5 +65,19 @@ public static class DependencyInjection
 			});
 
 		return services;
+	}
+
+	public static IServiceCollection AddMinio(this IServiceCollection services)
+	{
+		services.AddSingleton(new AmazonS3Client(
+			"minio",
+			"minio123",
+			new AmazonS3Config
+			{
+				ServiceURL = "http://localhost:9001/"
+			})
+		);
+
+        return services;
 	}
 }
