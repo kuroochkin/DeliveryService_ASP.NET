@@ -1,8 +1,9 @@
-﻿using static DeliveryService.Domain.Order.OrderEntity;
+﻿using DeliveryService.Domain.Product;
+using static DeliveryService.Domain.Order.OrderEntity;
 
 namespace DeliveryService.Domain.Restaraunt;
 
-public class RestarauntEntity
+public class RestaurantEntity
 {
 	public Guid Id { get; set; }
 
@@ -11,6 +12,8 @@ public class RestarauntEntity
 	public string? Address { get; set; }
 
 	public IsOpen Status { get; set; }
+
+	public List<ProductEntity> Products { get; set; } = new();
 
 	public IsOpen GetStatus => Status;
 

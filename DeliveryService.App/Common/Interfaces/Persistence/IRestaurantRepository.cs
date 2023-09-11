@@ -2,7 +2,7 @@
 
 namespace DeliveryService.App.Common.Interfaces.Persistence;
 
-public interface IRestarauntRepository : IGenericRepository<RestarauntEntity>
+public interface IRestaurantRepository : IGenericRepository<RestaurantEntity>
 {
 
 }
