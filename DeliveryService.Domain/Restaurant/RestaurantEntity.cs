@@ -1,5 +1,5 @@
-﻿using DeliveryService.Domain.Product;
-using static DeliveryService.Domain.Order.OrderEntity;
+﻿using DeliveryService.Domain.Order;
+using DeliveryService.Domain.Product;
 
 namespace DeliveryService.Domain.Restaraunt;
 
@@ -14,6 +14,8 @@ public class RestaurantEntity
 	public IsOpen Status { get; set; }
 
 	public List<ProductEntity> Products { get; set; } = new();
+
+	public List<OrderEntity> Orders { get; set; } = new();
 
 	public IsOpen GetStatus => Status;
 

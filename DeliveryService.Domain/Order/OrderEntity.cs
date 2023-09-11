@@ -21,7 +21,6 @@ public class OrderEntity
 	public DateTime End { get; set; }
 
 	#endregion
-
 	public string Description { get; set; }
 
 	public enum OrderStatus

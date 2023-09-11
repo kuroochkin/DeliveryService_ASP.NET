@@ -1,10 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace DeliveryService.infrastructure.Migrations
 {
-    public partial class StorageFile : Migration
+    public partial class OrderRest : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -41,6 +42,20 @@ namespace DeliveryService.infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Restaurants",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Status = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Restaurants", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Sections",
                 columns: table => new
                 {
@@ -50,21 +65,6 @@ namespace DeliveryService.infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Sections", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "StorageFiles",
-                columns: table => new
-                {
-                    FileId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Length = table.Column<int>(type: "int", nullable: false),
-                    BucketName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FileName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FilePath = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_StorageFiles", x => x.FileId);
                 });
 
             migrationBuilder.CreateTable(
@@ -91,11 +91,15 @@ namespace DeliveryService.infrastructure.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Created = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ConfirmedRestaurant = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EndRestaurant = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ConfirmedCourier = table.Column<DateTime>(type: "datetime2", nullable: false),
                     End = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Status = table.Column<int>(type: "int", nullable: false),
                     CourierId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    CustomerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    CustomerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    RestaurantEntityId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -111,6 +115,11 @@ namespace DeliveryService.infrastructure.Migrations
                         principalTable: "Customers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Orders_Restaurants_RestaurantEntityId",
+                        column: x => x.RestaurantEntityId,
+                        principalTable: "Restaurants",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -121,22 +130,24 @@ namespace DeliveryService.infrastructure.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Price = table.Column<double>(type: "float", nullable: false),
-                    StorageFileFileId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    Thumbnail = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    RestaurantId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     SectionId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Products", x => x.Id);
                     table.ForeignKey(
+                        name: "FK_Products_Restaurants_RestaurantId",
+                        column: x => x.RestaurantId,
+                        principalTable: "Restaurants",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
                         name: "FK_Products_Sections_SectionId",
                         column: x => x.SectionId,
                         principalTable: "Sections",
                         principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Products_StorageFiles_StorageFileFileId",
-                        column: x => x.StorageFileFileId,
-                        principalTable: "StorageFiles",
-                        principalColumn: "FileId");
                 });
 
             migrationBuilder.CreateTable(
@@ -189,14 +200,19 @@ namespace DeliveryService.infrastructure.Migrations
                 column: "CustomerId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Orders_RestaurantEntityId",
+                table: "Orders",
+                column: "RestaurantEntityId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Products_RestaurantId",
+                table: "Products",
+                column: "RestaurantId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Products_SectionId",
                 table: "Products",
                 column: "SectionId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Products_StorageFileFileId",
-                table: "Products",
-                column: "StorageFileFileId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -220,10 +236,10 @@ namespace DeliveryService.infrastructure.Migrations
                 name: "Customers");
 
             migrationBuilder.DropTable(
-                name: "Sections");
+                name: "Restaurants");
 
             migrationBuilder.DropTable(
-                name: "StorageFiles");
+                name: "Sections");
         }
     }
 }

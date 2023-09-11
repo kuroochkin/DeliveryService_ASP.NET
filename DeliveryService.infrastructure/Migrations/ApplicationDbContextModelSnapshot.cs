@@ -108,6 +108,9 @@ namespace DeliveryService.infrastructure.Migrations
                     b.Property<DateTime>("EndRestaurant")
                         .HasColumnType("datetime2");
 
+                    b.Property<Guid?>("RestaurantEntityId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
@@ -116,6 +119,8 @@ namespace DeliveryService.infrastructure.Migrations
                     b.HasIndex("CourierId");
 
                     b.HasIndex("CustomerId");
+
+                    b.HasIndex("RestaurantEntityId");
 
                     b.ToTable("Orders", (string)null);
                 });
@@ -275,6 +280,10 @@ namespace DeliveryService.infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("DeliveryService.Domain.Restaraunt.RestaurantEntity", null)
+                        .WithMany("Orders")
+                        .HasForeignKey("RestaurantEntityId");
+
                     b.Navigation("Courier");
 
                     b.Navigation("Customer");
@@ -333,6 +342,8 @@ namespace DeliveryService.infrastructure.Migrations
 
             modelBuilder.Entity("DeliveryService.Domain.Restaraunt.RestaurantEntity", b =>
                 {
+                    b.Navigation("Orders");
+
                     b.Navigation("Products");
                 });
 #pragma warning restore 612, 618
