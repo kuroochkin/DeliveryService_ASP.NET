@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using DeliveryService.Domain.Order;
+using DeliveryService.Domain.Restaraunt;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DeliveryService.Domain.Product;
 
@@ -11,6 +13,11 @@ public class ProductEntity
 	public double Price { get; set; }
 
 	public string Thumbnail { get; set; }
+
+	[ForeignKey("RestaurantId")]
+	public RestaurantEntity Restaurant { get; set; }
+
+	public Guid RestaurantId { get; set; }
 
 	public SectionEntity? Section { get; set; }
 
