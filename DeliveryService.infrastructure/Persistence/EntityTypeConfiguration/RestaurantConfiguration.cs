@@ -4,9 +4,9 @@ using DeliveryService.Domain.Restaraunt;
 
 namespace DeliveryService.infrastructure.Persistence.EntityTypeConfiguration;
 
-public class RestaurantConfiguration : IEntityTypeConfiguration<RestarauntEntity>
+public class RestaurantConfiguration : IEntityTypeConfiguration<RestaurantEntity>
 {
-	public void Configure(EntityTypeBuilder<RestarauntEntity> builder)
+	public void Configure(EntityTypeBuilder<RestaurantEntity> builder)
 	{
 		builder.ToTable("Restaraunts");
 		builder.HasKey(restaraunt => restaraunt.Id);

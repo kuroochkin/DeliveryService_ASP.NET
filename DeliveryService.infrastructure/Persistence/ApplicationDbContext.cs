@@ -14,7 +14,7 @@ public class ApplicationDbContext : DbContext
 {
 	public DbSet<CourierEntity> Couriers { get; set; }
 	public DbSet<CustomerEntity> Customers { get; set; }
-	public DbSet<RestarauntEntity> Restaraunts { get; set; }
+	public DbSet<RestaurantEntity> Restaraunts { get; set; }
 	public DbSet<OrderEntity> Orders { get; set; }
 	public DbSet<ProductEntity> Products { get; set; }
 	public DbSet<UserEntity> Users { get; set; }
@@ -33,6 +33,7 @@ public class ApplicationDbContext : DbContext
 		builder.ApplyConfiguration(new UserConfiguration());
 		builder.ApplyConfiguration(new OrderItemConfiguration());
 		builder.ApplyConfiguration(new SectionConfiguration());
+		builder.ApplyConfiguration(new RestaurantConfiguration());
 
 		base.OnModelCreating(builder);
 	}

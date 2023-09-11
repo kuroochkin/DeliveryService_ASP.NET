@@ -9,7 +9,7 @@ public class UnitOfWork : IUnitOfWork, IDisposable
 	public UnitOfWork(ApplicationDbContext context, 
 		ICourierRepository couriers, 
 		ICustomerRepository customers, 
-		IRestarauntRepository restaraunts,
+		IRestaurantRepository restaraunts,
 		IOrderRepository orders, 
 		IProductRepository products,
 		IUserRepository users,
@@ -29,7 +29,7 @@ public class UnitOfWork : IUnitOfWork, IDisposable
 
 	public ICourierRepository Couriers { get; }
 	public ICustomerRepository Customers { get; }
-	public IRestarauntRepository Restaraunts { get; }
+	public IRestaurantRepository Restaraunts { get; }
 	public IOrderRepository Orders { get; }
 	public IProductRepository Products { get; }
 	public IUserRepository Users { get; }
