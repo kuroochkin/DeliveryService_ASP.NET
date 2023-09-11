@@ -51,7 +51,7 @@ public class ConfirmOrderCommandHandler
 		order.Courier = courier;
 
 		//Меняем статус заказа
-		order.Status = OrderStatus.Progress;
+		order.Status = OrderStatus.ConfirmedCourier;
 
 		//Добавляем заказ в копилку заказов курьера
 		courier.AddOrder(order);

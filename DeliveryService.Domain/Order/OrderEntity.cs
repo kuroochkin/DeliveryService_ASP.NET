@@ -22,7 +22,6 @@ public class OrderEntity
 
 	#endregion
 
-	public RestaurantEntity Restaurant { get; set; }
 	public string Description { get; set; }
 
 	public enum OrderStatus

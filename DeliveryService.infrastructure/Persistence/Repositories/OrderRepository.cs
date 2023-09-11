@@ -60,7 +60,7 @@ public class OrderRepository : GenericRepository<OrderEntity>, IOrderRepository
 			.Include(order => order.Customer)
 			.Include(order => order.Courier)
 			.Where(order => order.Courier.Id == id)
-			.Where(order => order.Status == OrderStatus.Progress)
+			.Where(order => order.Status == OrderStatus.ConfirmedCourier)
 			.ToListAsync();
 	}
 
