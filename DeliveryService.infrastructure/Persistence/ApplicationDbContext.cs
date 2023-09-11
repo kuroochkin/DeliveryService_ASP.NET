@@ -3,6 +3,7 @@ using DeliveryService.Domain.Courier;
 using DeliveryService.Domain.Customer;
 using DeliveryService.Domain.Order;
 using DeliveryService.Domain.Product;
+using DeliveryService.Domain.Restaraunt;
 using DeliveryService.Domain.User;
 using DeliveryService.infrastructure.Persistence.EntityTypeConfiguration;
 using Microsoft.EntityFrameworkCore;
@@ -13,6 +14,7 @@ public class ApplicationDbContext : DbContext
 {
 	public DbSet<CourierEntity> Couriers { get; set; }
 	public DbSet<CustomerEntity> Customers { get; set; }
+	public DbSet<RestarauntEntity> Restaraunts { get; set; }
 	public DbSet<OrderEntity> Orders { get; set; }
 	public DbSet<ProductEntity> Products { get; set; }
 	public DbSet<UserEntity> Users { get; set; }
