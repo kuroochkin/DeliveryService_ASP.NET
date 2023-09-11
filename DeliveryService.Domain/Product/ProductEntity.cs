@@ -1,5 +1,4 @@
-﻿using DeliveryService.Domain.StorageFile;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DeliveryService.Domain.Product;
 
@@ -11,7 +10,7 @@ public class ProductEntity
 
 	public double Price { get; set; }
 
-	public StorageFileEntity? StorageFile { get; set; }
+	public string Thumbnail { get; set; }
 
 	public SectionEntity? Section { get; set; }
 

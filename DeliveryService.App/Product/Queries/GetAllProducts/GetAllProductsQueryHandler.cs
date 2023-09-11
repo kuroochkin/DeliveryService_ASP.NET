@@ -27,7 +27,7 @@ public class GetAllProductsQueryHandler
 		product.Id.ToString(),
 		product.Title,
 		product.Price.ToString(),
-		product.StorageFile.FileId.ToString(),
+		product.Thumbnail,
 		product.Section.Name
 		)).ToList();
 

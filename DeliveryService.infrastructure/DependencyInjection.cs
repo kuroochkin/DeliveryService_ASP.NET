@@ -31,7 +31,6 @@ public static class DependencyInjection
 		services.AddScoped<IUserRepository, UserRepository>();
 		services.AddScoped<IOrderItemRepository, OrderItemRepository>();
 		services.AddScoped<ISectionRepository, SectionRepository>();
-		services.AddScoped<IStorageFileRepository, StorageFileRepository>();
 		services.AddScoped<IUnitOfWork, UnitOfWork>();
 		
 

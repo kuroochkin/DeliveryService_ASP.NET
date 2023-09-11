@@ -2,6 +2,6 @@
 	string ProductId,
 	string Title,
 	string Price,
-	string StorageFileId,
+	string Thumbnail,
 	string Section
 	);

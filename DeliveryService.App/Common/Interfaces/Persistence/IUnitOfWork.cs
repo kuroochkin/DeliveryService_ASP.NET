@@ -9,7 +9,6 @@ public interface IUnitOfWork
 	IUserRepository Users { get; }
 	ISectionRepository Sections { get; }
 	IOrderItemRepository OrderItems { get; }
-	IStorageFileRepository StorageFiles { get; }
 
 		Task<bool> CompleteAsync();
 }
