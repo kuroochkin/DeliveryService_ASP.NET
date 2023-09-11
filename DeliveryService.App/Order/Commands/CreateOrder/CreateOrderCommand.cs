@@ -3,10 +3,10 @@ using DeliveryService.Domain.Product;
 using ErrorOr;
 using MediatR;
 
-namespace DeliveryService.App.Courier.Commands.AddCourier.AddOrder
+namespace DeliveryService.App.Order.Commands.CreateOrder
 {
-	public record CreateOrderCommand(
-		string CustomerId,
-		string Description,
-		List<GetProductRequest> Products) : IRequest<ErrorOr<bool>>;
+    public record CreateOrderCommand(
+        string CustomerId,
+        string Description,
+        List<GetProductRequest> Products) : IRequest<ErrorOr<bool>>;
 }

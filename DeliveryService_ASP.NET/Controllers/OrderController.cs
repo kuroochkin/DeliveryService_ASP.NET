@@ -1,5 +1,4 @@
 ﻿using MapsterMapper;
-using DeliveryService.App.Courier.Commands.AddCourier.AddOrder;
 using DeliveryService.Contracts.Order;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -13,6 +12,7 @@ using DeliveryService.App.Order.Queries.GetOrdersUser.Courier.GetAllOrdersByCour
 using DeliveryService.App.Order.Queries.GetOrdersUser.Customer.GetOrdersByCustomerByStatus;
 using DeliveryService.App.Order.Queries.GetAllOrdersByCreate;
 using DeliveryService.App.Order.Queries.GetOrdersUser.Courier.GetOrdersCourierByStatus;
+using DeliveryService.App.Order.Commands.CreateOrder;
 
 namespace DeliveryService.API.Controllers;
 
