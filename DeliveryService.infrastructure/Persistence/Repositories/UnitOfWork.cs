@@ -9,6 +9,7 @@ public class UnitOfWork : IUnitOfWork, IDisposable
 	public UnitOfWork(ApplicationDbContext context, 
 		ICourierRepository couriers, 
 		ICustomerRepository customers, 
+		IRestarauntRepository restaraunts,
 		IOrderRepository orders, 
 		IProductRepository products,
 		IUserRepository users,
@@ -18,6 +19,7 @@ public class UnitOfWork : IUnitOfWork, IDisposable
 		_context = context;
 		Couriers = couriers;
 		Customers = customers;
+		Restaraunts = restaraunts;
 		Orders = orders;
 		Products = products;
 		Users = users;
@@ -27,11 +29,13 @@ public class UnitOfWork : IUnitOfWork, IDisposable
 
 	public ICourierRepository Couriers { get; }
 	public ICustomerRepository Customers { get; }
+	public IRestarauntRepository Restaraunts { get; }
 	public IOrderRepository Orders { get; }
 	public IProductRepository Products { get; }
 	public IUserRepository Users { get; }
 	public IOrderItemRepository OrderItems { get; }
 	public ISectionRepository Sections { get; }
+	
 
 	public async Task<bool> CompleteAsync()
 	{
