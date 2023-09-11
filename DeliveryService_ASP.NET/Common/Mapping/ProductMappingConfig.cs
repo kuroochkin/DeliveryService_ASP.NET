@@ -19,6 +19,5 @@ public class ProductMappingConfig : IRegister
 
 		config.NewConfig<ProductsVm, GetAllProductsResponse>()
 			.Map(dest => dest.Products, src => src.Products);
-
 	}
 }

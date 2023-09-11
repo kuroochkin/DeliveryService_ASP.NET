@@ -1,5 +1,6 @@
 ﻿using DeliveryService.Domain.Courier;
 using DeliveryService.Domain.Customer;
+using DeliveryService.Domain.Restaraunt;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DeliveryService.Domain.Order;
@@ -8,16 +9,28 @@ public class OrderEntity
 {
 	public Guid Id { get; }
 
+	#region Date
 	public DateTime Created { get; set; }
+
+	public DateTime ConfirmedRestaurant { get; set; }
+
+	public DateTime EndRestaurant { get; set; }
+
+	public DateTime ConfirmedCourier { get; set; }
 
 	public DateTime End { get; set; }
 
+	#endregion
+
+	public RestaurantEntity Restaurant { get; set; }
 	public string Description { get; set; }
 
 	public enum OrderStatus
 	{
 		Create,
-		Progress,
+		ConfirmedRestaurant,
+		EndRestaurant,
+		ConfirmedCourier,
 		Complete,
 	};
 
@@ -31,8 +44,12 @@ public class OrderEntity
 		{
 			case OrderStatus.Create:
 				return "Create";
-			case OrderStatus.Progress:
-				return "Progress";
+			case OrderStatus.ConfirmedRestaurant:
+				return "ConfirmedRestaurant";
+			case OrderStatus.EndRestaurant:
+				return "EndRestaurant";
+			case OrderStatus.ConfirmedCourier:
+				return "ConfirmedCourier";
 			case OrderStatus.Complete:
 				return "Complete";
 		}

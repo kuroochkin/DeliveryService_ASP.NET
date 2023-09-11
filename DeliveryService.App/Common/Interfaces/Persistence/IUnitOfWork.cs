@@ -9,6 +9,7 @@ public interface IUnitOfWork
 	IUserRepository Users { get; }
 	ISectionRepository Sections { get; }
 	IOrderItemRepository OrderItems { get; }
+	IRestaurantRepository Restaraunts { get; }
 
 	Task<bool> CompleteAsync();
 }

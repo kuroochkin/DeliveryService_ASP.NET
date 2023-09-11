@@ -15,6 +15,7 @@ public class OrderConfiguration : IEntityTypeConfiguration<OrderEntity>
 		builder.Property(order => order.Created);
 		builder.Property(order => order.End);
 		builder.Property(order => order.Status);
+		builder.Property(order => order.Restaurant);
 
 		builder.Property(order => order.Id)
 		   .IsRequired()

@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using DeliveryService.Domain.Order;
+using DeliveryService.Domain.Restaraunt;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DeliveryService.Domain.Product;
 
@@ -12,6 +14,11 @@ public class ProductEntity
 
 	public string Thumbnail { get; set; }
 
+	[ForeignKey("RestaurantId")]
+	public RestaurantEntity Restaurant { get; set; }
+
+	public Guid RestaurantId { get; set; }
+
 	public SectionEntity? Section { get; set; }
 
 	public ProductEntity(int id, string title)
@@ -20,12 +27,11 @@ public class ProductEntity
 		Title = title;
 	}
 
-	public ProductEntity(int id, string name, double price, string thumbnail, SectionEntity section)
+	public ProductEntity(int id, string name, double price, SectionEntity section)
 	{
 		Id = id;
 		Title = name;
 		Price = price;
-		Thumbnail = thumbnail;
 		Section = section;
 	}
 

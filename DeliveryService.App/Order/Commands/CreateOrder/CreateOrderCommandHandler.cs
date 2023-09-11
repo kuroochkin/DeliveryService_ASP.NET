@@ -1,5 +1,4 @@
-﻿using AutoMapper.Execution;
-using DeliveryService.App.Common.Errors;
+﻿using DeliveryService.App.Common.Errors;
 using DeliveryService.App.Common.Interfaces.Persistence;
 using DeliveryService.Domain;
 using DeliveryService.Domain.Order;

@@ -2,6 +2,7 @@
 using DeliveryService.App.Common.Interfaces.Persistence;
 using ErrorOr;
 using MediatR;
+using Minio;
 
 namespace DeliveryService.App.Order.Queries.GetOrderDetails;
 

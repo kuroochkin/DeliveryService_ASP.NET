@@ -1,7 +1,12 @@
-﻿using DeliveryService.App.Customer.Queries.GetCustomerDetails;
+﻿using DeliveryService.App.Courier.Commands.AddCourier.AddOrder;
+using DeliveryService.App.Customer.Commands.EditProfile;
+using DeliveryService.App.Customer.Queries.GetCustomerDetails;
+using DeliveryService.Contracts.Customer;
 using DeliveryService.Contracts.Customer.Get;
+using DeliveryService.Contracts.Order;
 using MapsterMapper;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DeliveryService.API.Controllers;
@@ -32,5 +37,21 @@ public class CustomerController : ApiController
 			customer => Ok(_mapper.Map<GetCustomerDetailsResponse>(customer)),
 			errors => Problem("Ошибка")
 		);
+	}
+
+	[HttpPost("editProfile")]
+	[Authorize(Roles = "Customer")]
+	public async Task<IActionResult> CreateOrder(EditCustomerProfileRequest request)
+	{
+		var customer = GetUserId();
+
+		var command = _mapper.Map<EditProfileCommand>((request, customer));
+
+		var result = await _mediator.Send(command);
+
+		return result.Match(
+			Result => Ok(result.Value),
+			errors => Problem("Ошибка")
+			);
 	}
 }
