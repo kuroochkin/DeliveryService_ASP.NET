@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DeliveryService.Domain.Manager;
 
-namespace DeliveryService.App.Common.Interfaces.Persistence
+namespace DeliveryService.App.Common.Interfaces.Persistence;
+
+public interface IManagerRepository : IGenericRepository<ManagerEntity>
 {
-	internal class IManagerRepository
-	{
-	}
 }

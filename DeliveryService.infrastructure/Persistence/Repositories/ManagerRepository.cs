@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DeliveryService.App.Common.Interfaces.Persistence;
+using DeliveryService.Domain.Manager;
 
-namespace DeliveryService.infrastructure.Persistence.Repositories
+namespace DeliveryService.infrastructure.Persistence.Repositories;
+
+public class ManagerRepository : GenericRepository<ManagerEntity>, IManagerRepository
 {
-	internal class ManagerRepository
+	public ManagerRepository(ApplicationDbContext context) : base(context)
 	{
 	}
 }

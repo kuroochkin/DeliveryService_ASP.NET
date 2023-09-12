@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DeliveryService.Domain.Restaraunt;
 
-namespace DeliveryService.Domain.Manager
+namespace DeliveryService.Domain.Manager;
+
+public class ManagerEntity
 {
-	internal class ManagerEntity
-	{
-	}
+	public Guid Id { get; set; }
+	public RestaurantEntity Restaurant { get; set; }
+	public string LastName { get; set; }
+	public string FirstName { get; set; }
 }

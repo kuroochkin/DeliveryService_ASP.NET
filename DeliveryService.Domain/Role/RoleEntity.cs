@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace DeliveryService.Domain.Role;
 
-namespace DeliveryService.Domain.Role
+public class RoleEntity
 {
-	internal class RoleEntity
-	{
-	}
+	public Guid Id { get; set; }
+	public string Name { get; set; }
 }

@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DeliveryService.App.Common.Interfaces.Persistence;
+using DeliveryService.Domain.Role;
 
-namespace DeliveryService.infrastructure.Persistence.Repositories
+namespace DeliveryService.infrastructure.Persistence.Repositories;
+
+public class RoleRepository : GenericRepository<RoleEntity>, IRoleRepository
 {
-	internal class RoleRepository
+	public RoleRepository(ApplicationDbContext context) : base(context)
 	{
 	}
 }

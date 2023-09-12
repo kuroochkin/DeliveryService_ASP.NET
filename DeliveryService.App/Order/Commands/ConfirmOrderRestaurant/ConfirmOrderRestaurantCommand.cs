@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ErrorOr;
+using MediatR;
 
-namespace DeliveryService.App.Order.Commands.ConfirmOrderRestaurant
-{
-	internal class ConfirmOrderRestaurantCommand
-	{
-	}
-}
+namespace DeliveryService.App.Order.Commands.ConfirmOrderRestaurant;
+
+public record ConfirmOrderRestaurantCommand(
+		string RestaurantId,
+		string OrderId) : IRequest<ErrorOr<bool>>;
