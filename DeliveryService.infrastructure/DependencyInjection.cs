@@ -24,6 +24,7 @@ public static class DependencyInjection
 		this IServiceCollection services, 
 		ConfigurationManager configuration)
 	{
+		services.AddScoped<IRoleRepository, RoleRepository>();
 		services.AddScoped<ICourierRepository, CourierRepository>();
 		services.AddScoped<ICustomerRepository, CustomerRepository>();
 		services.AddScoped<IRestaurantRepository, RestaurantRepository>();
