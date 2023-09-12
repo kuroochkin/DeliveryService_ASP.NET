@@ -12,5 +12,6 @@ public class ManagerConfiguration : IEntityTypeConfiguration<ManagerEntity>
 		builder.HasKey(manager => manager.Id);
 		builder.Property(manager => manager.LastName);
 		builder.Property(manager => manager.FirstName);
+		builder.Property(manager => manager.CountOrder);
 	}
 }

@@ -78,6 +78,33 @@ namespace DeliveryService.infrastructure.Migrations
                     b.ToTable("Customers", (string)null);
                 });
 
+            modelBuilder.Entity("DeliveryService.Domain.Manager.ManagerEntity", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("CountOrder")
+                        .HasColumnType("int");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("RestaurantId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RestaurantId");
+
+                    b.ToTable("Managers", (string)null);
+                });
+
             modelBuilder.Entity("DeliveryService.Domain.Order.OrderEntity", b =>
                 {
                     b.Property<Guid>("Id")
@@ -108,7 +135,7 @@ namespace DeliveryService.infrastructure.Migrations
                     b.Property<DateTime>("EndRestaurant")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid?>("RestaurantEntityId")
+                    b.Property<Guid>("ManagerId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Status")
@@ -120,7 +147,7 @@ namespace DeliveryService.infrastructure.Migrations
 
                     b.HasIndex("CustomerId");
 
-                    b.HasIndex("RestaurantEntityId");
+                    b.HasIndex("ManagerId");
 
                     b.ToTable("Orders", (string)null);
                 });
@@ -171,7 +198,7 @@ namespace DeliveryService.infrastructure.Migrations
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
-                    b.Property<Guid>("RestaurantId")
+                    b.Property<Guid?>("RestaurantEntityId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("SectionId")
@@ -187,7 +214,7 @@ namespace DeliveryService.infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("RestaurantId");
+                    b.HasIndex("RestaurantEntityId");
 
                     b.HasIndex("SectionId");
 
@@ -215,15 +242,26 @@ namespace DeliveryService.infrastructure.Migrations
                     b.ToTable("Restaurants", (string)null);
                 });
 
-            modelBuilder.Entity("DeliveryService.Domain.User.UserEntity", b =>
+            modelBuilder.Entity("DeliveryService.Domain.Role.RoleEntity", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("City")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Roles", (string)null);
+                });
+
+            modelBuilder.Entity("DeliveryService.Domain.User.UserEntity", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -241,14 +279,12 @@ namespace DeliveryService.infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Type")
-                        .HasColumnType("int");
+                    b.Property<Guid>("RoleId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
 
                     b.ToTable("Users", (string)null);
                 });
@@ -268,6 +304,17 @@ namespace DeliveryService.infrastructure.Migrations
                     b.ToTable("Sections", (string)null);
                 });
 
+            modelBuilder.Entity("DeliveryService.Domain.Manager.ManagerEntity", b =>
+                {
+                    b.HasOne("DeliveryService.Domain.Restaraunt.RestaurantEntity", "Restaurant")
+                        .WithMany()
+                        .HasForeignKey("RestaurantId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Restaurant");
+                });
+
             modelBuilder.Entity("DeliveryService.Domain.Order.OrderEntity", b =>
                 {
                     b.HasOne("DeliveryService.Domain.Courier.CourierEntity", "Courier")
@@ -280,13 +327,17 @@ namespace DeliveryService.infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DeliveryService.Domain.Restaraunt.RestaurantEntity", null)
+                    b.HasOne("DeliveryService.Domain.Manager.ManagerEntity", "Manager")
                         .WithMany("Orders")
-                        .HasForeignKey("RestaurantEntityId");
+                        .HasForeignKey("ManagerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Courier");
 
                     b.Navigation("Customer");
+
+                    b.Navigation("Manager");
                 });
 
             modelBuilder.Entity("DeliveryService.Domain.OrderItemEntity", b =>
@@ -310,19 +361,26 @@ namespace DeliveryService.infrastructure.Migrations
 
             modelBuilder.Entity("DeliveryService.Domain.Product.ProductEntity", b =>
                 {
-                    b.HasOne("DeliveryService.Domain.Restaraunt.RestaurantEntity", "Restaurant")
+                    b.HasOne("DeliveryService.Domain.Restaraunt.RestaurantEntity", null)
                         .WithMany("Products")
-                        .HasForeignKey("RestaurantId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("RestaurantEntityId");
 
                     b.HasOne("SectionEntity", "Section")
                         .WithMany()
                         .HasForeignKey("SectionId");
 
-                    b.Navigation("Restaurant");
-
                     b.Navigation("Section");
+                });
+
+            modelBuilder.Entity("DeliveryService.Domain.User.UserEntity", b =>
+                {
+                    b.HasOne("DeliveryService.Domain.Role.RoleEntity", "Role")
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Role");
                 });
 
             modelBuilder.Entity("DeliveryService.Domain.Courier.CourierEntity", b =>
@@ -335,6 +393,11 @@ namespace DeliveryService.infrastructure.Migrations
                     b.Navigation("Orders");
                 });
 
+            modelBuilder.Entity("DeliveryService.Domain.Manager.ManagerEntity", b =>
+                {
+                    b.Navigation("Orders");
+                });
+
             modelBuilder.Entity("DeliveryService.Domain.Order.OrderEntity", b =>
                 {
                     b.Navigation("OrderItems");
@@ -342,8 +405,6 @@ namespace DeliveryService.infrastructure.Migrations
 
             modelBuilder.Entity("DeliveryService.Domain.Restaraunt.RestaurantEntity", b =>
                 {
-                    b.Navigation("Orders");
-
                     b.Navigation("Products");
                 });
 #pragma warning restore 612, 618

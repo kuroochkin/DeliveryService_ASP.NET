@@ -14,11 +14,6 @@ public class ProductEntity
 
 	public string Thumbnail { get; set; }
 
-	[ForeignKey("RestaurantId")]
-	public RestaurantEntity Restaurant { get; set; }
-
-	public Guid RestaurantId { get; set; }
-
 	public SectionEntity? Section { get; set; }
 
 	public ProductEntity(int id, string title)

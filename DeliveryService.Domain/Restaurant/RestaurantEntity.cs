@@ -15,8 +15,6 @@ public class RestaurantEntity
 
 	public List<ProductEntity> Products { get; set; } = new();
 
-	public List<OrderEntity> Orders { get; set; } = new();
-
 	public IsOpen GetStatus => Status;
 
 	public string GetStatusIsOpenToString()
