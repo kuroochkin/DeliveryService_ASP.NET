@@ -10,6 +10,7 @@ public interface IUnitOfWork
 	ISectionRepository Sections { get; }
 	IOrderItemRepository OrderItems { get; }
 	IRestaurantRepository Restaraunts { get; }
+	IRoleRepository Roles { get; }
 
 	Task<bool> CompleteAsync();
 }

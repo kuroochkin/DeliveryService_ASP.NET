@@ -13,6 +13,7 @@ public class UnitOfWork : IUnitOfWork, IDisposable
 		IOrderRepository orders, 
 		IProductRepository products,
 		IUserRepository users,
+		IRoleRepository roles,
 		IOrderItemRepository orderItems,
 		ISectionRepository sections)
 	{
@@ -23,16 +24,18 @@ public class UnitOfWork : IUnitOfWork, IDisposable
 		Orders = orders;
 		Products = products;
 		Users = users;
+		Roles = roles;
 		OrderItems = orderItems;
 		Sections = sections;
 	}
 
+	public IUserRepository Users { get; }
+	public IRoleRepository Roles { get; }
 	public ICourierRepository Couriers { get; }
 	public ICustomerRepository Customers { get; }
 	public IRestaurantRepository Restaraunts { get; }
 	public IOrderRepository Orders { get; }
 	public IProductRepository Products { get; }
-	public IUserRepository Users { get; }
 	public IOrderItemRepository OrderItems { get; }
 	public ISectionRepository Sections { get; }
 	
