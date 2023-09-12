@@ -4,6 +4,7 @@ using DeliveryService.Domain.Customer;
 using DeliveryService.Domain.Order;
 using DeliveryService.Domain.Product;
 using DeliveryService.Domain.Restaraunt;
+using DeliveryService.Domain.Role;
 using DeliveryService.Domain.User;
 using DeliveryService.infrastructure.Persistence.EntityTypeConfiguration;
 using Microsoft.EntityFrameworkCore;
@@ -20,6 +21,7 @@ public class ApplicationDbContext : DbContext
 	public DbSet<UserEntity> Users { get; set; }
 	public DbSet<OrderItemEntity> OrderItems { get; set; }
 	public DbSet<SectionEntity> Sections { get; set; }
+	public DbSet<RoleEntity> Roles { get; set; }
 
 	public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
 	   : base(options) { }
