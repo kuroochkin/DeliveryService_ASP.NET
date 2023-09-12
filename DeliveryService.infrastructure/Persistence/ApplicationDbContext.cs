@@ -28,6 +28,7 @@ public class ApplicationDbContext : DbContext
 
 	protected override void OnModelCreating(ModelBuilder builder)
 	{
+		builder.ApplyConfiguration(new RoleConfiguration());
 		builder.ApplyConfiguration(new CourierConfiguration());
 		builder.ApplyConfiguration(new CustomerConfiguration());
 		builder.ApplyConfiguration(new OrderConfiguration());
@@ -36,6 +37,7 @@ public class ApplicationDbContext : DbContext
 		builder.ApplyConfiguration(new OrderItemConfiguration());
 		builder.ApplyConfiguration(new SectionConfiguration());
 		builder.ApplyConfiguration(new RestaurantConfiguration());
+
 
 		base.OnModelCreating(builder);
 	}
