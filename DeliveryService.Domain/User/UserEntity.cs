@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using DeliveryService.Domain.Role;
 
 namespace DeliveryService.Domain.User;
 
@@ -13,20 +13,21 @@ public class UserEntity
 
 	public string Email { get; set; }
 
-	public string PhoneNumber { get; set; }
+	public RoleEntity Role { get; set; }
 
-	public string City { get; set; }
-
-	public UserType Type { get;  }
-
-	public UserEntity(string firstName, string lastName, string password, string email, UserType userType)
+	public UserEntity(
+		string firstName, 
+		string lastName, 
+		string password,
+		string email, 
+		RoleEntity role)
 	{
 		Id = Guid.NewGuid();
 		FirstName = firstName;
 		LastName = lastName;
 		Password = password;
 		Email = email;
-		Type = userType;
+		Role = role;
 	}
 
 	public UserEntity()
@@ -34,27 +35,19 @@ public class UserEntity
 
 	}
 
-	public UserType GetTypeUser => Type;
+	public string GetTypeUser => Role.Name;
 
 
 	public string GetUserTypeToString()
 	{
-		switch (Type)
-		{
-			case UserType.Customer:
-				return "Customer";
-			case UserType.Courier:
-				return "Courier";
-		}
+		if(Role.Name == "Customer")
+			return "Customer";
+		else if(Role.Name == "Courier")
+			return "Courier";
+		else if(Role.Name == "Manager")
+			return "Manager";
 
 		return "";
 	}
-}
-
-
-public enum UserType
-{
-	Customer,
-	Courier
 }
 

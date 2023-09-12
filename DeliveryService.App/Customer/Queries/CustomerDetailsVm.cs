@@ -7,7 +7,5 @@ public record CustomerDetailsVm(
 	string LastName,
 	string FirstName,
 	DateTime BirthDay,
-	int CountOrder,
-	string PhoneNumber,
-	string City
+	int CountOrder
 	);

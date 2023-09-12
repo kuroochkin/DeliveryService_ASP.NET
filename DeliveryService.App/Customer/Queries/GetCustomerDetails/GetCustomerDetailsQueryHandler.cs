@@ -43,9 +43,7 @@ public class GetCustomerDetailsQueryHandler
 			user.LastName,
 			user.FirstName,
 			customer.BirthDay,
-			customer.CountOrder,
-			user.PhoneNumber,
-			user.City);
+			customer.CountOrder);
 
 		return customerDetails;
 	}

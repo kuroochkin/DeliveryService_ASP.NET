@@ -5,5 +5,5 @@ public record RegisterRequest(
 	string FirstName,
 	string Password,
 	string Email,
-	bool IsCustomer);
+	string RoleName);
 

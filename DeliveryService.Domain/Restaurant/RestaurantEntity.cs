@@ -1,5 +1,5 @@
-﻿using DeliveryService.Domain.Product;
-using static DeliveryService.Domain.Order.OrderEntity;
+﻿using DeliveryService.Domain.Order;
+using DeliveryService.Domain.Product;
 
 namespace DeliveryService.Domain.Restaraunt;
 

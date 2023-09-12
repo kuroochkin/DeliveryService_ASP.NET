@@ -1,9 +1,7 @@
-﻿using DeliveryService.App.Courier.Commands.AddCourier.AddOrder;
-using DeliveryService.App.Customer.Commands.EditProfile;
+﻿using DeliveryService.App.Customer.Commands.EditProfile;
 using DeliveryService.App.Customer.Queries.GetCustomerDetails;
 using DeliveryService.Contracts.Customer;
 using DeliveryService.Contracts.Customer.Get;
-using DeliveryService.Contracts.Order;
 using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -41,7 +39,7 @@ public class CustomerController : ApiController
 
 	[HttpPost("editProfile")]
 	[Authorize(Roles = "Customer")]
-	public async Task<IActionResult> CreateOrder(EditCustomerProfileRequest request)
+	public async Task<IActionResult> EditProfile(EditCustomerProfileRequest request)
 	{
 		var customer = GetUserId();
 

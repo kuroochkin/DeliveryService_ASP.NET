@@ -2,11 +2,13 @@
 
 public interface IUnitOfWork
 {
+	IUserRepository Users { get; }
+	IRoleRepository Roles { get; }
 	ICourierRepository Couriers { get; }
 	ICustomerRepository Customers { get; }
+	IManagerRepository Managers { get; }
 	IOrderRepository Orders { get; }
 	IProductRepository Products { get; }
-	IUserRepository Users { get; }
 	ISectionRepository Sections { get; }
 	IOrderItemRepository OrderItems { get; }
 	IRestaurantRepository Restaraunts { get; }

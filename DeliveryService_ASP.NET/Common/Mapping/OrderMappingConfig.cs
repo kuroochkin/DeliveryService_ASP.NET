@@ -1,5 +1,5 @@
-﻿using DeliveryService.App.Courier.Commands.AddCourier.AddOrder;
-using DeliveryService.App.Order.Commands.ConfirmOrder;
+﻿using DeliveryService.App.Order.Commands.ConfirmOrder;
+using DeliveryService.App.Order.Commands.CreateOrder;
 using DeliveryService.App.Order.Queries.GetOrderDetails;
 using DeliveryService.App.Order.Queries.GetOrdersUser;
 using DeliveryService.Contracts.Order;

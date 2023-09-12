@@ -78,10 +78,43 @@ namespace DeliveryService.infrastructure.Migrations
                     b.ToTable("Customers", (string)null);
                 });
 
+            modelBuilder.Entity("DeliveryService.Domain.Manager.ManagerEntity", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("CountOrder")
+                        .HasColumnType("int");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("RestaurantId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RestaurantId");
+
+                    b.ToTable("Managers", (string)null);
+                });
+
             modelBuilder.Entity("DeliveryService.Domain.Order.OrderEntity", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("ConfirmedCourier")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("ConfirmedRestaurant")
+                        .HasColumnType("datetime2");
 
                     b.Property<Guid?>("CourierId")
                         .HasColumnType("uniqueidentifier");
@@ -99,6 +132,12 @@ namespace DeliveryService.infrastructure.Migrations
                     b.Property<DateTime>("End")
                         .HasColumnType("datetime2");
 
+                    b.Property<DateTime>("EndRestaurant")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("ManagerId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
@@ -107,6 +146,8 @@ namespace DeliveryService.infrastructure.Migrations
                     b.HasIndex("CourierId");
 
                     b.HasIndex("CustomerId");
+
+                    b.HasIndex("ManagerId");
 
                     b.ToTable("Orders", (string)null);
                 });
@@ -157,6 +198,9 @@ namespace DeliveryService.infrastructure.Migrations
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
+                    b.Property<Guid?>("RestaurantEntityId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid?>("SectionId")
                         .HasColumnType("uniqueidentifier");
 
@@ -170,9 +214,47 @@ namespace DeliveryService.infrastructure.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("RestaurantEntityId");
+
                     b.HasIndex("SectionId");
 
                     b.ToTable("Products", (string)null);
+                });
+
+            modelBuilder.Entity("DeliveryService.Domain.Restaraunt.RestaurantEntity", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Restaurants", (string)null);
+                });
+
+            modelBuilder.Entity("DeliveryService.Domain.Role.RoleEntity", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Roles", (string)null);
                 });
 
             modelBuilder.Entity("DeliveryService.Domain.User.UserEntity", b =>
@@ -180,10 +262,6 @@ namespace DeliveryService.infrastructure.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("City")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -201,14 +279,12 @@ namespace DeliveryService.infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Type")
-                        .HasColumnType("int");
+                    b.Property<Guid>("RoleId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
 
                     b.ToTable("Users", (string)null);
                 });
@@ -228,6 +304,17 @@ namespace DeliveryService.infrastructure.Migrations
                     b.ToTable("Sections", (string)null);
                 });
 
+            modelBuilder.Entity("DeliveryService.Domain.Manager.ManagerEntity", b =>
+                {
+                    b.HasOne("DeliveryService.Domain.Restaraunt.RestaurantEntity", "Restaurant")
+                        .WithMany()
+                        .HasForeignKey("RestaurantId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Restaurant");
+                });
+
             modelBuilder.Entity("DeliveryService.Domain.Order.OrderEntity", b =>
                 {
                     b.HasOne("DeliveryService.Domain.Courier.CourierEntity", "Courier")
@@ -240,9 +327,17 @@ namespace DeliveryService.infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("DeliveryService.Domain.Manager.ManagerEntity", "Manager")
+                        .WithMany("Orders")
+                        .HasForeignKey("ManagerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Courier");
 
                     b.Navigation("Customer");
+
+                    b.Navigation("Manager");
                 });
 
             modelBuilder.Entity("DeliveryService.Domain.OrderItemEntity", b =>
@@ -266,11 +361,26 @@ namespace DeliveryService.infrastructure.Migrations
 
             modelBuilder.Entity("DeliveryService.Domain.Product.ProductEntity", b =>
                 {
+                    b.HasOne("DeliveryService.Domain.Restaraunt.RestaurantEntity", null)
+                        .WithMany("Products")
+                        .HasForeignKey("RestaurantEntityId");
+
                     b.HasOne("SectionEntity", "Section")
                         .WithMany()
                         .HasForeignKey("SectionId");
 
                     b.Navigation("Section");
+                });
+
+            modelBuilder.Entity("DeliveryService.Domain.User.UserEntity", b =>
+                {
+                    b.HasOne("DeliveryService.Domain.Role.RoleEntity", "Role")
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Role");
                 });
 
             modelBuilder.Entity("DeliveryService.Domain.Courier.CourierEntity", b =>
@@ -283,9 +393,19 @@ namespace DeliveryService.infrastructure.Migrations
                     b.Navigation("Orders");
                 });
 
+            modelBuilder.Entity("DeliveryService.Domain.Manager.ManagerEntity", b =>
+                {
+                    b.Navigation("Orders");
+                });
+
             modelBuilder.Entity("DeliveryService.Domain.Order.OrderEntity", b =>
                 {
                     b.Navigation("OrderItems");
+                });
+
+            modelBuilder.Entity("DeliveryService.Domain.Restaraunt.RestaurantEntity", b =>
+                {
+                    b.Navigation("Products");
                 });
 #pragma warning restore 612, 618
         }

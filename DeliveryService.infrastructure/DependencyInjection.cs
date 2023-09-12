@@ -12,8 +12,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using Minio;
-using System.Data.SqlTypes;
 using System.Text;
 
 namespace DeliveryService.infrastructure;
@@ -24,12 +22,14 @@ public static class DependencyInjection
 		this IServiceCollection services, 
 		ConfigurationManager configuration)
 	{
+		services.AddScoped<IUserRepository, UserRepository>();
+		services.AddScoped<IRoleRepository, RoleRepository>();
 		services.AddScoped<ICourierRepository, CourierRepository>();
 		services.AddScoped<ICustomerRepository, CustomerRepository>();
+		services.AddScoped<IManagerRepository, ManagerRepository>();
 		services.AddScoped<IRestaurantRepository, RestaurantRepository>();
 		services.AddScoped<IOrderRepository, OrderRepository>();
 		services.AddScoped<IProductRepository, ProductRepository>();
-		services.AddScoped<IUserRepository, UserRepository>();
 		services.AddScoped<IOrderItemRepository, OrderItemRepository>();
 		services.AddScoped<ISectionRepository, SectionRepository>();
 		services.AddScoped<IUnitOfWork, UnitOfWork>();

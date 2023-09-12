@@ -9,4 +9,4 @@ public record RegisterCommand(
     string LastName,
     string Email,
     string Password,
-    bool IsCustomer) : IRequest<ErrorOr<AuthenticationResult>>;
+    string Role) : IRequest<ErrorOr<AuthenticationResult>>;

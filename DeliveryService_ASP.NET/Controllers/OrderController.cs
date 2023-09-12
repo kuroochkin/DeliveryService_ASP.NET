@@ -1,5 +1,4 @@
 ﻿using MapsterMapper;
-using DeliveryService.App.Courier.Commands.AddCourier.AddOrder;
 using DeliveryService.Contracts.Order;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -13,6 +12,7 @@ using DeliveryService.App.Order.Queries.GetOrdersUser.Courier.GetAllOrdersByCour
 using DeliveryService.App.Order.Queries.GetOrdersUser.Customer.GetOrdersByCustomerByStatus;
 using DeliveryService.App.Order.Queries.GetAllOrdersByCreate;
 using DeliveryService.App.Order.Queries.GetOrdersUser.Courier.GetOrdersCourierByStatus;
+using DeliveryService.App.Order.Commands.CreateOrder;
 
 namespace DeliveryService.API.Controllers;
 
@@ -158,14 +158,13 @@ public class OrderController : ApiController
 			);
 	}
 
-
-	[HttpPost("confirm")]
+	[HttpPost("confirmRestaurant")]
 	[Authorize(Roles = "Courier")]
 	public async Task<IActionResult> ConfirmOrder(ConfirmOrderRequest request)
 	{
 		var courier = GetUserId();
 
-		var command = _mapper.Map<ConfirmOrderCommand>((request,courier));
+		var command = _mapper.Map<ConfirmOrderCommand>((request, courier));
 
 		var result = await _mediator.Send(command);
 
@@ -174,6 +173,23 @@ public class OrderController : ApiController
 			errors => Problem("Ошибка")
 			);
 	}
+
+
+	//[HttpPost("confirm")]
+	//[Authorize(Roles = "Courier")]
+	//public async Task<IActionResult> ConfirmOrder(ConfirmOrderRequest request)
+	//{
+	//	var courier = GetUserId();
+
+	//	var command = _mapper.Map<ConfirmOrderCommand>((request,courier));
+
+	//	var result = await _mediator.Send(command);
+
+	//	return result.Match(
+	//		orderResult => Ok(result.Value),
+	//		errors => Problem("Ошибка")
+	//		);
+	//}
 
 	[HttpPost("complete")]
 	[Authorize(Roles = "Courier")]

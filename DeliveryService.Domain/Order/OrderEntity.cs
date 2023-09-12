@@ -1,6 +1,6 @@
 ﻿using DeliveryService.Domain.Courier;
 using DeliveryService.Domain.Customer;
-using DeliveryService.Domain.Restaraunt;
+using DeliveryService.Domain.Manager;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DeliveryService.Domain.Order;
@@ -21,8 +21,6 @@ public class OrderEntity
 	public DateTime End { get; set; }
 
 	#endregion
-
-	public RestaurantEntity Restaurant { get; set; }
 	public string Description { get; set; }
 
 	public enum OrderStatus
@@ -60,6 +58,8 @@ public class OrderEntity
 	public CourierEntity? Courier { get; set; }
 
 	public CustomerEntity Customer { get; set; } = null!;
+
+	public ManagerEntity Manager { get; set; } 
 
 	public List<OrderItemEntity> OrderItems { get; set; } = new();
 

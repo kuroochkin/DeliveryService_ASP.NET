@@ -43,9 +43,7 @@ public class GetCourierDetailsQueryHandler
 			user.LastName,
 			user.FirstName,
 			courier.BirthDay,
-			courier.CountOrder,
-			user.PhoneNumber,
-			user.City);
+			courier.CountOrder);
 
 		return courierDetails;
 	}

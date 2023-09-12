@@ -4,9 +4,11 @@ using DeliveryService.App.Common.Interfaces.Auth;
 using DeliveryService.App.Common.Interfaces.Persistence;
 using DeliveryService.Domain.Courier;
 using DeliveryService.Domain.Customer;
+using DeliveryService.Domain.Manager;
 using DeliveryService.Domain.User;
 using ErrorOr;
 using MediatR;
+using static DeliveryService.App.Common.Errors.Errors;
 
 namespace DeliveryService.App.Auth.Commands.Register;
 
@@ -32,28 +34,35 @@ public class RegisterCommandHandler
             return Errors.Auth.EmailIsWasUsed;
         }
 
-        UserEntity user;
+        var role = await _unitOfWork.Roles.FindRoleByName(request.Role);
+
 
         //Создаем объект пользователя и определяем его роль
-        if (request.IsCustomer)
-            user = new UserEntity(request.LastName, request.FirstName,
-                request.Password, request.Email, UserType.Customer);
-        else
-            user = new UserEntity(request.LastName, request.FirstName,
-                request.Password, request.Email, UserType.Courier);
+        var user = new UserEntity(
+            request.LastName, 
+            request.FirstName,
+            request.Password, 
+            request.Email, 
+            role);
+
 
         //Добавляем пользователя в коллекцию
         await _unitOfWork.Users.Add(user);
 
-        if (user.GetTypeUser == UserType.Courier)
+        if (user.GetTypeUser == "Courier")
         {
             var courier = new CourierEntity(user.Id, user.LastName, user.FirstName);
             await _unitOfWork.Couriers.Add(courier);
         }
-        else
+        if (user.GetTypeUser == "Customer")
         {
-            var customer = new CustomerEntity(user.Id, user.LastName, user.FirstName);
-            await _unitOfWork.Customers.Add(customer);
+			var customer = new CustomerEntity(user.Id, user.LastName, user.FirstName);
+			await _unitOfWork.Customers.Add(customer);
+		}
+		else
+        {
+            var manager = new ManagerEntity(user.Id, user.LastName, user.FirstName);
+            await _unitOfWork.Managers.Add(manager);
         }
         await _unitOfWork.CompleteAsync();
 
