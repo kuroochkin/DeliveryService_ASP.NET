@@ -19,8 +19,6 @@ public class CustomerMappingConfig : IRegister
 			.Map(dest => dest.LastName, src => src.LastName)
 			.Map(dest => dest.FirstName, src => src.FirstName)
 			.Map(dest => dest.BirthDay, src => src.BirthDay)
-			.Map(dest => dest.City, src => src.City)
-			.Map(dest => dest.PhoneNumber, src => src.PhoneNumber)
 			.Map(dest => dest.CountOrder, src => src.CountOrder);
 
 		config.NewConfig<EditCustomerProfileRequest, EditProfileCommand>()
@@ -30,8 +28,6 @@ public class CustomerMappingConfig : IRegister
 			.Map(dest => dest.LastName, src => src.LastName)
 			.Map(dest => dest.FirstName, src => src.FirstName)
 			.Map(dest => dest.Birthday, src => src.Birthday)
-			.Map(dest => dest.City, src => src.City)
-			.Map(dest => dest.PhoneNumber, src => src.PhoneNumber)
 			.Map(dest => dest.CountOrder, src => src.CountOrder);
 
 	}

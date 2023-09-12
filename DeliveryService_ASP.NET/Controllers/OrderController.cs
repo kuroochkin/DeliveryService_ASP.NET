@@ -175,21 +175,21 @@ public class OrderController : ApiController
 	}
 
 
-	[HttpPost("confirm")]
-	[Authorize(Roles = "Courier")]
-	public async Task<IActionResult> ConfirmOrder(ConfirmOrderRequest request)
-	{
-		var courier = GetUserId();
+	//[HttpPost("confirm")]
+	//[Authorize(Roles = "Courier")]
+	//public async Task<IActionResult> ConfirmOrder(ConfirmOrderRequest request)
+	//{
+	//	var courier = GetUserId();
 
-		var command = _mapper.Map<ConfirmOrderCommand>((request,courier));
+	//	var command = _mapper.Map<ConfirmOrderCommand>((request,courier));
 
-		var result = await _mediator.Send(command);
+	//	var result = await _mediator.Send(command);
 
-		return result.Match(
-			orderResult => Ok(result.Value),
-			errors => Problem("Ошибка")
-			);
-	}
+	//	return result.Match(
+	//		orderResult => Ok(result.Value),
+	//		errors => Problem("Ошибка")
+	//		);
+	//}
 
 	[HttpPost("complete")]
 	[Authorize(Roles = "Courier")]

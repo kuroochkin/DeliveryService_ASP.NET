@@ -15,8 +15,6 @@ public class CourierMappingConfig : IRegister
 			.Map(dest => dest.LastName, src => src.LastName)
 			.Map(dest => dest.FirstName, src => src.FirstName)
 			.Map(dest => dest.BirthDay, src => src.BirthDay)
-			.Map(dest => dest.City, src => src.City)
-			.Map(dest => dest.PhoneNumber, src => src.PhoneNumber)
 			.Map(dest => dest.CountOrder, src => src.CountOrder);
 	}
 }

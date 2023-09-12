@@ -15,7 +15,12 @@ public class UserEntity
 
 	public RoleEntity Role { get; set; }
 
-	public UserEntity(string firstName, string lastName, string password, string email, RoleEntity role)
+	public UserEntity(
+		string firstName, 
+		string lastName, 
+		string password,
+		string email, 
+		RoleEntity role)
 	{
 		Id = Guid.NewGuid();
 		FirstName = firstName;

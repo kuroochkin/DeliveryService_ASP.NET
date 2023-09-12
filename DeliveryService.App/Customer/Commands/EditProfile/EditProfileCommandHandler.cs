@@ -40,8 +40,6 @@ public class EditProfileCommandHandler
 		user.LastName = user.LastName;
 		user.Email = request.Email;
 		user.Password = request.Password;
-		user.City = request.City;
-		user.PhoneNumber = request.PhoneNumber;
 
 		customer.FirstName = request.FirstName;
 		customer.LastName = request.LastName;
