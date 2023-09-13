@@ -19,9 +19,9 @@ public class ConfirmOrderRestaurantCommandHandler
 		ConfirmOrderRestaurantCommand request, 
 		CancellationToken cancellationToken)
 	{
-		if (!Guid.TryParse(request.RestaurantId, out var restaurantId))
+		if (!Guid.TryParse(request.ManagerId, out var managerId))
 		{
-			return Errors.Restaurant.InvalidId;
+			return Errors.Manager.InvalidId;
 		}
 
 		if (!Guid.TryParse(request.OrderId, out var orderId))
@@ -35,10 +35,18 @@ public class ConfirmOrderRestaurantCommandHandler
 			return Errors.Order.NotFound;
 		}
 
+		var manager = await _unitOfWork.Managers.FindManagerWithRestaurantById(managerId);
+		if (manager is null)
+		{
+			return Errors.Manager.NotFound;
+		}
+
 		if (order.GetStatus >= OrderStatus.ConfirmedRestaurant)
 			return false;
 
 		order.Status = OrderStatus.ConfirmedRestaurant;
+
+		order.ConfirmedRestaurant = DateTime.Now;
 
 		return await _unitOfWork.CompleteAsync();
 	}

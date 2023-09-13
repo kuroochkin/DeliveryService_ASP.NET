@@ -13,6 +13,8 @@ using DeliveryService.App.Order.Queries.GetOrdersUser.Customer.GetOrdersByCustom
 using DeliveryService.App.Order.Queries.GetAllOrdersByCreate;
 using DeliveryService.App.Order.Queries.GetOrdersUser.Courier.GetOrdersCourierByStatus;
 using DeliveryService.App.Order.Commands.CreateOrder;
+using DeliveryService.App.Order.Commands.ConfirmOrderRestaurant;
+using DeliveryService.Contracts.Manager;
 
 namespace DeliveryService.API.Controllers;
 
@@ -158,13 +160,13 @@ public class OrderController : ApiController
 			);
 	}
 
-	[HttpPost("confirmRestaurant")]
-	[Authorize(Roles = "Courier")]
-	public async Task<IActionResult> ConfirmOrder(ConfirmOrderRequest request)
+	[HttpPost("manager/confirmRestaurant")]
+	[Authorize(Roles = "Manager")]
+	public async Task<IActionResult> ConfirmOrder(ConfirmOrderRestaurantRequest request)
 	{
-		var courier = GetUserId();
+		var manager = GetUserId();
 
-		var command = _mapper.Map<ConfirmOrderCommand>((request, courier));
+		var command = _mapper.Map<ConfirmOrderRestaurantCommand>((request, manager));
 
 		var result = await _mediator.Send(command);
 
