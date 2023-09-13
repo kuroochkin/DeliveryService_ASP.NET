@@ -1,7 +1,8 @@
 ﻿using DeliveryService.App.Courier.Queries;
+using DeliveryService.App.Order.Commands.CompleteOrder;
 using DeliveryService.App.Order.Commands.ConfirmOrder;
+using DeliveryService.Contracts.Courier;
 using DeliveryService.Contracts.Courier.Get;
-using DeliveryService.Contracts.Customer;
 using Mapster;
 
 namespace DeliveryService.API.Common.Mapping;
@@ -20,6 +21,10 @@ public class CourierMappingConfig : IRegister
 			.Map(dest => dest.CountOrder, src => src.CountOrder);
 
 		config.NewConfig<(ConfirmOrderCourierRequest request, string courierId), ConfirmOrderCourierCommand>()
+			.Map(dest => dest.CourierId, src => src.courierId)
+			.Map(dest => dest.OrderId, src => src.request.OrderId);
+
+		config.NewConfig<(EndOrderCourierRequest request, string courierId), EndOrderCourierCommand>()
 			.Map(dest => dest.CourierId, src => src.courierId)
 			.Map(dest => dest.OrderId, src => src.request.OrderId);
 	}

@@ -1,4 +1,4 @@
-﻿namespace DeliveryService.Contracts.Customer;
+﻿namespace DeliveryService.Contracts.Courier;
 
 public record ConfirmOrderCourierRequest(
     string OrderId);

@@ -115,4 +115,13 @@ public class OrderRepository : GenericRepository<OrderEntity>, IOrderRepository
 			.Include(order => order.Manager)
 			.FirstOrDefaultAsync(order => order.Id == id);
 	}
+
+	public async Task<OrderEntity?> FindOrderWithCustomerAndCourierAndManager(Guid id)
+	{
+		return await _context.Orders
+			.Include(order => order.Customer)
+			.Include(order => order.Courier)
+			.Include(order => order.Manager)
+			.FirstOrDefaultAsync(order => order.Id == id);
+	}
 }

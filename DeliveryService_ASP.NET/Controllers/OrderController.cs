@@ -16,7 +16,7 @@ using DeliveryService.App.Order.Commands.ConfirmOrderRestaurant;
 using DeliveryService.Contracts.Manager;
 using DeliveryService.App.Order.Commands.EndOrderRestaurant;
 using DeliveryService.App.Order.Commands.ConfirmOrder;
-using DeliveryService.Contracts.Customer;
+using DeliveryService.Contracts.Courier;
 
 namespace DeliveryService.API.Controllers;
 
@@ -213,9 +213,11 @@ public class OrderController : ApiController
 
 	[HttpPost("complete")]
 	[Authorize(Roles = "Courier")]
-	public async Task<IActionResult> CompleteOrder(CompleteOrderRequest request)
+	public async Task<IActionResult> CompleteOrder(EndOrderCourierRequest request)
 	{
-		var command = _mapper.Map<CompleteOrderCommand>(request);
+		var courierId = GetUserId();
+
+		var command = _mapper.Map<EndOrderCourierCommand>((request, courierId));
 
 		var result = await _mediator.Send(command);
 
