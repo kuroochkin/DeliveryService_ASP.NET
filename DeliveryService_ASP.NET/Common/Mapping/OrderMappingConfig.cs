@@ -2,6 +2,7 @@
 using DeliveryService.App.Order.Commands.CreateOrder;
 using DeliveryService.App.Order.Queries.GetOrderDetails;
 using DeliveryService.App.Order.Queries.GetOrdersUser;
+using DeliveryService.Contracts.Customer;
 using DeliveryService.Contracts.Order;
 using DeliveryService.Contracts.Order.Get;
 using Mapster;
@@ -26,10 +27,6 @@ public class OrderMappingConfig : IRegister
 			.Map(dest => dest.CustomerId, src => src.customerId)
 			.Map(dest => dest.Description, src => src.request.Description)
 			.Map(dest => dest.Products, src => src.request.Products);
-
-		config.NewConfig<(ConfirmOrderRequest request, string courierId), ConfirmOrderCourierCommand>()
-			.Map(dest => dest.CourierId, src => src.courierId)
-			.Map(dest => dest.OrderId, src => src.request.OrderId);
 
 		config.NewConfig<OrdersUserVm, GetOrdersCustomerResponse>()
 			.Map(dest => dest.Orders, src => src.Orders);

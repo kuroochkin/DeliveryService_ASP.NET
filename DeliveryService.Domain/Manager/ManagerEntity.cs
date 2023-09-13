@@ -22,4 +22,10 @@ public class ManagerEntity
 		LastName = lastName;
 		CountOrder = 0;
 	}
+
+	public void AddOrder(OrderEntity order)
+	{
+		_orders.Add(order);
+		CountOrder++;
+	}
 }

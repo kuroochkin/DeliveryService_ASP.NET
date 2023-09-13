@@ -2,6 +2,7 @@
 using DeliveryService.App.Common.Interfaces.Persistence;
 using ErrorOr;
 using MediatR;
+using static DeliveryService.App.Common.Errors.Errors;
 using static DeliveryService.Domain.Order.OrderEntity;
 
 namespace DeliveryService.App.Order.Commands.ConfirmOrderRestaurant;
@@ -47,6 +48,8 @@ public class ConfirmOrderRestaurantCommandHandler
 		order.Status = OrderStatus.ConfirmedRestaurant;
 
 		order.ConfirmedRestaurant = DateTime.Now;
+
+		manager.AddOrder(order);
 
 		return await _unitOfWork.CompleteAsync();
 	}

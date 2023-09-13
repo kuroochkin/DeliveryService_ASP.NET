@@ -38,13 +38,13 @@ public class ConfirmOrderCourierCommandHandler
 			return Errors.Courier.NotFound;
 		}
 
-		var order = await _unitOfWork.Orders.FindOrderWithCustomer(orderId);
+		var order = await _unitOfWork.Orders.FindOrderWithCustomerAndManager(orderId);
 		if (order is null)
 		{
 			return Errors.Order.NotFound;
 		}
 
-		if (order.GetStatus != OrderStatus.Create)
+		if (order.GetStatus >= OrderStatus.ConfirmedCourier || order.GetStatus < OrderStatus.EndRestaurant)
 			return false;
 
 		//Добавляем курьера в заказ
@@ -52,6 +52,8 @@ public class ConfirmOrderCourierCommandHandler
 
 		//Меняем статус заказа
 		order.Status = OrderStatus.ConfirmedCourier;
+
+		order.ConfirmedCourier = DateTime.Now;
 
 		//Добавляем заказ в копилку заказов курьера
 		courier.AddOrder(order);
