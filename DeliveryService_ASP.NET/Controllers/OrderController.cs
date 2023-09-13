@@ -2,7 +2,6 @@
 using DeliveryService.Contracts.Order;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using DeliveryService.App.Order.Commands.ConfirmOrder;
 using DeliveryService.App.Order.Commands.CompleteOrder;
 using Microsoft.AspNetCore.Authorization;
 using DeliveryService.App.Order.Queries.GetOrderDetails;
@@ -15,6 +14,7 @@ using DeliveryService.App.Order.Queries.GetOrdersUser.Courier.GetOrdersCourierBy
 using DeliveryService.App.Order.Commands.CreateOrder;
 using DeliveryService.App.Order.Commands.ConfirmOrderRestaurant;
 using DeliveryService.Contracts.Manager;
+using DeliveryService.App.Order.Commands.EndOrderRestaurant;
 
 namespace DeliveryService.API.Controllers;
 
@@ -162,11 +162,27 @@ public class OrderController : ApiController
 
 	[HttpPost("manager/confirmRestaurant")]
 	[Authorize(Roles = "Manager")]
-	public async Task<IActionResult> ConfirmOrder(ConfirmOrderRestaurantRequest request)
+	public async Task<IActionResult> ConfirmOrderByRestaurant(ConfirmOrderRestaurantRequest request)
 	{
 		var manager = GetUserId();
 
 		var command = _mapper.Map<ConfirmOrderRestaurantCommand>((request, manager));
+
+		var result = await _mediator.Send(command);
+
+		return result.Match(
+			orderResult => Ok(result.Value),
+			errors => Problem("Ошибка")
+			);
+	}
+
+	[HttpPost("manager/endRestaurant")]
+	[Authorize(Roles = "Manager")]
+	public async Task<IActionResult> EndOrderByRestaurant(EndOrderRestaurantRequest request)
+	{
+		var manager = GetUserId();
+
+		var command = _mapper.Map<EndOrderRestaurantCommand>((request, manager));
 
 		var result = await _mediator.Send(command);
 

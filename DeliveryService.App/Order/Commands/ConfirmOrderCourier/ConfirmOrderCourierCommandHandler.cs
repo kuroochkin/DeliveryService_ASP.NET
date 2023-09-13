@@ -6,19 +6,19 @@ using static DeliveryService.Domain.Order.OrderEntity;
 
 namespace DeliveryService.App.Order.Commands.ConfirmOrder;
 
-public class ConfirmOrderCommandHandler
-	: IRequestHandler<ConfirmOrderCommand, ErrorOr<bool>>
+public class ConfirmOrderCourierCommandHandler
+	: IRequestHandler<ConfirmOrderCourierCommand, ErrorOr<bool>>
 {
 	
 	private readonly IUnitOfWork _unitOfWork;
 
-	public ConfirmOrderCommandHandler(IUnitOfWork unitOfWork)
+	public ConfirmOrderCourierCommandHandler(IUnitOfWork unitOfWork)
 	{
 		_unitOfWork = unitOfWork;
 	}
 
 	public async Task<ErrorOr<bool>> Handle
-		(ConfirmOrderCommand request, 
+		(ConfirmOrderCourierCommand request, 
 		CancellationToken cancellationToken)
 	{
 		if (!Guid.TryParse(request.CourierId, out var courierId))

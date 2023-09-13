@@ -27,7 +27,7 @@ public class OrderMappingConfig : IRegister
 			.Map(dest => dest.Description, src => src.request.Description)
 			.Map(dest => dest.Products, src => src.request.Products);
 
-		config.NewConfig<(ConfirmOrderRequest request, string courierId), ConfirmOrderCommand>()
+		config.NewConfig<(ConfirmOrderRequest request, string courierId), ConfirmOrderCourierCommand>()
 			.Map(dest => dest.CourierId, src => src.courierId)
 			.Map(dest => dest.OrderId, src => src.request.OrderId);
 

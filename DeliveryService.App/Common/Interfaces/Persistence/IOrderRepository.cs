@@ -8,6 +8,8 @@ public interface IOrderRepository : IGenericRepository<OrderEntity>
 {
 	Task<OrderEntity?> FindOrderWithCustomer(Guid id);
 
+	Task<OrderEntity?> FindOrderWithCustomerAndManager(Guid id);
+
 	Task<OrderEntity?> FindOrderWithCustomerAndCourier(Guid id);
 
 	Task<OrderEntity?> FindOrderWithCustomerAndCourierAndProducts(Guid id);
