@@ -11,7 +11,7 @@ public interface IUnitOfWork
 	IProductRepository Products { get; }
 	ISectionRepository Sections { get; }
 	IOrderItemRepository OrderItems { get; }
-	IRestaurantRepository Restaraunts { get; }
+	IRestaurantRepository Restaurants { get; }
 
 	Task<bool> CompleteAsync();
 }

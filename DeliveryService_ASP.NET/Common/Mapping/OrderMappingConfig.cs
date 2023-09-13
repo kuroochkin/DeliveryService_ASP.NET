@@ -4,9 +4,7 @@ using DeliveryService.App.Order.Queries.GetOrderDetails;
 using DeliveryService.App.Order.Queries.GetOrdersUser;
 using DeliveryService.Contracts.Order;
 using DeliveryService.Contracts.Order.Get;
-using DeliveryService.Domain;
 using Mapster;
-using Microsoft.EntityFrameworkCore.Design;
 
 namespace DeliveryService.API.Common.Mapping;
 

@@ -10,7 +10,7 @@ public class UnitOfWork : IUnitOfWork, IDisposable
 		ICourierRepository couriers, 
 		ICustomerRepository customers, 
 		IManagerRepository managers,
-		IRestaurantRepository restaraunts,
+		IRestaurantRepository restaurants,
 		IOrderRepository orders, 
 		IProductRepository products,
 		IUserRepository users,
@@ -24,7 +24,7 @@ public class UnitOfWork : IUnitOfWork, IDisposable
 		Couriers = couriers;
 		Customers = customers;
 		Managers = managers;
-		Restaraunts = restaraunts;
+		Restaurants = restaurants;
 		Orders = orders;
 		Products = products;
 		OrderItems = orderItems;
@@ -36,7 +36,7 @@ public class UnitOfWork : IUnitOfWork, IDisposable
 	public ICourierRepository Couriers { get; }
 	public ICustomerRepository Customers { get; }
 	public IManagerRepository Managers { get; }
-	public IRestaurantRepository Restaraunts { get; }
+	public IRestaurantRepository Restaurants { get; }
 	public IOrderRepository Orders { get; }
 	public IProductRepository Products { get; }
 	public IOrderItemRepository OrderItems { get; }
