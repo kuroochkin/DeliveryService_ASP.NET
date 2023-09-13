@@ -49,6 +49,8 @@ public class ConfirmOrderRestaurantCommandHandler
 
 		order.ConfirmedRestaurant = DateTime.Now;
 
+		order.Manager = manager;
+
 		manager.AddOrder(order);
 
 		return await _unitOfWork.CompleteAsync();
