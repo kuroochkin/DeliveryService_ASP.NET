@@ -23,4 +23,11 @@ public class UserRepository : GenericRepository<UserEntity>, IUserRepository
 		return await _context.Users
 			.FirstOrDefaultAsync(x => x.Email == email);
 	}
+
+	public async Task<UserEntity?> FindUserByRegisteredEmailWithRole(string email)
+	{
+		return await _context.Users
+			.Include(x => x.Role)
+			.FirstOrDefaultAsync(x => x.Email == email);
+	}
 }
