@@ -25,7 +25,7 @@ public class GetOrderDetailsQueryHandler
 			return Errors.Order.InvalidId;
 		}
 
-		var order = await _unitOfWork.Orders.FindOrderWithCustomerAndCourierAndProducts(orderId);
+		var order = await _unitOfWork.Orders.FindOrderWithCustomerAndCourierAndManager(orderId);
 		if (order is null)
 		{
 			return Errors.Order.NotFound;
@@ -35,6 +35,9 @@ public class GetOrderDetailsQueryHandler
 			order.Id.ToString(),
 			order.Description,
 			order.Created,
+			order.ConfirmedRestaurant,
+			order.EndRestaurant,
+			order.ConfirmedCourier,
 			order.End,
 			order.Status,
 			new CourierVm(
@@ -42,6 +45,11 @@ public class GetOrderDetailsQueryHandler
 				order?.Courier?.LastName,
 				order?.Courier?.FirstName
 				),
+			new ManagerVm(
+				order?.Manager?.Id.ToString(),
+				order?.Manager?.LastName,
+				order?.Manager?.FirstName,
+				order?.Manager?.Restaurant?.Name),
 			new CustomerVm(
 				order.Customer.Id.ToString(),
 				order.Customer.LastName,

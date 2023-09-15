@@ -19,7 +19,7 @@ public class ApplicationDbContext : DbContext
 	public DbSet<CourierEntity> Couriers { get; set; }
 	public DbSet<CustomerEntity> Customers { get; set; }
 	public DbSet<ManagerEntity> Managers { get; set; }
-	public DbSet<RestaurantEntity> Restaraunts { get; set; }
+	public DbSet<RestaurantEntity> Restaurants { get; set; }
 	public DbSet<OrderEntity> Orders { get; set; }
 	public DbSet<ProductEntity> Products { get; set; }
 	public DbSet<OrderItemEntity> OrderItems { get; set; }

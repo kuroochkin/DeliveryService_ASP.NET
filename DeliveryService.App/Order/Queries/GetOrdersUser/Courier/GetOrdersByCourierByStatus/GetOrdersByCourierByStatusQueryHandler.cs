@@ -1,29 +1,32 @@
 ﻿using DeliveryService.App.Common.Errors;
 using DeliveryService.App.Common.Interfaces.Persistence;
 using DeliveryService.App.Order.Queries.GetOrderDetails;
+using DeliveryService.App.Order.Queries.GetOrdersUser.Customer.GetOrdersByCustomerByStatus;
 using ErrorOr;
 using MediatR;
+using static DeliveryService.Domain.Order.OrderEntity;
 
-namespace DeliveryService.App.Order.Queries.GetOrdersUser.Courier.GetOrdersCourierByStatus;
+namespace DeliveryService.App.Order.Queries.GetOrdersUser.Courier.GetOrdersByCourierByStatus;
 
-public class GetOrdersCourierCompleteQueryHandler
-	: IRequestHandler<GetOrdersCourierCompleteQuery, ErrorOr<OrdersUserVm>>
+public class GetOrdersCourierStatusQueryHandler
+	: IRequestHandler<GetOrdersCourierStatusQuery, ErrorOr<OrdersUserVm>>
 {
 	private readonly IUnitOfWork _unitOfWork;
 
-	public GetOrdersCourierCompleteQueryHandler(IUnitOfWork unitOfWork)
+	public GetOrdersCourierStatusQueryHandler(IUnitOfWork unitOfWork)
 	{
 		_unitOfWork = unitOfWork;
 	}
-
 	public async Task<ErrorOr<OrdersUserVm>> Handle(
-		GetOrdersCourierCompleteQuery request,
+		GetOrdersCourierStatusQuery request, 
 		CancellationToken cancellationToken)
 	{
 		if (!Guid.TryParse(request.CourierId, out var courierId))
 		{
-			return Errors.Customer.InvalidId;
+			return Errors.Courier.InvalidId;
 		}
+
+		OrderStatus orderStatus = (OrderStatus)Enum.Parse(typeof(OrderStatus), request.OrderStatus);
 
 		var courier = await _unitOfWork.Couriers.FindById(courierId);
 		if (courier is null)
@@ -31,12 +34,15 @@ public class GetOrdersCourierCompleteQueryHandler
 			return Errors.Courier.InvalidId;
 		}
 
-		var orders = await _unitOfWork.Orders.FindOrdersCourierByOrderComplete(courierId);
+		var orders = await _unitOfWork.Orders.FindOrdersByCourierIdByOrderStatus(courierId, orderStatus);
 
 		var allOrderModel = orders.Select(order => new OrderDetailsVm(
 		   order.Id.ToString(),
 		   order.Description,
 		   order.Created,
+		   order.ConfirmedRestaurant,
+		   order.EndRestaurant,
+		   order.ConfirmedCourier,
 		   order.End,
 		   order.Status,
 		   new CourierVm(
@@ -44,6 +50,12 @@ public class GetOrdersCourierCompleteQueryHandler
 			   order?.Courier?.LastName,
 			   order?.Courier?.FirstName
 			   ),
+		   new ManagerVm(
+				order?.Manager?.Id.ToString(),
+				order?.Manager?.LastName,
+				order?.Manager?.FirstName,
+				order?.Manager?.Restaurant?.Name
+				),
 		   new CustomerVm(
 			   order.Customer.Id.ToString(),
 			   order.Customer.LastName,

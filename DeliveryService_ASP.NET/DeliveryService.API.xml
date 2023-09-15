@@ -1,0 +1,136 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DeliveryService.API</name>
+    </assembly>
+    <members>
+        <member name="M:DeliveryService.API.Controllers.AuthController.Register(DeliveryService.Contracts.Auth.RegisterRequest)">
+            <summary>
+            Регистрация пользователя
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DeliveryService.API.Controllers.AuthController.Login(DeliveryService.Contracts.Auth.LoginRequest)">
+            <summary>
+            Авторизация пользователя
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DeliveryService.API.Controllers.CourierController.GetDetailsCourier">
+            <summary>
+            Получение информации о конкретном курьере
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DeliveryService.API.Controllers.CustomerController.GetDetailsCustomer">
+            <summary>
+            Получение информации о конкретном заказчике
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DeliveryService.API.Controllers.CustomerController.EditProfile(DeliveryService.Contracts.Customer.EditCustomerProfileRequest)">
+            <summary>
+            Редактирование профиля заказчика
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DeliveryService.API.Controllers.ManagerController.AddRestaurant(DeliveryService.Contracts.Manager.JoinRestaurantRequest)">
+            <summary>
+            Привязка менеджера к ресторану
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DeliveryService.API.Controllers.OrderController.GetDetailsOrder(System.String)">
+            <summary>
+            Получение информация о заказе по его Id
+            </summary>
+            <param name="orderId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DeliveryService.API.Controllers.OrderController.GetAllOrdersByCustomerId">
+            <summary>
+            Получение всех заказов конкретного заказчика
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DeliveryService.API.Controllers.OrderController.GetOrdersByCustomerIdByOrderStatus(System.String)">
+            <summary>
+            Получение всех заказов конкретного заказчика по статусу заказа
+            </summary>
+            <param name="orderStatus"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DeliveryService.API.Controllers.OrderController.GetOrdersByCourierIdByOrderStatus(System.String)">
+            <summary>
+            Получение всех заказов конкретного курьера по статусу заказа
+            </summary>
+            <param name="orderStatus"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DeliveryService.API.Controllers.OrderController.GetAllOrdersByCourierId">
+            <summary>
+            Получение всех заказов конкретного курьера
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DeliveryService.API.Controllers.OrderController.CreateOrder(DeliveryService.Contracts.Order.CreateOrderRequest)">
+            <summary>
+            Запрос по созданию заказа
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DeliveryService.API.Controllers.OrderController.ConfirmOrderByRestaurant(DeliveryService.Contracts.Manager.ConfirmOrderRestaurantRequest)">
+            <summary>
+            Подтверждение заказа менеджером ресторана
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DeliveryService.API.Controllers.OrderController.EndOrderByRestaurant(DeliveryService.Contracts.Manager.EndOrderRestaurantRequest)">
+            <summary>
+            Окончание сборки заказа менеджером ресторана
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DeliveryService.API.Controllers.OrderController.ConfirmOrderByCourier(DeliveryService.Contracts.Courier.ConfirmOrderCourierRequest)">
+            <summary>
+            Подтверждение заказа курьером
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DeliveryService.API.Controllers.OrderController.CompleteOrder(DeliveryService.Contracts.Courier.EndOrderCourierRequest)">
+            <summary>
+            Окончание выполнения заказа курьером
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DeliveryService.API.Controllers.ProductController.GetAllProducts">
+            <summary>
+            Получение всех продуктов из всех ресторанов
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DeliveryService.API.Controllers.ProductController.GetAllProducts(System.String)">
+            <summary>
+            Получение продуктов по определенной секции
+            </summary>
+            <param name="sectionId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DeliveryService.API.Controllers.ProductController.GetProductById(System.String)">
+            <summary>
+            Получение информации о конкретном продукте
+            </summary>
+            <param name="productId"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

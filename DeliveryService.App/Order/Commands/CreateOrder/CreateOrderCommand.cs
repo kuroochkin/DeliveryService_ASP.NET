@@ -1,5 +1,4 @@
 ﻿using DeliveryService.Contracts.Order;
-using DeliveryService.Domain.Product;
 using ErrorOr;
 using MediatR;
 

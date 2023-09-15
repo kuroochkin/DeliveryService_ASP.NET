@@ -6,19 +6,19 @@ using static DeliveryService.Domain.Order.OrderEntity;
 
 namespace DeliveryService.App.Order.Commands.ConfirmOrder;
 
-public class ConfirmOrderCommandHandler
-	: IRequestHandler<ConfirmOrderCommand, ErrorOr<bool>>
+public class ConfirmOrderCourierCommandHandler
+	: IRequestHandler<ConfirmOrderCourierCommand, ErrorOr<bool>>
 {
 	
 	private readonly IUnitOfWork _unitOfWork;
 
-	public ConfirmOrderCommandHandler(IUnitOfWork unitOfWork)
+	public ConfirmOrderCourierCommandHandler(IUnitOfWork unitOfWork)
 	{
 		_unitOfWork = unitOfWork;
 	}
 
 	public async Task<ErrorOr<bool>> Handle
-		(ConfirmOrderCommand request, 
+		(ConfirmOrderCourierCommand request, 
 		CancellationToken cancellationToken)
 	{
 		if (!Guid.TryParse(request.CourierId, out var courierId))
@@ -38,13 +38,13 @@ public class ConfirmOrderCommandHandler
 			return Errors.Courier.NotFound;
 		}
 
-		var order = await _unitOfWork.Orders.FindOrderWithCustomer(orderId);
+		var order = await _unitOfWork.Orders.FindOrderWithCustomerAndManager(orderId);
 		if (order is null)
 		{
 			return Errors.Order.NotFound;
 		}
 
-		if (order.GetStatus != OrderStatus.Create)
+		if (order.GetStatus >= OrderStatus.ConfirmedCourier || order.GetStatus < OrderStatus.EndRestaurant)
 			return false;
 
 		//Добавляем курьера в заказ
@@ -52,6 +52,8 @@ public class ConfirmOrderCommandHandler
 
 		//Меняем статус заказа
 		order.Status = OrderStatus.ConfirmedCourier;
+
+		order.ConfirmedCourier = DateTime.Now;
 
 		//Добавляем заказ в копилку заказов курьера
 		courier.AddOrder(order);

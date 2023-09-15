@@ -1,5 +1,4 @@
-﻿using DeliveryService.Domain.Order;
-using DeliveryService.Domain.Product;
+﻿using DeliveryService.Domain.Product;
 
 namespace DeliveryService.Domain.Restaraunt;
 

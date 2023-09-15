@@ -36,14 +36,22 @@ public class GetOrdersCourierQueryHandler
         order.Id.ToString(),
         order.Description,
         order.Created,
-        order.End,
+		order.ConfirmedRestaurant,
+		order.EndRestaurant,
+		order.ConfirmedCourier,
+		order.End,
         order.Status,
         new CourierVm(
             order?.Courier?.Id.ToString(),
             order?.Courier?.LastName,
             order?.Courier?.FirstName
             ),
-        new CustomerVm(
+		new ManagerVm(
+				order?.Manager?.Id.ToString(),
+				order?.Manager?.LastName,
+				order?.Manager?.FirstName,
+				order?.Manager?.Restaurant?.Name),
+		new CustomerVm(
             order.Customer.Id.ToString(),
             order.Customer.LastName,
             order.Customer.FirstName

@@ -19,8 +19,12 @@ public class CourierController : ApiController
 		_mapper = mapper;
 	}
 
+	/// <summary>
+	/// Получение информации о конкретном курьере
+	/// </summary>
+	/// <returns></returns>
 	[HttpGet("profile")]
-	public async Task<IActionResult> GetDetailsOrder()
+	public async Task<IActionResult> GetDetailsCourier()
 	{
 		var courierId = GetUserId();
 

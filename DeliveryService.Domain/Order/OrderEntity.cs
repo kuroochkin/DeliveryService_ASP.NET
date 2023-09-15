@@ -59,7 +59,7 @@ public class OrderEntity
 
 	public CustomerEntity Customer { get; set; } = null!;
 
-	public ManagerEntity Manager { get; set; } 
+	public ManagerEntity? Manager { get; set; } 
 
 	public List<OrderItemEntity> OrderItems { get; set; } = new();
 

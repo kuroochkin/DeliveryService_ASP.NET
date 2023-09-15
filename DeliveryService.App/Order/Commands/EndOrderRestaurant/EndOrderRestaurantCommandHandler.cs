@@ -2,22 +2,21 @@
 using DeliveryService.App.Common.Interfaces.Persistence;
 using ErrorOr;
 using MediatR;
-using static DeliveryService.App.Common.Errors.Errors;
 using static DeliveryService.Domain.Order.OrderEntity;
 
-namespace DeliveryService.App.Order.Commands.ConfirmOrderRestaurant;
+namespace DeliveryService.App.Order.Commands.EndOrderRestaurant;
 
-public class ConfirmOrderRestaurantCommandHandler
-	: IRequestHandler<ConfirmOrderRestaurantCommand, ErrorOr<bool>>
+public class EndOrderRestaurantCommandHandler
+	: IRequestHandler<EndOrderRestaurantCommand, ErrorOr<bool>>
 {
 	private readonly IUnitOfWork _unitOfWork;
 
-	public ConfirmOrderRestaurantCommandHandler(IUnitOfWork unitOfWork)
+	public EndOrderRestaurantCommandHandler(IUnitOfWork unitOfWork)
 	{
 		_unitOfWork = unitOfWork;
 	}
 	public async Task<ErrorOr<bool>> Handle(
-		ConfirmOrderRestaurantCommand request, 
+		EndOrderRestaurantCommand request, 
 		CancellationToken cancellationToken)
 	{
 		if (!Guid.TryParse(request.ManagerId, out var managerId))
@@ -30,7 +29,7 @@ public class ConfirmOrderRestaurantCommandHandler
 			return Errors.Order.InvalidId;
 		}
 
-		var order = await _unitOfWork.Orders.FindOrderWithCustomer(orderId);
+		var order = await _unitOfWork.Orders.FindOrderWithCustomerAndManager(orderId);
 		if (order is null)
 		{
 			return Errors.Order.NotFound;
@@ -42,17 +41,14 @@ public class ConfirmOrderRestaurantCommandHandler
 			return Errors.Manager.NotFound;
 		}
 
-		if (order.GetStatus >= OrderStatus.ConfirmedRestaurant)
+		if (order.GetStatus >= OrderStatus.EndRestaurant || order.GetStatus < OrderStatus.ConfirmedRestaurant)
 			return false;
 
-		order.Status = OrderStatus.ConfirmedRestaurant;
+		order.Status = OrderStatus.EndRestaurant;
 
-		order.ConfirmedRestaurant = DateTime.Now;
-
-		order.Manager = manager;
-
-		manager.AddOrder(order);
+		order.EndRestaurant = DateTime.Now;
 
 		return await _unitOfWork.CompleteAsync();
 	}
 }
+

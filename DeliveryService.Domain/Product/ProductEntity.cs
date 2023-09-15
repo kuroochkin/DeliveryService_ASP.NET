@@ -1,8 +1,4 @@
-﻿using DeliveryService.Domain.Order;
-using DeliveryService.Domain.Restaraunt;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace DeliveryService.Domain.Product;
+﻿namespace DeliveryService.Domain.Product;
 
 public class ProductEntity
 {

@@ -7,19 +7,19 @@ using static DeliveryService.Domain.Order.OrderEntity;
 
 namespace DeliveryService.App.Order.Commands.CompleteOrder;
 
-public class CompleteOrderCommandHandler
-	: IRequestHandler<CompleteOrderCommand, ErrorOr<bool>>
+public class EndOrderCourierCommandHandler
+	: IRequestHandler<EndOrderCourierCommand, ErrorOr<bool>>
 {
 	
 	private readonly IUnitOfWork _unitOfWork;
 
-	public CompleteOrderCommandHandler(IUnitOfWork unitOfWork)
+	public EndOrderCourierCommandHandler(IUnitOfWork unitOfWork)
 	{
 		_unitOfWork = unitOfWork;
 	}
 
 	public async Task<ErrorOr<bool>> Handle
-		(CompleteOrderCommand request, 
+		(EndOrderCourierCommand request, 
 		CancellationToken cancellationToken)
 	{
 		if (!Guid.TryParse(request.OrderId, out var orderId))
@@ -27,14 +27,14 @@ public class CompleteOrderCommandHandler
 			return Errors.Order.InvalidId;
 		}
 
-		var order = await _unitOfWork.Orders.FindOrderWithCustomerAndCourier(orderId);
+		var order = await _unitOfWork.Orders.FindOrderWithCustomerAndCourierAndManager(orderId);
 		if (order is null)
 		{
 			return Errors.Order.NotFound;
 		}
 
 
-		if (order.GetStatus != OrderStatus.ConfirmedCourier)
+		if (order.GetStatus < OrderStatus.ConfirmedCourier || order.GetStatus == OrderStatus.Complete)
 			return false;
 
 		//Меняем статус заказа
@@ -44,6 +44,5 @@ public class CompleteOrderCommandHandler
 		order.End = DateTime.Now;
 
 		return await _unitOfWork.CompleteAsync();
-
 	}
 }

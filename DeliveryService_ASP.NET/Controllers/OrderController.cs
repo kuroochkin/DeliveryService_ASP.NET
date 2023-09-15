@@ -2,7 +2,6 @@
 using DeliveryService.Contracts.Order;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using DeliveryService.App.Order.Commands.ConfirmOrder;
 using DeliveryService.App.Order.Commands.CompleteOrder;
 using Microsoft.AspNetCore.Authorization;
 using DeliveryService.App.Order.Queries.GetOrderDetails;
@@ -10,9 +9,13 @@ using DeliveryService.Contracts.Order.Get;
 using DeliveryService.App.Order.Queries.GetOrdersUser.Customer.GelAllOrdersByCustomer;
 using DeliveryService.App.Order.Queries.GetOrdersUser.Courier.GetAllOrdersByCourier;
 using DeliveryService.App.Order.Queries.GetOrdersUser.Customer.GetOrdersByCustomerByStatus;
-using DeliveryService.App.Order.Queries.GetAllOrdersByCreate;
-using DeliveryService.App.Order.Queries.GetOrdersUser.Courier.GetOrdersCourierByStatus;
 using DeliveryService.App.Order.Commands.CreateOrder;
+using DeliveryService.App.Order.Commands.ConfirmOrderRestaurant;
+using DeliveryService.Contracts.Manager;
+using DeliveryService.App.Order.Commands.EndOrderRestaurant;
+using DeliveryService.App.Order.Commands.ConfirmOrder;
+using DeliveryService.Contracts.Courier;
+using DeliveryService.App.Order.Queries.GetOrdersUser.Courier.GetOrdersByCourierByStatus;
 
 namespace DeliveryService.API.Controllers;
 
@@ -29,7 +32,11 @@ public class OrderController : ApiController
 		_mapper = mapper;
 	}
 	
-	//ГОТОВО!!!
+	/// <summary>
+	///	Получение информация о заказе по его Id
+	/// </summary>
+	/// <param name="orderId"></param>
+	/// <returns></returns>
 	[HttpGet("{orderId}")]
 	public async Task<IActionResult> GetDetailsOrder(string orderId)
 	{
@@ -43,7 +50,10 @@ public class OrderController : ApiController
 		);
 	}
 
-	//ГОТОВО!!!
+	/// <summary>
+	/// Получение всех заказов конкретного заказчика
+	/// </summary>
+	/// <returns></returns>
 	[HttpGet("customerOrders")]
 	[Authorize(Roles = "Customer")]
 	public async Task<IActionResult> GetAllOrdersByCustomerId()
@@ -60,21 +70,11 @@ public class OrderController : ApiController
 		);
 	}
 
-	[HttpGet("allOrdersByCreate")]
-	public async Task<IActionResult> GetAllOrdersByCreate()
-	{
-
-		var query = new GetAllOrdersByCreateQuery();
-
-		var orderResult = await _mediator.Send(query);
-
-		return orderResult.Match(
-			orders => Ok(_mapper.Map<GetAllOrdersByCreateResponse>(orders)),
-			errors => Problem("Ошибка")
-		);
-	}
-
-	//ГОТОВО!!!
+	/// <summary>
+	/// Получение всех заказов конкретного заказчика по статусу заказа
+	/// </summary>
+	/// <param name="orderStatus"></param>
+	/// <returns></returns>
 	[HttpGet("customerOrders/{orderStatus}")]
 	[Authorize(Roles = "Customer")]
 	public async Task<IActionResult> GetOrdersByCustomerIdByOrderStatus(string orderStatus)
@@ -91,13 +91,18 @@ public class OrderController : ApiController
 		);
 	}
 
-	[HttpGet("courierOrders/Progress")]
+	/// <summary>
+	/// Получение всех заказов конкретного курьера по статусу заказа
+	/// </summary>
+	/// <param name="orderStatus"></param>
+	/// <returns></returns>
+	[HttpGet("courierOrders/{orderStatus}")]
 	[Authorize(Roles = "Courier")]
-	public async Task<IActionResult> GetOrdersCourierByOrderProgress()
+	public async Task<IActionResult> GetOrdersByCourierIdByOrderStatus(string orderStatus)
 	{
 		var courierId = GetUserId();
 
-		var query = new GetOrdersCourierProgressQuery(courierId);
+		var query = new GetOrdersCourierStatusQuery(courierId, orderStatus);
 
 		var orderResult = await _mediator.Send(query);
 
@@ -107,23 +112,10 @@ public class OrderController : ApiController
 		);
 	}
 
-	[HttpGet("courierOrders/Complete")]
-	[Authorize(Roles = "Courier")]
-	public async Task<IActionResult> GetOrdersCourierByOrderComplete()
-	{
-		var courierId = GetUserId();
-
-		var query = new GetOrdersCourierCompleteQuery(courierId);
-
-		var orderResult = await _mediator.Send(query);
-
-		return orderResult.Match(
-			orders => Ok(_mapper.Map<GetOrdersCourierResponse>(orders)),
-			errors => Problem("Ошибка")
-		);
-	}
-
-	//ГОТОВО!!!
+	/// <summary>
+	/// Получение всех заказов конкретного курьера
+	/// </summary>
+	/// <returns></returns>
 	[HttpGet("courierOrders")]
 	[Authorize(Roles = "Courier")]
 	public async Task<IActionResult> GetAllOrdersByCourierId()
@@ -141,7 +133,11 @@ public class OrderController : ApiController
 
 	}
 
-	//ГОТОВО!!!
+	/// <summary>
+	/// Запрос по созданию заказа
+	/// </summary>
+	/// <param name="request"></param>
+	/// <returns></returns>
 	[HttpPost("create")]
 	[Authorize(Roles = "Customer")]
 	public async Task<IActionResult> CreateOrder(CreateOrderRequest request)
@@ -158,13 +154,18 @@ public class OrderController : ApiController
 			);
 	}
 
-	[HttpPost("confirmRestaurant")]
-	[Authorize(Roles = "Courier")]
-	public async Task<IActionResult> ConfirmOrder(ConfirmOrderRequest request)
+	/// <summary>
+	/// Подтверждение заказа менеджером ресторана
+	/// </summary>
+	/// <param name="request"></param>
+	/// <returns></returns>
+	[HttpPost("manager/confirmRestaurant")]
+	[Authorize(Roles = "Manager")]
+	public async Task<IActionResult> ConfirmOrderByRestaurant(ConfirmOrderRestaurantRequest request)
 	{
-		var courier = GetUserId();
+		var manager = GetUserId();
 
-		var command = _mapper.Map<ConfirmOrderCommand>((request, courier));
+		var command = _mapper.Map<ConfirmOrderRestaurantCommand>((request, manager));
 
 		var result = await _mediator.Send(command);
 
@@ -174,28 +175,60 @@ public class OrderController : ApiController
 			);
 	}
 
+	/// <summary>
+	/// Окончание сборки заказа менеджером ресторана
+	/// </summary>
+	/// <param name="request"></param>
+	/// <returns></returns>
+	[HttpPost("manager/endRestaurant")]
+	[Authorize(Roles = "Manager")]
+	public async Task<IActionResult> EndOrderByRestaurant(EndOrderRestaurantRequest request)
+	{
+		var manager = GetUserId();
 
-	//[HttpPost("confirm")]
-	//[Authorize(Roles = "Courier")]
-	//public async Task<IActionResult> ConfirmOrder(ConfirmOrderRequest request)
-	//{
-	//	var courier = GetUserId();
+		var command = _mapper.Map<EndOrderRestaurantCommand>((request, manager));
 
-	//	var command = _mapper.Map<ConfirmOrderCommand>((request,courier));
+		var result = await _mediator.Send(command);
 
-	//	var result = await _mediator.Send(command);
+		return result.Match(
+			orderResult => Ok(result.Value),
+			errors => Problem("Ошибка")
+			);
+	}
 
-	//	return result.Match(
-	//		orderResult => Ok(result.Value),
-	//		errors => Problem("Ошибка")
-	//		);
-	//}
+	/// <summary>
+	/// Подтверждение заказа курьером
+	/// </summary>
+	/// <param name="request"></param>
+	/// <returns></returns>
+	[HttpPost("confirm")]
+	[Authorize(Roles = "Courier")]
+	public async Task<IActionResult> ConfirmOrderByCourier(ConfirmOrderCourierRequest request)
+	{
+		var courier = GetUserId();
 
+		var command = _mapper.Map<ConfirmOrderCourierCommand>((request, courier));
+
+		var result = await _mediator.Send(command);
+
+		return result.Match(
+			orderResult => Ok(result.Value),
+			errors => Problem("Ошибка")
+			);
+	}
+
+	/// <summary>
+	/// Окончание выполнения заказа курьером
+	/// </summary>
+	/// <param name="request"></param>
+	/// <returns></returns>
 	[HttpPost("complete")]
 	[Authorize(Roles = "Courier")]
-	public async Task<IActionResult> CompleteOrder(CompleteOrderRequest request)
+	public async Task<IActionResult> CompleteOrder(EndOrderCourierRequest request)
 	{
-		var command = _mapper.Map<CompleteOrderCommand>(request);
+		var courierId = GetUserId();
+
+		var command = _mapper.Map<EndOrderCourierCommand>((request, courierId));
 
 		var result = await _mediator.Send(command);
 

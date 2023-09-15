@@ -4,5 +4,5 @@ using MediatR;
 namespace DeliveryService.App.Order.Commands.ConfirmOrderRestaurant;
 
 public record ConfirmOrderRestaurantCommand(
-		string RestaurantId,
+		string ManagerId,
 		string OrderId) : IRequest<ErrorOr<bool>>;
