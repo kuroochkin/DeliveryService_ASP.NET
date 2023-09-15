@@ -13,6 +13,7 @@ public record OrderDetailsVm(
 	DateTime End,
 	OrderStatus Status,
 	CourierVm? Courier,
+	ManagerVm? Manager,
 	CustomerVm Customer,
 	List<ProductOrderVm> Products
 	);
@@ -26,6 +27,13 @@ public record CustomerVm(
 	string CustomerId,
 	string LastName,
 	string FirstName);
+
+public record ManagerVm(
+	string ?ManagerId,
+	string ?LastName,
+	string ?FirstName,
+	string ?Restaurant
+	);
 
 public record ProductOrderVm(
 	string ProductId,

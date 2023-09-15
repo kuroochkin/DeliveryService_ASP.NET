@@ -12,6 +12,7 @@ public record GetOrderDetailsResponse(
 	DateTime End,
 	string Status,
 	CourierResponse? Courier,
+	ManagerResponse? Manager,
 	CustomerResponse Customer,
 	List<ProductsOrderResponse> Products);
 
@@ -24,6 +25,13 @@ public record CustomerResponse(
 	string CustomerId,
 	string LastName,
 	string FirstName);
+
+public record ManagerResponse(
+	string? ManagerId,
+	string? LastName,
+	string? FirstName,
+	string? Restaurant
+	);
 
 public record ProductsOrderResponse(
 	string ProductId,
