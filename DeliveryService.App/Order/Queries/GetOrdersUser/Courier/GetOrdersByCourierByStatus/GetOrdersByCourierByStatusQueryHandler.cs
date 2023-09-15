@@ -54,7 +54,8 @@ public class GetOrdersCourierStatusQueryHandler
 				order?.Manager?.Id.ToString(),
 				order?.Manager?.LastName,
 				order?.Manager?.FirstName,
-				order?.Manager?.Restaurant?.Name),
+				order?.Manager?.Restaurant?.Name
+				),
 		   new CustomerVm(
 			   order.Customer.Id.ToString(),
 			   order.Customer.LastName,

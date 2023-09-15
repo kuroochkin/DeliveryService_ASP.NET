@@ -16,6 +16,7 @@ using DeliveryService.Contracts.Manager;
 using DeliveryService.App.Order.Commands.EndOrderRestaurant;
 using DeliveryService.App.Order.Commands.ConfirmOrder;
 using DeliveryService.Contracts.Courier;
+using DeliveryService.App.Order.Queries.GetOrdersUser.Courier.GetOrdersByCourierByStatus;
 
 namespace DeliveryService.API.Controllers;
 
@@ -76,6 +77,22 @@ public class OrderController : ApiController
 
 		return orderResult.Match(
 			orders => Ok(_mapper.Map<GetOrdersCustomerResponse>(orders)),
+			errors => Problem("Ошибка")
+		);
+	}
+
+	[HttpGet("courierOrders/{orderStatus}")]
+	[Authorize(Roles = "Courier")]
+	public async Task<IActionResult> GetOrdersByCourierIdByOrderStatus(string orderStatus)
+	{
+		var courierId = GetUserId();
+
+		var query = new GetOrdersCourierStatusQuery(courierId, orderStatus);
+
+		var orderResult = await _mediator.Send(query);
+
+		return orderResult.Match(
+			orders => Ok(_mapper.Map<GetOrdersCourierResponse>(orders)),
 			errors => Problem("Ошибка")
 		);
 	}

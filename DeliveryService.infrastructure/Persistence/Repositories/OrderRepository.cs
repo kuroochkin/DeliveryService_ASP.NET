@@ -16,6 +16,8 @@ public class OrderRepository : GenericRepository<OrderEntity>, IOrderRepository
 		return await _context.Orders
 			.Include(order => order.Customer)
 			.Include(order => order.Courier)
+			.Include(order => order.Manager)
+			.Include(order => order.OrderItems)
 			.Where(order => order.Courier.Id == id)
 			.ToListAsync();
 	}
@@ -25,6 +27,7 @@ public class OrderRepository : GenericRepository<OrderEntity>, IOrderRepository
 		return await _context.Orders
 			.Include(order => order.Customer)
 			.Include(order => order.Courier)
+			.Include(order => order.Manager)
 			.Include(order => order.OrderItems)
 			.Where(order => order.Customer.Id == id)
 			.ToListAsync();
@@ -37,6 +40,8 @@ public class OrderRepository : GenericRepository<OrderEntity>, IOrderRepository
 		return await _context.Orders
 			.Include(order => order.Customer)
 			.Include(order => order.Courier)
+			.Include(order => order.Manager)
+			.Include(order => order.OrderItems)
 			.Where(order => order.Customer.Id == id)
 			.Where(order => order.Status == orderStatus)
 			.ToListAsync();
@@ -49,6 +54,8 @@ public class OrderRepository : GenericRepository<OrderEntity>, IOrderRepository
 		return await _context.Orders
 			.Include(order => order.Customer)
 			.Include(order => order.Courier)
+			.Include(order => order.Manager)
+			.Include(order => order.OrderItems)
 			.Where(order => order.Courier.Id == id)
 			.Where(order => order.Status == orderStatus)
 			.ToListAsync();
@@ -59,6 +66,8 @@ public class OrderRepository : GenericRepository<OrderEntity>, IOrderRepository
 		return await _context.Orders
 			.Include(order => order.Customer)
 			.Include(order => order.Courier)
+			.Include(order => order.Manager)
+			.Include(order => order.OrderItems)
 			.Where(order => order.Courier.Id == id)
 			.Where(order => order.Status == OrderStatus.ConfirmedCourier)
 			.ToListAsync();
@@ -69,18 +78,9 @@ public class OrderRepository : GenericRepository<OrderEntity>, IOrderRepository
 		return await _context.Orders
 			.Include(order => order.Customer)
 			.Include(order => order.Courier)
+			.Include(order => order.OrderItems)
 			.Where(order => order.Courier.Id == id)
 			.Where(order => order.Status == OrderStatus.Complete)
-			.ToListAsync();
-	}
-
-
-	public async Task<List<OrderEntity>?> FindOrdersByCreate()
-	{
-		return await _context.Orders
-			.Include(order => order.Customer)
-			.Include(order => order.Courier)
-			.Where(order => order.Status == OrderStatus.Create)
 			.ToListAsync();
 	}
 
