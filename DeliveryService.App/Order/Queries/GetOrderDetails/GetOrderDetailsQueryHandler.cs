@@ -25,7 +25,7 @@ public class GetOrderDetailsQueryHandler
 			return Errors.Order.InvalidId;
 		}
 
-		var order = await _unitOfWork.Orders.FindOrderWithCustomerAndCourierAndProducts(orderId);
+		var order = await _unitOfWork.Orders.FindOrderWithCustomerAndCourierAndManager(orderId);
 		if (order is null)
 		{
 			return Errors.Order.NotFound;
