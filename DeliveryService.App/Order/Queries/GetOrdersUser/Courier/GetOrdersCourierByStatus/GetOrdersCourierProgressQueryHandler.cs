@@ -37,6 +37,9 @@ public class GetOrdersCourierProgressQueryHandler
 		   order.Id.ToString(),
 		   order.Description,
 		   order.Created,
+		   order.ConfirmedRestaurant,
+		   order.EndRestaurant,
+		   order.ConfirmedCourier,
 		   order.End,
 		   order.Status,
 		   new CourierVm(
