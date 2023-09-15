@@ -23,6 +23,10 @@ public class ProductController : Controller
 		_mapper = mapper;
 	}
 
+	/// <summary>
+	/// Получение всех продуктов из всех ресторанов
+	/// </summary>
+	/// <returns></returns>
 	[HttpGet("allProducts")]
 	public async Task<IActionResult> GetAllProducts()
 	{
@@ -36,6 +40,11 @@ public class ProductController : Controller
 		);
 	}
 
+	/// <summary>
+	/// Получение продуктов по определенной секции
+	/// </summary>
+	/// <param name="sectionId"></param>
+	/// <returns></returns>
 	[HttpGet("allProducts/{sectionId}")]
 	public async Task<IActionResult> GetAllProducts(string sectionId)
 	{
@@ -49,6 +58,11 @@ public class ProductController : Controller
 		);
 	}
 
+	/// <summary>
+	/// Получение информации о конкретном продукте
+	/// </summary>
+	/// <param name="productId"></param>
+	/// <returns></returns>
 	[HttpGet("{productId}")]
 	public async Task<IActionResult> GetProductById(string productId)
 	{

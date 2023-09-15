@@ -32,7 +32,11 @@ public class OrderController : ApiController
 		_mapper = mapper;
 	}
 	
-	//ГОТОВО!!!
+	/// <summary>
+	///	Получение информация о заказе по его Id
+	/// </summary>
+	/// <param name="orderId"></param>
+	/// <returns></returns>
 	[HttpGet("{orderId}")]
 	public async Task<IActionResult> GetDetailsOrder(string orderId)
 	{
@@ -46,7 +50,10 @@ public class OrderController : ApiController
 		);
 	}
 
-	//ГОТОВО!!!
+	/// <summary>
+	/// Получение всех заказов конкретного заказчика
+	/// </summary>
+	/// <returns></returns>
 	[HttpGet("customerOrders")]
 	[Authorize(Roles = "Customer")]
 	public async Task<IActionResult> GetAllOrdersByCustomerId()
@@ -63,7 +70,11 @@ public class OrderController : ApiController
 		);
 	}
 
-	//ГОТОВО!!!
+	/// <summary>
+	/// Получение всех заказов конкретного заказчика по статусу заказа
+	/// </summary>
+	/// <param name="orderStatus"></param>
+	/// <returns></returns>
 	[HttpGet("customerOrders/{orderStatus}")]
 	[Authorize(Roles = "Customer")]
 	public async Task<IActionResult> GetOrdersByCustomerIdByOrderStatus(string orderStatus)
@@ -80,6 +91,11 @@ public class OrderController : ApiController
 		);
 	}
 
+	/// <summary>
+	/// Получение всех заказов конкретного курьера по статусу заказа
+	/// </summary>
+	/// <param name="orderStatus"></param>
+	/// <returns></returns>
 	[HttpGet("courierOrders/{orderStatus}")]
 	[Authorize(Roles = "Courier")]
 	public async Task<IActionResult> GetOrdersByCourierIdByOrderStatus(string orderStatus)
@@ -96,7 +112,10 @@ public class OrderController : ApiController
 		);
 	}
 
-	//ГОТОВО!!!
+	/// <summary>
+	/// Получение всех заказов конкретного курьера
+	/// </summary>
+	/// <returns></returns>
 	[HttpGet("courierOrders")]
 	[Authorize(Roles = "Courier")]
 	public async Task<IActionResult> GetAllOrdersByCourierId()
@@ -114,7 +133,11 @@ public class OrderController : ApiController
 
 	}
 
-	//ГОТОВО!!!
+	/// <summary>
+	/// Запрос по созданию заказа
+	/// </summary>
+	/// <param name="request"></param>
+	/// <returns></returns>
 	[HttpPost("create")]
 	[Authorize(Roles = "Customer")]
 	public async Task<IActionResult> CreateOrder(CreateOrderRequest request)
@@ -131,6 +154,11 @@ public class OrderController : ApiController
 			);
 	}
 
+	/// <summary>
+	/// Подтверждение заказа менеджером ресторана
+	/// </summary>
+	/// <param name="request"></param>
+	/// <returns></returns>
 	[HttpPost("manager/confirmRestaurant")]
 	[Authorize(Roles = "Manager")]
 	public async Task<IActionResult> ConfirmOrderByRestaurant(ConfirmOrderRestaurantRequest request)
@@ -147,6 +175,11 @@ public class OrderController : ApiController
 			);
 	}
 
+	/// <summary>
+	/// Окончание сборки заказа менеджером ресторана
+	/// </summary>
+	/// <param name="request"></param>
+	/// <returns></returns>
 	[HttpPost("manager/endRestaurant")]
 	[Authorize(Roles = "Manager")]
 	public async Task<IActionResult> EndOrderByRestaurant(EndOrderRestaurantRequest request)
@@ -163,7 +196,11 @@ public class OrderController : ApiController
 			);
 	}
 
-
+	/// <summary>
+	/// Подтверждение заказа курьером
+	/// </summary>
+	/// <param name="request"></param>
+	/// <returns></returns>
 	[HttpPost("confirm")]
 	[Authorize(Roles = "Courier")]
 	public async Task<IActionResult> ConfirmOrderByCourier(ConfirmOrderCourierRequest request)
@@ -180,6 +217,11 @@ public class OrderController : ApiController
 			);
 	}
 
+	/// <summary>
+	/// Окончание выполнения заказа курьером
+	/// </summary>
+	/// <param name="request"></param>
+	/// <returns></returns>
 	[HttpPost("complete")]
 	[Authorize(Roles = "Courier")]
 	public async Task<IActionResult> CompleteOrder(EndOrderCourierRequest request)

@@ -22,7 +22,11 @@ public class AuthController : Controller
 		_mapper = mapper;
 	}
 
-	//ГОТОВО!!!
+	/// <summary>
+	/// Регистрация пользователя
+	/// </summary>
+	/// <param name="request"></param>
+	/// <returns></returns>
 	[HttpPost("register")]
 	public async Task<IActionResult> Register(RegisterRequest request)
 	{
@@ -36,7 +40,11 @@ public class AuthController : Controller
 			);
 	}
 
-	//ГОТОВО!!!
+	/// <summary>
+	/// Авторизация пользователя
+	/// </summary>
+	/// <param name="request"></param>
+	/// <returns></returns>
 	[HttpPost("login")]
 	public async Task<IActionResult> Login(LoginRequest request)
 	{
@@ -49,5 +57,4 @@ public class AuthController : Controller
 			errors => Problem("Ошибка")
 			);
 	}
-
 }

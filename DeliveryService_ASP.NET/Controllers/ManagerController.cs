@@ -21,6 +21,11 @@ public class ManagerController : ApiController
 		_mapper = mapper;
 	}
 
+	/// <summary>
+	/// Привязка менеджера к ресторану
+	/// </summary>
+	/// <param name="request"></param>
+	/// <returns></returns>
 	[HttpPost("addRestaurant")]
 	[Authorize(Roles = "Manager")]
 	public async Task<IActionResult> AddRestaurant(JoinRestaurantRequest request)

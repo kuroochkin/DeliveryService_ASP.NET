@@ -22,8 +22,12 @@ public class CustomerController : ApiController
 		_mapper = mapper;
 	}
 
+	/// <summary>
+	/// Получение информации о конкретном заказчике
+	/// </summary>
+	/// <returns></returns>
 	[HttpGet("profile")]
-	public async Task<IActionResult> GetDetailsOrder()
+	public async Task<IActionResult> GetDetailsCustomer()
 	{
 		var customerId = GetUserId();
 
@@ -37,6 +41,11 @@ public class CustomerController : ApiController
 		);
 	}
 
+	/// <summary>
+	/// Редактирование профиля заказчика
+	/// </summary>
+	/// <param name="request"></param>
+	/// <returns></returns>
 	[HttpPost("editProfile")]
 	[Authorize(Roles = "Customer")]
 	public async Task<IActionResult> EditProfile(EditCustomerProfileRequest request)

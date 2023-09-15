@@ -7,9 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DeliveryService.API.Controllers;
 
-[ApiController]
 [Route("api/sections")]
-public class SectionController : ApiController
+public class SectionController : Controller
 {
 	private readonly ISender _mediator;
 	private readonly IMapper _mapper;
