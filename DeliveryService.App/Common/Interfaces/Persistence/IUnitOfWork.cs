@@ -8,6 +8,7 @@ public interface IUnitOfWork
 	ICustomerRepository Customers { get; }
 	IManagerRepository Managers { get; }
 	IOrderRepository Orders { get; }
+	IPaymentOrderRepository OrderPayments { get; }
 	IProductRepository Products { get; }
 	ISectionRepository Sections { get; }
 	IOrderItemRepository OrderItems { get; }

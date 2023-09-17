@@ -3,6 +3,7 @@ using DeliveryService.App.Common.Interfaces.Persistence;
 using DeliveryService.App.Order.Commands.CreateOrder;
 using DeliveryService.Domain;
 using DeliveryService.Domain.Order;
+using DeliveryService.Domain.PaymentOrder;
 using ErrorOr;
 using MediatR;
 using static DeliveryService.Domain.Order.OrderEntity;
@@ -43,13 +44,16 @@ public class CreateOrderCommandHandler
             product.Title
             )).ToList();
 
+        var payment = new PaymentOrderEntity(request.Card, request.TotalPrice);
+
 
         var order = new OrderEntity()
         {
             Description = request.Description,
             Status = OrderStatus.Create,
             Customer = customer,
-            OrderItems = orderItems
+            OrderItems = orderItems,
+            Payment = payment
         };
 
 
