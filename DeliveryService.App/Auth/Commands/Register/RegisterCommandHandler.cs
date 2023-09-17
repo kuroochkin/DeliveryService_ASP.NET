@@ -8,7 +8,6 @@ using DeliveryService.Domain.Manager;
 using DeliveryService.Domain.User;
 using ErrorOr;
 using MediatR;
-using static DeliveryService.App.Common.Errors.Errors;
 
 namespace DeliveryService.App.Auth.Commands.Register;
 
@@ -36,12 +35,14 @@ public class RegisterCommandHandler
 
         var role = await _unitOfWork.Roles.FindRoleByName(request.Role);
 
+        // Хэширование пароля
+        var passwordHashed = PasswordHasher.HashPassword(request.Password);
 
-        //Создаем объект пользователя и определяем его роль
-        var user = new UserEntity(
+		//Создаем объект пользователя и определяем его роль
+		var user = new UserEntity(
             request.LastName, 
             request.FirstName,
-            request.Password, 
+			passwordHashed, 
             request.Email, 
             role);
 
