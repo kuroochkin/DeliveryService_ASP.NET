@@ -11,7 +11,8 @@ public class UnitOfWork : IUnitOfWork, IDisposable
 		ICustomerRepository customers, 
 		IManagerRepository managers,
 		IRestaurantRepository restaurants,
-		IOrderRepository orders, 
+		IOrderRepository orders,
+		IPaymentOrderRepository orderPayments,
 		IProductRepository products,
 		IUserRepository users,
 		IRoleRepository roles,
@@ -26,6 +27,7 @@ public class UnitOfWork : IUnitOfWork, IDisposable
 		Managers = managers;
 		Restaurants = restaurants;
 		Orders = orders;
+		OrderPayments = orderPayments;
 		Products = products;
 		OrderItems = orderItems;
 		Sections = sections;
@@ -38,6 +40,7 @@ public class UnitOfWork : IUnitOfWork, IDisposable
 	public IManagerRepository Managers { get; }
 	public IRestaurantRepository Restaurants { get; }
 	public IOrderRepository Orders { get; }
+	public IPaymentOrderRepository OrderPayments { get; }
 	public IProductRepository Products { get; }
 	public IOrderItemRepository OrderItems { get; }
 	public ISectionRepository Sections { get; }

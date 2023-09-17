@@ -138,6 +138,9 @@ namespace DeliveryService.infrastructure.Migrations
                     b.Property<Guid?>("ManagerId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("PaymentId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
@@ -148,6 +151,8 @@ namespace DeliveryService.infrastructure.Migrations
                     b.HasIndex("CustomerId");
 
                     b.HasIndex("ManagerId");
+
+                    b.HasIndex("PaymentId");
 
                     b.ToTable("Orders", (string)null);
                 });
@@ -185,6 +190,27 @@ namespace DeliveryService.infrastructure.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("OrderItem", (string)null);
+                });
+
+            modelBuilder.Entity("DeliveryService.Domain.PaymentOrder.PaymentOrderEntity", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Card")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("PaymentDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("OrderPayments", (string)null);
                 });
 
             modelBuilder.Entity("DeliveryService.Domain.Product.ProductEntity", b =>
@@ -329,11 +355,17 @@ namespace DeliveryService.infrastructure.Migrations
                         .WithMany("Orders")
                         .HasForeignKey("ManagerId");
 
+                    b.HasOne("DeliveryService.Domain.PaymentOrder.PaymentOrderEntity", "Payment")
+                        .WithMany()
+                        .HasForeignKey("PaymentId");
+
                     b.Navigation("Courier");
 
                     b.Navigation("Customer");
 
                     b.Navigation("Manager");
+
+                    b.Navigation("Payment");
                 });
 
             modelBuilder.Entity("DeliveryService.Domain.OrderItemEntity", b =>

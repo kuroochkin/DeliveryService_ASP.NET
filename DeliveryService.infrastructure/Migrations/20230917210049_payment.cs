@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DeliveryService.infrastructure.Migrations
 {
-    public partial class AddRoles : Migration
+    public partial class payment : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -39,6 +39,20 @@ namespace DeliveryService.infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Customers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "OrderPayments",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Card = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    PaymentDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OrderPayments", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -84,7 +98,7 @@ namespace DeliveryService.infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    RestaurantId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    RestaurantId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CountOrder = table.Column<int>(type: "int", nullable: false)
@@ -96,8 +110,7 @@ namespace DeliveryService.infrastructure.Migrations
                         name: "FK_Managers_Restaurants_RestaurantId",
                         column: x => x.RestaurantId,
                         principalTable: "Restaurants",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -160,10 +173,11 @@ namespace DeliveryService.infrastructure.Migrations
                     ConfirmedCourier = table.Column<DateTime>(type: "datetime2", nullable: false),
                     End = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PaymentId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     Status = table.Column<int>(type: "int", nullable: false),
                     CourierId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     CustomerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ManagerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    ManagerId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -183,8 +197,12 @@ namespace DeliveryService.infrastructure.Migrations
                         name: "FK_Orders_Managers_ManagerId",
                         column: x => x.ManagerId,
                         principalTable: "Managers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Orders_OrderPayments_PaymentId",
+                        column: x => x.PaymentId,
+                        principalTable: "OrderPayments",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -247,6 +265,11 @@ namespace DeliveryService.infrastructure.Migrations
                 column: "ManagerId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Orders_PaymentId",
+                table: "Orders",
+                column: "PaymentId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Products_RestaurantEntityId",
                 table: "Products",
                 column: "RestaurantEntityId");
@@ -287,6 +310,9 @@ namespace DeliveryService.infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "Managers");
+
+            migrationBuilder.DropTable(
+                name: "OrderPayments");
 
             migrationBuilder.DropTable(
                 name: "Sections");

@@ -27,7 +27,7 @@ namespace DeliveryService.App.Auth.Queries.Login
 			var user = await _unitOfWork.Users.FindUserByRegisteredEmailWithRole(request.Email);
 			if(user is not null)
 			{
-				if(user.Password == request.Password)
+				if(PasswordHasher.VerifyPassword(request.Password, user.Password))
 				{
 					var token = _jwtTokenGenerator.GenerateToken(user);
 					return new AuthenticationResult(token, user.Role.Name.ToString());
