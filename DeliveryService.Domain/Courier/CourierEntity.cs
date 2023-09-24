@@ -20,6 +20,22 @@ public class CourierEntity
 
 	public IReadOnlyList<OrderEntity> Orders => _orders.AsReadOnly();
 
+	public User.UserEntity UserEntity
+	{
+		get => default;
+		set
+		{
+		}
+	}
+
+	public OrderEntity OrderEntity
+	{
+		get => default;
+		set
+		{
+		}
+	}
+
 	public CourierEntity(Guid id, string lastName, string firstName)
 	{
 		Id = id;

@@ -12,6 +12,7 @@ public class ProductEntity
 
 	public SectionEntity? Section { get; set; }
 
+
 	public ProductEntity(int id, string title)
 	{
 		Id = id;

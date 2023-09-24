@@ -20,6 +20,7 @@ public class CustomerEntity
 
 	public IReadOnlyList<OrderEntity> Orders => _orders.AsReadOnly();
 
+
 	public CustomerEntity(Guid id, string lastName, string firstName)
 	{
 		Id = id;
