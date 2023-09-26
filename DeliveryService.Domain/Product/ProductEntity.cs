@@ -12,13 +12,6 @@ public class ProductEntity
 
 	public SectionEntity? Section { get; set; }
 
-
-	public ProductEntity(int id, string title)
-	{
-		Id = id;
-		Title = title;
-	}
-
 	public ProductEntity(int id, string name, double price, SectionEntity section)
 	{
 		Id = id;

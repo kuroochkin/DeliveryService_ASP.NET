@@ -1,2 +1,98 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ClassDiagram /> 
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="DeliveryService.Domain.Courier.CourierEntity">
+    <Position X="1.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAUCAGAgAAEAAAAAAAAAAAAAAAAIAAAIAAAAAAAAAAg=</HashCode>
+      <FileName>Courier\CourierEntity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DeliveryService.Domain.Customer.CustomerEntity">
+    <Position X="10" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAUCAGAgAAEAAAAAAAAAAAAAAAAIAAAIAAAAAAAAAAg=</HashCode>
+      <FileName>Customer\CustomerEntity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DeliveryService.Domain.Manager.ManagerEntity">
+    <Position X="5.5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAUCAEAgAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>Manager\ManagerEntity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DeliveryService.Domain.Order.OrderEntity">
+    <Position X="5.5" Y="8.25" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="DeliveryService.Domain.Order.OrderEntity.OrderStatus" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Order\OrderEntity.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAMCBAAEAAEgAAAAAIAAAABEABAQBAQAAAgAAAAAAAA=</HashCode>
+      <FileName>Order\OrderEntity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DeliveryService.Domain.PaymentOrder.PaymentOrderEntity">
+    <Position X="2.75" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABCAAAAAQEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>PaymentOrder\PaymentOrderEntity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DeliveryService.Domain.Product.ProductEntity">
+    <Position X="9" Y="11.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAQAAAEAAAAAACAAAAAAAAAAAAAAAAIAAAAA=</HashCode>
+      <FileName>Product\ProductEntity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DeliveryService.Domain.Restaraunt.RestaurantEntity">
+    <Position X="9" Y="6.75" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="DeliveryService.Domain.Restaraunt.RestaurantEntity.IsOpen" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Restaurant\RestaurantEntity.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAACAAAEAAAAAAAAAAAAAAQEAAAAAAACACAAAAAAAAQ=</HashCode>
+      <FileName>Restaurant\RestaurantEntity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DeliveryService.Domain.Role.RoleEntity">
+    <Position X="3.25" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Role\RoleEntity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DeliveryService.Domain.User.UserEntity">
+    <Position X="5.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAEAAACAAAAAAEAAQAAAAAAIAAAACAAAAAAAAAAg=</HashCode>
+      <FileName>User\UserEntity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DeliveryService.Domain.OrderItemEntity">
+    <Position X="2.25" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAECAAAAAAAAAEAAAAAACAQAAAAAQAAAAAAAAAAAAAA=</HashCode>
+      <FileName>OrderItemEntity\OrderItemEntity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SectionEntity">
+    <Position X="11.5" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SectionEntity\SectionEntity.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Product" />
+    </ShowAsAssociation>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
