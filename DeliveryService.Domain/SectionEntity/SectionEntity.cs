@@ -3,7 +3,15 @@
     public Guid Id { get; set; }
     public string Name { get; set; }
 
-    public SectionEntity(Guid id, string name)
+	public DeliveryService.Domain.Product.ProductEntity Product
+	{
+		get => default;
+		set
+		{
+		}
+	}
+
+	public SectionEntity(Guid id, string name)
     {
         Id = id;
         Name = name;
