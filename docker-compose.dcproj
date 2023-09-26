@@ -3,7 +3,7 @@
   <PropertyGroup Label="Globals">
     <ProjectVersion>2.1</ProjectVersion>
     <DockerTargetOS>Linux</DockerTargetOS>
-    <ProjectGuid>13b28158-9d06-458a-a62d-b6019bc6ee3d</ProjectGuid>
+    <ProjectGuid>2fc6ad18-3beb-43f7-9fdd-3cf226455744</ProjectGuid>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
     <DockerServiceUrl>{Scheme}://localhost:{ServicePort}</DockerServiceUrl>
     <DockerServiceName>deliveryservice.api</DockerServiceName>
