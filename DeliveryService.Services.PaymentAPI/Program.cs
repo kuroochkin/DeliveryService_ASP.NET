@@ -1,6 +1,7 @@
 using AutoMapper;
 using DeliveryService.Services.PaymentAPI.DbContexts;
 using DeliveryService.Services.PaymentAPI.Mapping;
+using DeliveryService.Services.PaymentAPI.Messaging;
 using DeliveryService.Services.PaymentAPI.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
@@ -30,7 +31,7 @@ var optionBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
 optionBuilder.UseSqlServer(builder.Configuration.GetConnectionString("SqlServer"));
 services.AddSingleton<IPaymentRepository>(new PaymentRepository(optionBuilder.Options));
 
-//services.AddHostedService<RabbitMQCheckoutConsumer>();
+services.AddHostedService<RabbitMQCheckoutConsumer>();
 
 var app = builder.Build();
 

@@ -1,6 +1,6 @@
-﻿namespace DeliveryService.Services.PaymentAPI.Models;
+﻿namespace DeliveryService.Services.PaymentAPI.Messages;
 
-public class PaymentEntity
+public class PaymentDTO
 {
 	public string Id { get; set; }
 	public string OrderId { get; set; }
