@@ -23,6 +23,8 @@ public class OrderEntity
 	#endregion
 	public string Description { get; set; }
 
+	public bool PaymentStatus { get; set; }
+
 	public enum OrderStatus
 	{
 		Create,
