@@ -1,5 +1,6 @@
 ﻿using DeliveryService.App.Common.Errors;
 using DeliveryService.App.Common.Interfaces.Persistence;
+using DeliveryService.App.Common.RabbitMQSender;
 using DeliveryService.App.Order.Commands.CreateOrder;
 using DeliveryService.Domain;
 using DeliveryService.Domain.Order;
@@ -13,10 +14,14 @@ public class CreateOrderCommandHandler
     : IRequestHandler<CreateOrderCommand, ErrorOr<bool>>
 {
     private readonly IUnitOfWork _unitOfWork;
+    private readonly IRabbitMQOrderMessageSender _rabbitMessageSender; 
 
-    public CreateOrderCommandHandler(IUnitOfWork unitOfWork)
+    public CreateOrderCommandHandler(
+        IUnitOfWork unitOfWork, 
+        IRabbitMQOrderMessageSender rabbitMessageSender)
     {
         _unitOfWork = unitOfWork;
+        _rabbitMessageSender = rabbitMessageSender;
     }
 
     public async Task<ErrorOr<bool>> Handle(
