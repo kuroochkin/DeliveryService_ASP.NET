@@ -21,6 +21,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeliveryService.Contracts",
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{13B28158-9D06-458A-A62D-B6019BC6EE3D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{E6E51EE1-41B2-4693-BFCF-2ECDA6A48655}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeliveryService.Services.PaymentAPI", "DeliveryService.Services.PaymentAPI\DeliveryService.Services.PaymentAPI.csproj", "{3DCB53C9-29C0-44E4-8F47-6DAF530D2A03}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +55,10 @@ Global
 		{13B28158-9D06-458A-A62D-B6019BC6EE3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{13B28158-9D06-458A-A62D-B6019BC6EE3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{13B28158-9D06-458A-A62D-B6019BC6EE3D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3DCB53C9-29C0-44E4-8F47-6DAF530D2A03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DCB53C9-29C0-44E4-8F47-6DAF530D2A03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DCB53C9-29C0-44E4-8F47-6DAF530D2A03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DCB53C9-29C0-44E4-8F47-6DAF530D2A03}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -61,6 +69,7 @@ Global
 		{2ED1AD2D-0740-410E-895D-9842D10A221A} = {EDB841FB-9A89-4E15-8BF2-6CF7A63475AA}
 		{EB23172B-1FE1-4281-AC50-4F560A18F5D0} = {C4E7D0C8-C6E2-481A-8214-4D2CADC6F311}
 		{B02B938D-8CA0-4CD0-B31A-B3167D7B4605} = {7FCA4D67-5A3E-476F-B125-A2E1C2AE835D}
+		{3DCB53C9-29C0-44E4-8F47-6DAF530D2A03} = {E6E51EE1-41B2-4693-BFCF-2ECDA6A48655}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8C515027-DD6A-4FB2-A343-04CC8DDFD87E}
