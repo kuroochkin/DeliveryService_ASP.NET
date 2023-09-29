@@ -16,6 +16,7 @@ using DeliveryService.App.Order.Commands.EndOrderRestaurant;
 using DeliveryService.App.Order.Commands.ConfirmOrder;
 using DeliveryService.Contracts.Courier;
 using DeliveryService.App.Order.Queries.GetOrdersUser.Courier.GetOrdersByCourierByStatus;
+using DeliveryService.App.Order.Commands.CheckoutPayment;
 
 namespace DeliveryService.API.Controllers;
 
@@ -145,6 +146,22 @@ public class OrderController : ApiController
 		var customer = GetUserId();
 
 		var command = _mapper.Map<CreateOrderCommand>((request, customer));
+
+		var result = await _mediator.Send(command);
+
+		return result.Match(
+			orderResult => Ok(result.Value),
+			errors => Problem("Ошибка")
+			);
+	}
+
+	[HttpPost("checkout")]
+	[Authorize(Roles = "Customer")]
+	public async Task<IActionResult> CheckoutPayment(CheckoutPaymentRequest request)
+	{
+		var customer = GetUserId();
+
+		var command = _mapper.Map<CheckoutPaymentCommand>((request, customer));
 
 		var result = await _mediator.Send(command);
 
