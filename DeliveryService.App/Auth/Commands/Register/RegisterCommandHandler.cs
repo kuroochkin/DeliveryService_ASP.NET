@@ -2,6 +2,8 @@
 using DeliveryService.App.Common.Errors;
 using DeliveryService.App.Common.Interfaces.Auth;
 using DeliveryService.App.Common.Interfaces.Persistence;
+using DeliveryService.App.Common.Messages;
+using DeliveryService.App.Common.RabbitMQSender;
 using DeliveryService.Domain.Courier;
 using DeliveryService.Domain.Customer;
 using DeliveryService.Domain.Manager;
@@ -15,13 +17,16 @@ public class RegisterCommandHandler
     : IRequestHandler<RegisterCommand, ErrorOr<AuthenticationResult>>
 {
     private readonly IUnitOfWork _unitOfWork;
-    private readonly IJwtTokenGenerator _jwtTokenGenerator;
+	private readonly IRabbitMQOrderMessageSender _rabbitMessageSender;
+	private readonly IJwtTokenGenerator _jwtTokenGenerator;
     public RegisterCommandHandler(
        IUnitOfWork unitOfWork,
-       IJwtTokenGenerator jwtTokenGenerator)
+       IJwtTokenGenerator jwtTokenGenerator,
+	   IRabbitMQOrderMessageSender rabbitMessageSender)
     {
         _unitOfWork = unitOfWork;
         _jwtTokenGenerator = jwtTokenGenerator;
+        _rabbitMessageSender = rabbitMessageSender;
     }
     public async Task<ErrorOr<AuthenticationResult>> Handle
         (RegisterCommand request,
@@ -69,6 +74,13 @@ public class RegisterCommandHandler
 
         var token = _jwtTokenGenerator.GenerateToken(user);
 
-        return new AuthenticationResult(token, user.GetUserTypeToString());
+  //      var checkout = new TestDTO()
+  //      {
+  //          Name = "fkgjodf"
+  //      };
+
+		//_rabbitMessageSender.SendMessage(checkout, "checkoutqueue");
+
+		return new AuthenticationResult(token, user.GetUserTypeToString());
     }
 }

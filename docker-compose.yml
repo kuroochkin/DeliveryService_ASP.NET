@@ -8,15 +8,27 @@ services:
       dockerfile: DeliveryService_ASP.NET/Dockerfile
     ports:
       - 5000:80
+  deliveryservice.services.paymentapi:
+    image: ${DOCKER_REGISTRY-}deliveryserviceservicespaymentapi
+    build:
+      context: .
+      dockerfile: DeliveryService.Services.PaymentAPI/Dockerfile
+    ports:
+      - 5001:80
   rabbitmq:
     image: rabbitmq:3.8-management-alpine
-    hostname: onlineschool_rabbitmq
+    hostname: rabbitmq
     restart: always
     environment:
       - RABBITMQ_DEFAULT_USER=rmuser
       - RABBITMQ_DEFAULT_PASS=rmpassword
       - RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS=-rabbit log_levels [{connection,error},{default,error}] disk_free_limit 2147483648
+    volumes:
+      - ./rabbitmq:/var/lib/rabbitmq
     ports:
       - 15672:15672
       - 5672:5672
     
+
+
+

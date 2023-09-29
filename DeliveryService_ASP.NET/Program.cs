@@ -1,7 +1,7 @@
 using DeliveryService.API;
 using DeliveryService.App;
+using DeliveryService.App.Common.RabbitMQSender;
 using DeliveryService.infrastructure;
-using Microsoft.AspNetCore.Builder;
 
 var builder = WebApplication.CreateBuilder(args);
 {
@@ -21,6 +21,8 @@ var builder = WebApplication.CreateBuilder(args);
 			});
 		});
 }
+
+builder.Services.AddSingleton<IRabbitMQOrderMessageSender, RabbitMQOrderMessageSender>();
 
 var app = builder.Build();
 {

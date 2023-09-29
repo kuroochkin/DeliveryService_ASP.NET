@@ -52,7 +52,6 @@ public class RabbitMQCheckoutConsumer : BackgroundService
 	{
 		PaymentEntity payment = new()
 		{
-			Id = paymentDto.Id,
 			OrderId = paymentDto.OrderId,
 			UserId = paymentDto.UserId,
 			FirstName = paymentDto.FirstName,
