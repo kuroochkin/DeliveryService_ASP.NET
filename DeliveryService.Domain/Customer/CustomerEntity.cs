@@ -25,7 +25,7 @@ public class CustomerEntity
 		Id = id;
 		FirstName = firstName;
 		LastName = lastName;
-		BirthDay = DateTime.Now;
+		BirthDay = DateTime.UtcNow;
 		CountOrder = 0;
 	}
 

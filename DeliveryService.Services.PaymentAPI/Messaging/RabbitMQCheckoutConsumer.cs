@@ -19,7 +19,7 @@ public class RabbitMQCheckoutConsumer : BackgroundService
 		_paymentRepository = orderRepository;
 		var factory = new ConnectionFactory
 		{
-			HostName = "localhost",
+			HostName = "dockercompose10352310043466506766-rabbitmq-1",
 			UserName = "rmuser",
 			Password = "rmpassword"
 		};
@@ -52,6 +52,7 @@ public class RabbitMQCheckoutConsumer : BackgroundService
 	{
 		PaymentEntity payment = new()
 		{
+			Id = Guid.NewGuid(),
 			OrderId = paymentDto.OrderId,
 			UserId = paymentDto.UserId,
 			FirstName = paymentDto.FirstName,

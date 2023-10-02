@@ -20,7 +20,7 @@ services.AddSwaggerGen(c =>
 
 services.AddDbContext<ApplicationDbContext>(options =>
 {
-	options.UseSqlServer(builder.Configuration.GetConnectionString("SqlServer"));
+	options.UseNpgsql(builder.Configuration.GetConnectionString("NpgServer"));
 });
 
 IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
@@ -28,7 +28,7 @@ services.AddSingleton(mapper);
 services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 var optionBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
-optionBuilder.UseSqlServer(builder.Configuration.GetConnectionString("SqlServer"));
+optionBuilder.UseNpgsql(builder.Configuration.GetConnectionString("NpgServer"));
 services.AddSingleton<IPaymentRepository>(new PaymentRepository(optionBuilder.Options));
 
 services.AddHostedService<RabbitMQCheckoutConsumer>();

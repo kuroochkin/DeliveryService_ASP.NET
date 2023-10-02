@@ -68,6 +68,6 @@ public class OrderEntity
 	public OrderEntity()
 	{
 		Id = Guid.NewGuid();
-		Created = DateTime.Now;
+		Created = DateTime.UtcNow;
 	}
 }

@@ -13,7 +13,7 @@ public class RabbitMQOrderMessageSender : IRabbitMQOrderMessageSender
 
 	public RabbitMQOrderMessageSender()
 	{
-		_hostname = "localhost";
+		_hostname = "dockercompose10352310043466506766-rabbitmq-1";
 		_password = "rmpassword";
 		_username = "rmuser";
 	}
