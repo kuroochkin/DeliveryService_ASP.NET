@@ -4,8 +4,6 @@ services:
   postgres:
     image: postgres
     hostname: postgres
-    ports:
-      - "5433:5432"
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
