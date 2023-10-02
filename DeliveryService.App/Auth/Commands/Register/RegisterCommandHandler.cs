@@ -17,16 +17,13 @@ public class RegisterCommandHandler
     : IRequestHandler<RegisterCommand, ErrorOr<AuthenticationResult>>
 {
     private readonly IUnitOfWork _unitOfWork;
-	private readonly IRabbitMQOrderMessageSender _rabbitMessageSender;
 	private readonly IJwtTokenGenerator _jwtTokenGenerator;
     public RegisterCommandHandler(
        IUnitOfWork unitOfWork,
-       IJwtTokenGenerator jwtTokenGenerator,
-	   IRabbitMQOrderMessageSender rabbitMessageSender)
+       IJwtTokenGenerator jwtTokenGenerator)
     {
         _unitOfWork = unitOfWork;
         _jwtTokenGenerator = jwtTokenGenerator;
-        _rabbitMessageSender = rabbitMessageSender;
     }
     public async Task<ErrorOr<AuthenticationResult>> Handle
         (RegisterCommand request,
@@ -74,13 +71,6 @@ public class RegisterCommandHandler
 
         var token = _jwtTokenGenerator.GenerateToken(user);
 
-  //      var checkout = new TestDTO()
-  //      {
-  //          Name = "fkgjodf"
-  //      };
-
-		//_rabbitMessageSender.SendMessage(checkout, "checkoutqueue");
-
-		return new AuthenticationResult(token, user.GetUserTypeToString());
+        return new AuthenticationResult(token, user.GetUserTypeToString());
     }
 }
