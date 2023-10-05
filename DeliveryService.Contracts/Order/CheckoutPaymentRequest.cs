@@ -3,7 +3,7 @@
 public record CheckoutPaymentRequest(
 	 string OrderId,
 	 string CardNumber,
-	 string CVV,
+	 string Cvv,
 	 string ExpiryMonthYear,
 	 double OrderTotalSum,
 	 int CartTotalItems);

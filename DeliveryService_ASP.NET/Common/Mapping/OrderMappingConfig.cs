@@ -33,7 +33,7 @@ public class OrderMappingConfig : IRegister
 			.Map(dest => dest.CustomerId, src => src.customerId)
 			.Map(dest => dest.OrderId, src => src.request.OrderId)
 			.Map(dest => dest.CardNumber, src => src.request.CardNumber)
-			.Map(dest => dest.CVV, src => src.request.CVV)
+			.Map(dest => dest.Cvv, src => src.request.Cvv)
 			.Map(dest => dest.ExpiryMonthYear, src => src.request.ExpiryMonthYear)
 			.Map(dest => dest.OrderTotalSum, src => src.request.OrderTotalSum)
 			.Map(dest => dest.CartTotalItems, src => src.request.CartTotalItems);

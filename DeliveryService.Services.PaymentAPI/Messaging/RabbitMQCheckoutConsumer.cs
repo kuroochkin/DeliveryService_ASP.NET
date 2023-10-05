@@ -59,7 +59,7 @@ public class RabbitMQCheckoutConsumer : BackgroundService
 			LastName = paymentDto.LastName,
 			Email = paymentDto.Email,
 			CardNumber = paymentDto.CardNumber,
-			CVV = paymentDto.CVV,
+			CVV = paymentDto.Cvv,
 			ExpiryMonthYear = paymentDto.ExpiryMonthYear,
 			OrderTotalSum = paymentDto.OrderTotalSum,
 			CartTotalItems = paymentDto.CartTotalItems,

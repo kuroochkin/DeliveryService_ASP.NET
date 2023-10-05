@@ -7,7 +7,7 @@ public record CheckoutPaymentCommand(
 	 string OrderId,
 	 string CustomerId,
 	 string CardNumber,
-	 string CVV,
+	 string Cvv,
 	 string ExpiryMonthYear,
 	 double OrderTotalSum,
 	 int CartTotalItems) : IRequest<ErrorOr<bool>>;

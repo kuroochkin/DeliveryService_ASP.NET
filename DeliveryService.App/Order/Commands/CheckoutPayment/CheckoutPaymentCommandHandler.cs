@@ -50,7 +50,7 @@ public class CheckoutPaymentCommandHandler
 			LastName = user.LastName,
 			Email = user.Email,
 			CardNumber = request.CardNumber,
-			CVV = request.CVV,
+			Cvv = request.Cvv,
 			ExpiryMonthYear = request.ExpiryMonthYear,
 			OrderTotalSum = request.OrderTotalSum,
 			CartTotalItems = request.CartTotalItems,
