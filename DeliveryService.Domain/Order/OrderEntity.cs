@@ -1,7 +1,6 @@
 ﻿using DeliveryService.Domain.Courier;
 using DeliveryService.Domain.Customer;
 using DeliveryService.Domain.Manager;
-using DeliveryService.Domain.PaymentOrder;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DeliveryService.Domain.Order;
@@ -24,7 +23,7 @@ public class OrderEntity
 	#endregion
 	public string Description { get; set; }
 
-	public PaymentOrderEntity? Payment { get; set; }
+	public bool PaymentStatus { get; set; }
 
 	public enum OrderStatus
 	{
@@ -69,6 +68,6 @@ public class OrderEntity
 	public OrderEntity()
 	{
 		Id = Guid.NewGuid();
-		Created = DateTime.Now;
+		Created = DateTime.UtcNow;
 	}
 }

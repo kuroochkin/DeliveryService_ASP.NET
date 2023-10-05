@@ -29,7 +29,6 @@ public static class DependencyInjection
 		services.AddScoped<IManagerRepository, ManagerRepository>();
 		services.AddScoped<IRestaurantRepository, RestaurantRepository>();
 		services.AddScoped<IOrderRepository, OrderRepository>();
-		services.AddScoped<IPaymentOrderRepository, PaymentOrderRepository>();
 		services.AddScoped<IProductRepository, ProductRepository>();
 		services.AddScoped<IOrderItemRepository, OrderItemRepository>();
 		services.AddScoped<ISectionRepository, SectionRepository>();
@@ -42,7 +41,7 @@ public static class DependencyInjection
 
 		services.AddDbContext<ApplicationDbContext>(options =>
 		{
-			options.UseSqlServer(configuration.GetConnectionString("SqlServer"));
+			options.UseNpgsql(configuration.GetConnectionString("NpgServer"));
 		});
 
 		return services;

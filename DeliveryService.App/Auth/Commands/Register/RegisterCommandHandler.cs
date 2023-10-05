@@ -2,6 +2,8 @@
 using DeliveryService.App.Common.Errors;
 using DeliveryService.App.Common.Interfaces.Auth;
 using DeliveryService.App.Common.Interfaces.Persistence;
+using DeliveryService.App.Common.Messages;
+using DeliveryService.App.Common.RabbitMQSender;
 using DeliveryService.Domain.Courier;
 using DeliveryService.Domain.Customer;
 using DeliveryService.Domain.Manager;
@@ -15,7 +17,7 @@ public class RegisterCommandHandler
     : IRequestHandler<RegisterCommand, ErrorOr<AuthenticationResult>>
 {
     private readonly IUnitOfWork _unitOfWork;
-    private readonly IJwtTokenGenerator _jwtTokenGenerator;
+	private readonly IJwtTokenGenerator _jwtTokenGenerator;
     public RegisterCommandHandler(
        IUnitOfWork unitOfWork,
        IJwtTokenGenerator jwtTokenGenerator)
