@@ -2,6 +2,7 @@ using DeliveryService.API;
 using DeliveryService.App;
 using DeliveryService.App.Common.RabbitMQSender;
 using DeliveryService.infrastructure;
+using DeliveryService.Services.PaymentAPI.Messaging;
 
 var builder = WebApplication.CreateBuilder(args);
 {
@@ -23,6 +24,7 @@ var builder = WebApplication.CreateBuilder(args);
 }
 
 builder.Services.AddSingleton<IRabbitMQOrderMessageSender, RabbitMQOrderMessageSender>();
+builder.Services.AddHostedService<RabbitMQChangePaymentStatusConsumer>();
 
 var app = builder.Build();
 {

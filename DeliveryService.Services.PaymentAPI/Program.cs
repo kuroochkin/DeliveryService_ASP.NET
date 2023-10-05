@@ -1,4 +1,5 @@
 using AutoMapper;
+using DeliveryService.App.Common.RabbitMQSender;
 using DeliveryService.Services.PaymentAPI.DbContexts;
 using DeliveryService.Services.PaymentAPI.Mapping;
 using DeliveryService.Services.PaymentAPI.Messaging;
@@ -31,6 +32,7 @@ var optionBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
 optionBuilder.UseNpgsql(builder.Configuration.GetConnectionString("NpgServer"));
 services.AddSingleton<IPaymentRepository>(new PaymentRepository(optionBuilder.Options));
 
+services.AddSingleton<IRabbitMQOrderMessageSender, RabbitMQOrderMessageSender>();
 services.AddHostedService<RabbitMQCheckoutConsumer>();
 
 var app = builder.Build();

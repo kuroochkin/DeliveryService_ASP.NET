@@ -50,6 +50,6 @@ public class UnitOfWork : IUnitOfWork, IDisposable
 
 	public void Dispose()
 	{
-		_context.Dispose();
+		_context?.Dispose();
 	}
 }

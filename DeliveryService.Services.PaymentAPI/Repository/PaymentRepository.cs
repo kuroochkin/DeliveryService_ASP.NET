@@ -22,4 +22,12 @@ public class PaymentRepository : IPaymentRepository
 
 		return false;
 	}
+
+	public async Task<PaymentEntity> FindPaymentByOrderId(string orderId)
+	{
+		await using var _db = new ApplicationDbContext(_dbContext);
+		var payment = _db.Payments.FirstOrDefault(payment => payment.OrderId == orderId);
+		
+		return payment;
+	}
 }
