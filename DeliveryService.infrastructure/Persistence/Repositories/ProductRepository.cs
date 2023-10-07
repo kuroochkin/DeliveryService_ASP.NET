@@ -1,5 +1,4 @@
 ﻿using DeliveryService.App.Common.Interfaces.Persistence;
-using DeliveryService.Domain.Order;
 using DeliveryService.Domain.Product;
 using Microsoft.EntityFrameworkCore;
 

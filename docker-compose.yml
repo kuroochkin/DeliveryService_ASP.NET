@@ -33,6 +33,7 @@ services:
       dockerfile: DeliveryService_ASP.NET/Dockerfile
     ports:
       - 5000:80
+
   deliveryservice.services.paymentapi:
     image: ${DOCKER_REGISTRY-}deliveryserviceservicespaymentapi
     build:
