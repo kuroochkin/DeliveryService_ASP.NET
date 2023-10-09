@@ -6,6 +6,7 @@ using DeliveryService.Domain.Order;
 using DeliveryService.Domain.Product;
 using DeliveryService.Domain.Restaraunt;
 using DeliveryService.Domain.Role;
+using DeliveryService.Domain.Section;
 using DeliveryService.Domain.User;
 using DeliveryService.infrastructure.Persistence.EntityTypeConfiguration;
 using Microsoft.EntityFrameworkCore;
