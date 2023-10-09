@@ -1,14 +1,15 @@
-﻿using DeliveryService.App.Product.Queries.GetAllProducts;
-using DeliveryService.App.Section.Queries.GetAllSection;
+﻿using DeliveryService.App.Section.Queries.GetAllSection;
 using DeliveryService.Contracts.Section.Get;
 using MapsterMapper;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DeliveryService.API.Controllers;
 
+[Authorize]
 [Route("api/sections")]
-public class SectionController : Controller
+public class SectionController : ApiController
 {
 	private readonly ISender _mediator;
 	private readonly IMapper _mapper;

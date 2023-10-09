@@ -39,7 +39,7 @@ services:
       context: .
       dockerfile: DeliveryService.Services.PaymentAPI/Dockerfile
     ports:
-      - 5001:80
+      - 5002:80
 
   rabbitmq:
     image: rabbitmq:3.8-management-alpine
