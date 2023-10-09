@@ -1,8 +1,6 @@
 ﻿using DeliveryService.App.Common.Interfaces.Persistence;
-using DeliveryService.App.Product.Queries;
 using ErrorOr;
 using MediatR;
-using static DeliveryService.App.Common.Errors.Errors;
 
 namespace DeliveryService.App.Section.Queries.GetAllSection;
 
@@ -17,7 +15,7 @@ public class GetAllSectionQueryHandler
 	}
 
 	public async Task<ErrorOr<SectionsVm>> Handle(
-		GetAllSectionQuery request, 
+		GetAllSectionQuery request,
 		CancellationToken cancellationToken)
 	{
 		var sections = await _unitOfWork.Sections.GetAll();

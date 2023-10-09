@@ -1,5 +1,4 @@
-﻿using DeliveryService.App.Common.Errors;
-using DeliveryService.App.Common.Interfaces.Persistence;
+﻿using DeliveryService.App.Common.Interfaces.Persistence;
 using DeliveryService.App.Common.Messages;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
