@@ -12,6 +12,8 @@ public class ProductEntity
 
 	public string Thumbnail { get; set; }
 
+	public Guid RestaurantId { get; set; }
+
 	public SectionEntity? Section { get; set; }
 
 	public ProductEntity(int id, string name, double price, SectionEntity section)
