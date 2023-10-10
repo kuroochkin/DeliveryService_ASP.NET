@@ -1,5 +1,4 @@
-﻿
-using DeliveryService.Services.PaymentAPI.App.Payment.Commands.ChangePayment;
+﻿using DeliveryService.Services.PaymentAPI.App.Payment.Commands.ChangePayment;
 using DeliveryService.Services.PaymentAPI.Contracts.Payment.Requests;
 using MapsterMapper;
 using MediatR;
