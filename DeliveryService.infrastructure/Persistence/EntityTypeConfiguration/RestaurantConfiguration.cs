@@ -13,8 +13,5 @@ public class RestaurantConfiguration : IEntityTypeConfiguration<RestaurantEntity
 		builder.Property(restaraunt => restaraunt.Name);
 		builder.Property(restaraunt => restaraunt.Address);
 		builder.Property(restaraunt => restaraunt.Status);
-
-		builder.HasMany(item => item.Products);
-
 	}
 }

@@ -33,13 +33,23 @@ services:
       dockerfile: DeliveryService_ASP.NET/Dockerfile
     ports:
       - 5000:80
+
   deliveryservice.services.paymentapi:
     image: ${DOCKER_REGISTRY-}deliveryserviceservicespaymentapi
     build:
       context: .
       dockerfile: DeliveryService.Services.PaymentAPI/Dockerfile
     ports:
+      - 5001:80
+
+  deliveryservice.services.productapi:
+    image: ${DOCKER_REGISTRY-}deliveryserviceservicesproductapi
+    build:
+      context: .
+      dockerfile: DeliveryService.Services.ProductAPI/Dockerfile
+    ports:
       - 5002:80
+
 
   rabbitmq:
     image: rabbitmq:3.8-management-alpine
@@ -61,5 +71,6 @@ volumes:
 
 
   
+
 
 

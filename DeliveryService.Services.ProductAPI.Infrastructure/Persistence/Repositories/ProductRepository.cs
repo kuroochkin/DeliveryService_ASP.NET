@@ -13,6 +13,7 @@ public class ProductRepository : GenericRepository<ProductEntity>, IProductRepos
 	public async Task<ProductEntity?> FindProductById(int id)
 	{
 		return await _context.Products
+			.Include(product => product.Section)
 			.FirstOrDefaultAsync(product => product.Id == id);
 	}
 

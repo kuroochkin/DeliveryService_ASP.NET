@@ -49,13 +49,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{B38C7FE8-FD10-440A-89C2-2A679A3BC5B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeliveryService.Services.ProductAPI.App", "DeliveryService.Services.ProductAPI.App\DeliveryService.Services.ProductAPI.App.csproj", "{6D9BED6D-2333-46B2-83DA-B8093D790754}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeliveryService.Services.ProductAPI.App", "DeliveryService.Services.ProductAPI.App\DeliveryService.Services.ProductAPI.App.csproj", "{6D9BED6D-2333-46B2-83DA-B8093D790754}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeliveryService.Services.ProductAPI.Domain", "DeliveryService.Services.ProductAPI.Domain\DeliveryService.Services.ProductAPI.Domain.csproj", "{F999F801-42CD-4082-851D-1BF6A4A22476}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeliveryService.Services.ProductAPI.Domain", "DeliveryService.Services.ProductAPI.Domain\DeliveryService.Services.ProductAPI.Domain.csproj", "{F999F801-42CD-4082-851D-1BF6A4A22476}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeliveryService.Services.ProductAPI.Infrastructure", "DeliveryService.Services.ProductAPI.Infrastructure\DeliveryService.Services.ProductAPI.Infrastructure.csproj", "{EC56EA71-EA20-48F4-8323-C57E3ADBB965}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeliveryService.Services.ProductAPI.Infrastructure", "DeliveryService.Services.ProductAPI.Infrastructure\DeliveryService.Services.ProductAPI.Infrastructure.csproj", "{EC56EA71-EA20-48F4-8323-C57E3ADBB965}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeliveryService.Services.ProductAPI", "DeliveryService.Services.ProductAPI\DeliveryService.Services.ProductAPI.csproj", "{4C5C3918-C371-4A0E-8AE1-A35E20118323}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeliveryService.Services.ProductAPI", "DeliveryService.Services.ProductAPI\DeliveryService.Services.ProductAPI.csproj", "{4C5C3918-C371-4A0E-8AE1-A35E20118323}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeliveryService.Services.ProductAPI.Contracts", "DeliveryService.Services.ProductAPI.Contracts\DeliveryService.Services.ProductAPI.Contracts.csproj", "{4A26AC49-8738-4185-8901-2D987CA37179}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -123,6 +125,10 @@ Global
 		{4C5C3918-C371-4A0E-8AE1-A35E20118323}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4C5C3918-C371-4A0E-8AE1-A35E20118323}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4C5C3918-C371-4A0E-8AE1-A35E20118323}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A26AC49-8738-4185-8901-2D987CA37179}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A26AC49-8738-4185-8901-2D987CA37179}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A26AC49-8738-4185-8901-2D987CA37179}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A26AC49-8738-4185-8901-2D987CA37179}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -150,6 +156,7 @@ Global
 		{F999F801-42CD-4082-851D-1BF6A4A22476} = {CCA7A738-B519-4861-AFBF-2D1E2D5DF821}
 		{EC56EA71-EA20-48F4-8323-C57E3ADBB965} = {BA8BEC61-E7BC-4CD1-A5A0-81FE47D1C10B}
 		{4C5C3918-C371-4A0E-8AE1-A35E20118323} = {B38C7FE8-FD10-440A-89C2-2A679A3BC5B4}
+		{4A26AC49-8738-4185-8901-2D987CA37179} = {B38C7FE8-FD10-440A-89C2-2A679A3BC5B4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8C515027-DD6A-4FB2-A343-04CC8DDFD87E}
