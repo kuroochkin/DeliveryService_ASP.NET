@@ -23,7 +23,7 @@ var builder = WebApplication.CreateBuilder(args);
 		});
 }
 
-builder.Services.AddSingleton<IRabbitMQOrderMessageSender, RabbitMQOrderMessageSender>();
+builder.Services.AddSingleton<IRabbitMQMessageSender, RabbitMQMessageSender>();
 builder.Services.AddHostedService<RabbitMQChangePaymentStatusConsumer>();
 
 var app = builder.Build();

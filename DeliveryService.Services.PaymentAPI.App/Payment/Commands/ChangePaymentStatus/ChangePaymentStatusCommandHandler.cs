@@ -11,11 +11,11 @@ public class ChangePaymentStatusCommandHandler
 	: IRequestHandler<ChangePaymentStatusCommand, ErrorOr<bool>>
 {
 	private readonly IUnitOfWork _unitOfWork;
-	private readonly IRabbitMQOrderMessageSender _rabbitMessageSender;
+	private readonly IRabbitMQMessageSender _rabbitMessageSender;
 
 	public ChangePaymentStatusCommandHandler(
 		IUnitOfWork unitOfWork,
-		IRabbitMQOrderMessageSender rabbitMessageSender)
+		IRabbitMQMessageSender rabbitMessageSender)
 	{
 		_unitOfWork = unitOfWork;
 		_rabbitMessageSender = rabbitMessageSender;

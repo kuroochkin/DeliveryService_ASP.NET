@@ -4,14 +4,14 @@ using System.Text;
 
 namespace DeliveryService.App.Common.RabbitMQSender;
 
-public class RabbitMQOrderMessageSender : IRabbitMQOrderMessageSender
+public class RabbitMQMessageSender : IRabbitMQMessageSender
 {
 	private readonly string _hostname;
 	private readonly string _password;
 	private readonly string _username;
 	private IConnection _connection;
 
-	public RabbitMQOrderMessageSender()
+	public RabbitMQMessageSender()
 	{
 		_hostname = "dockercompose10352310043466506766-rabbitmq-1";
 		_password = "rmpassword";
