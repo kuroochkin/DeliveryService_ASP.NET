@@ -18,12 +18,12 @@ public class RegisterCommandHandler
 {
     private readonly IUnitOfWork _unitOfWork;
 	private readonly IJwtTokenGenerator _jwtTokenGenerator;
-    private readonly IRabbitMQMessageSender _rabbitMQSender;
+    private readonly IRabbitMQRegistrationMessageSender _rabbitMQSender;
 
     public RegisterCommandHandler(
        IUnitOfWork unitOfWork,
        IJwtTokenGenerator jwtTokenGenerator,
-       IRabbitMQMessageSender rabbitMQMessage)
+	   IRabbitMQRegistrationMessageSender rabbitMQMessage)
     {
         _unitOfWork = unitOfWork;
         _jwtTokenGenerator = jwtTokenGenerator;
@@ -77,12 +77,11 @@ public class RegisterCommandHandler
         var message = new EmailServiceDTO()
         {
             Email = request.Email,
-            Operation = "Registration",
             FirstName = request.FirstName,
             LastName = request.LastName,
         };
 
-        _rabbitMQSender.SendMessage(message, "email-registration-queue");
+        //_rabbitMQSender.SendMessage(message, "email-queue");
 
         var token = _jwtTokenGenerator.GenerateToken(user);
 

@@ -7,7 +7,6 @@ using DeliveryService.Services.PaymentAPI.App.Common.Interfaces.Persistence;
 using System.Text;
 using Newtonsoft.Json;
 using Microsoft.Extensions.DependencyInjection;
-using System;
 
 namespace DeliveryService.Services.PaymentAPI.App.Common.Messaging;
 

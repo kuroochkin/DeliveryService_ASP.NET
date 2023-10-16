@@ -50,6 +50,11 @@ services:
     ports:
       - 5002:80
 
+  # emailservice:
+  #   image: hiddenviki/emailservice2-app:latest-amd642-another-one
+  #   ports:
+  #     - 8080:80
+
 
   rabbitmq:
     image: rabbitmq:3.8-management-alpine
