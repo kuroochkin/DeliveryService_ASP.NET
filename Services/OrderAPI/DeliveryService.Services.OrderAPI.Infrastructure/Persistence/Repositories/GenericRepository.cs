@@ -1,4 +1,5 @@
 ﻿using DeliveryService.Services.OrderAPI.App.Common.Interfaces.Persistence;
+using Microsoft.EntityFrameworkCore;
 
 namespace DeliveryService.Services.OrderAPI.Infrastructure.Persistence.Repositories;
 

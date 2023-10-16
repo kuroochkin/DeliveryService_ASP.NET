@@ -59,7 +59,7 @@ public class OrderEntity
 
 	public Guid CustomerId { get; set; }
 
-	public Guid Manager { get; set; }
+	public Guid ManagerId { get; set; }
 
 	public List<OrderItemEntity> OrderItems { get; set; } = new();
 

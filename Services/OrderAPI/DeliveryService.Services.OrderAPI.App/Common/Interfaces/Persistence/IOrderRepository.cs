@@ -5,12 +5,6 @@ namespace DeliveryService.Services.OrderAPI.App.Common.Interfaces.Persistence;
 
 public interface IOrderRepository : IGenericRepository<OrderEntity>
 {
-	Task<OrderEntity?> FindOrderWithCustomer(Guid id);
-
-	Task<OrderEntity?> FindOrderWithCustomerAndManager(Guid id);
-
-	Task<OrderEntity?> FindOrderWithCustomerAndCourier(Guid id);
-
 	Task<OrderEntity?> FindOrderWithCustomerAndCourierAndManager(Guid id);
 
 	Task<List<OrderEntity>?> FindOrdersByCustomerId(Guid id);
