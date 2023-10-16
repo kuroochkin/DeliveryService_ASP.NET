@@ -11,6 +11,8 @@
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="12.0.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+    <PackageReference Include="Mapster" Version="7.4.0" />
+    <PackageReference Include="Mapster.DependencyInjection" Version="1.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.1">
       <PrivateAssets>all</PrivateAssets>
@@ -26,6 +28,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DeliveryService.App\DeliveryService.App.csproj" />
+    <ProjectReference Include="..\DeliveryService.Services.PaymentAPI.App\DeliveryService.Services.PaymentAPI.App.csproj" />
+    <ProjectReference Include="..\DeliveryService.Services.PaymentAPI.Contracts\DeliveryService.Services.PaymentAPI.Contracts.csproj" />
+    <ProjectReference Include="..\DeliveryService.Services.PaymentAPI.Domain\DeliveryService.Services.PaymentAPI.Domain.csproj" />
+    <ProjectReference Include="..\DeliveryService.Services.PaymentAPI.Infrastructure\DeliveryService.Services.PaymentAPI.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
+using DeliveryService.Domain.Section;
 
 namespace DeliveryService.infrastructure.Persistence.EntityTypeConfiguration;
 

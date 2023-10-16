@@ -18,13 +18,18 @@ public class RegisterCommandHandler
 {
     private readonly IUnitOfWork _unitOfWork;
 	private readonly IJwtTokenGenerator _jwtTokenGenerator;
+    private readonly IRabbitMQRegistrationMessageSender _rabbitMQSender;
+
     public RegisterCommandHandler(
        IUnitOfWork unitOfWork,
-       IJwtTokenGenerator jwtTokenGenerator)
+       IJwtTokenGenerator jwtTokenGenerator,
+	   IRabbitMQRegistrationMessageSender rabbitMQMessage)
     {
         _unitOfWork = unitOfWork;
         _jwtTokenGenerator = jwtTokenGenerator;
+        _rabbitMQSender = rabbitMQMessage;
     }
+
     public async Task<ErrorOr<AuthenticationResult>> Handle
         (RegisterCommand request,
         CancellationToken cancellationToken)
@@ -68,6 +73,15 @@ public class RegisterCommandHandler
             await _unitOfWork.Managers.Add(manager);
         }
         await _unitOfWork.CompleteAsync();
+
+        var message = new EmailServiceDTO()
+        {
+            Email = request.Email,
+            FirstName = request.FirstName,
+            LastName = request.LastName,
+        };
+
+        //_rabbitMQSender.SendMessage(message, "email-queue");
 
         var token = _jwtTokenGenerator.GenerateToken(user);
 

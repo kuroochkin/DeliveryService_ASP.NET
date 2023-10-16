@@ -1,5 +1,5 @@
 ﻿using DeliveryService.App.Common.Interfaces.Persistence;
-using DeliveryService.Domain.Courier;
+using DeliveryService.Domain.Section;
 
 namespace DeliveryService.infrastructure.Persistence.Repositories;
 

@@ -1,4 +1,6 @@
-﻿namespace DeliveryService.Domain.Product;
+﻿using DeliveryService.Domain.Section;
+
+namespace DeliveryService.Domain.Product;
 
 public class ProductEntity
 {

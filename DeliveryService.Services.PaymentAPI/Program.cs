@@ -1,48 +1,48 @@
-using AutoMapper;
+using DeliveryService.Services.PaymentAPI.Infrastructure;
+using DeliveryService.Services.PaymentAPI;
 using DeliveryService.App.Common.RabbitMQSender;
-using DeliveryService.Services.PaymentAPI.DbContexts;
-using DeliveryService.Services.PaymentAPI.Mapping;
-using DeliveryService.Services.PaymentAPI.Messaging;
-using DeliveryService.Services.PaymentAPI.Repository;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.OpenApi.Models;
+using DeliveryService.Services.PaymentAPI.App;
+using DeliveryService.Services.PaymentAPI.App.Common.Messaging;
 
 var builder = WebApplication.CreateBuilder(args);
-
-var services = builder.Services;
-
-services.AddControllers();
-services.AddEndpointsApiExplorer();
-
-services.AddSwaggerGen(c =>
 {
-	c.SwaggerDoc("v1", new OpenApiInfo { Title = "DeliveryService.Services.PaymentAPI", Version = "v1" });
-});
+	builder.Services
+		.AddApplication()
+		.AddInfrastructure(builder.Configuration)
+		.AddPresentation();
 
-services.AddDbContext<ApplicationDbContext>(options =>
-{
-	options.UseNpgsql(builder.Configuration.GetConnectionString("NpgServer"));
-});
-
-IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
-services.AddSingleton(mapper);
-services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-
-var optionBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
-optionBuilder.UseNpgsql(builder.Configuration.GetConnectionString("NpgServer"));
-services.AddSingleton<IPaymentRepository>(new PaymentRepository(optionBuilder.Options));
-
-services.AddSingleton<IRabbitMQOrderMessageSender, RabbitMQOrderMessageSender>();
-services.AddHostedService<RabbitMQCheckoutConsumer>();
-
-var app = builder.Build();
-
-if (app.Environment.IsDevelopment())
-{
-	app.UseSwagger();
-	app.UseSwaggerUI();
+	builder.Services
+		.AddCors(options =>
+		{
+			options.AddPolicy("AllowAllHeaders", builder =>
+			{
+				builder.AllowAnyOrigin()
+					   .AllowAnyHeader()
+					   .AllowAnyMethod();
+			});
+		});
 }
 
-app.MapControllers();
+builder.Services.AddSingleton<IRabbitMQMessageSender, RabbitMQMessageSender>();
+builder.Services.AddHostedService<RabbitMQCheckoutConsumer>();
 
-app.Run();
+var app = builder.Build();
+{
+	if (app.Environment.IsDevelopment())
+	{
+		app.UseSwagger();
+		app.UseSwaggerUI();
+	}
+
+
+	app.UseCors("AllowAllHeaders");
+
+	//app.UseHttpsRedirection();
+
+	//app.UseAuthentication();
+	//app.UseAuthorization();
+
+	app.MapControllers();
+
+	app.Run();
+}
