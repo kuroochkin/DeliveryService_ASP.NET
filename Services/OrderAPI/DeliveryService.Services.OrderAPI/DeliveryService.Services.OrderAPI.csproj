@@ -7,7 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Mapster" Version="7.4.0" />
+    <PackageReference Include="Mapster.DependencyInjection" Version="1.0.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DeliveryService.Services.OrderAPI.App\DeliveryService.Services.OrderAPI.App.csproj" />
+    <ProjectReference Include="..\DeliveryService.Services.OrderAPI.Infrastructure\DeliveryService.Services.OrderAPI.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
