@@ -21,3 +21,10 @@ services:
     ports:
       - "80"
 
+
+  deliveryservice.services.orderapi:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "80"
+

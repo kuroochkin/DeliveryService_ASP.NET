@@ -33,6 +33,8 @@ services:
       dockerfile: DeliveryService_ASP.NET/Dockerfile
     ports:
       - 5000:80
+    depends_on:
+      - rabbitmq
 
   deliveryservice.services.paymentapi:
     image: ${DOCKER_REGISTRY-}deliveryserviceservicespaymentapi
@@ -41,6 +43,8 @@ services:
       dockerfile: DeliveryService.Services.PaymentAPI/Dockerfile
     ports:
       - 5001:80
+    depends_on:
+      - rabbitmq  
 
   deliveryservice.services.productapi:
     image: ${DOCKER_REGISTRY-}deliveryserviceservicesproductapi
@@ -49,20 +53,27 @@ services:
       dockerfile: DeliveryService.Services.ProductAPI/Dockerfile
     ports:
       - 5002:80
+    depends_on:
+      - rabbitmq
 
-  # emailservice:
-  #   image: hiddenviki/emailservice2-app:latest-amd642-another-one
-  #   ports:
-  #     - 8080:80
+  deliveryservice.services.orderapi:
+    image: ${DOCKER_REGISTRY-}deliveryserviceservicesorderapi
+    build:
+      context: .
+      dockerfile: Services/OrderAPI/DeliveryService.Services.OrderAPI/Dockerfile
+    ports:
+      - 5003:80
+    depends_on:
+      - rabbitmq
 
 
   rabbitmq:
     image: rabbitmq:3.8-management-alpine
-    hostname: rabbitmq
     restart: always
     environment:
       - RABBITMQ_DEFAULT_USER=rmuser
       - RABBITMQ_DEFAULT_PASS=rmpassword
+      - SPRING_RABBITMQ_SSL_ENABLED=true
       - RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS=-rabbit log_levels [{connection,error},{default,error}] disk_free_limit 2147483648
     volumes:
       - ./rabbitmq:/var/lib/rabbitmq
@@ -76,6 +87,7 @@ volumes:
 
 
   
+
 
 
 

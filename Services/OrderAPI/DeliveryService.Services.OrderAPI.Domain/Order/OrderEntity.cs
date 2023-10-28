@@ -55,11 +55,11 @@ public class OrderEntity
 		return "";
 	}
 
-	public Guid CourierId { get; set; }
+	public Guid? CourierId { get; set; }
 
 	public Guid CustomerId { get; set; }
 
-	public Guid ManagerId { get; set; }
+	public Guid? ManagerId { get; set; }
 
 	public List<OrderItemEntity> OrderItems { get; set; } = new();
 
