@@ -24,10 +24,17 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:DeliveryService.API.Controllers.CustomerController.FindCustomer(System.String)">
+        <member name="M:DeliveryService.API.Controllers.CustomerController.GetDetailsCustomer">
             <summary>
             Получение информации о конкретном заказчике
             </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DeliveryService.API.Controllers.CustomerController.EditProfile(DeliveryService.Contracts.Customer.EditCustomerProfileRequest)">
+            <summary>
+            Редактирование профиля заказчика
+            </summary>
+            <param name="request"></param>
             <returns></returns>
         </member>
         <member name="M:DeliveryService.API.Controllers.ManagerController.AddRestaurant(DeliveryService.Contracts.Manager.JoinRestaurantRequest)">

@@ -1,4 +1,6 @@
-﻿namespace DeliveryService.Contracts.Order;
+﻿using DeliveryService.Domain.Product;
+
+namespace DeliveryService.Contracts.Order;
 
 public record CreateOrderRequest(
 	string Description,

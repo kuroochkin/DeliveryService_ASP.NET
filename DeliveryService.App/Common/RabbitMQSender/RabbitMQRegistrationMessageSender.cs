@@ -26,13 +26,13 @@ public class RabbitMQRegistrationMessageSender : IRabbitMQRegistrationMessageSen
 			channel.QueueDeclare(queue: queueName, false, false, false, arguments: null);
 			var json = JsonConvert.SerializeObject(message);
 			var body = Encoding.UTF8.GetBytes(json);
-			//var headers = new Dictionary<string, object>
-			//{
-			//	{"Operation", "Registration"},
-   //         };
-			//var properties = channel.CreateBasicProperties();
-			//properties.Headers = headers;
-			channel.BasicPublish(exchange: "", routingKey: queueName, basicProperties: null, body: body);
+			var headers = new Dictionary<string, object>
+			{
+				{"Operation", "Registration"},
+            };
+			var properties = channel.CreateBasicProperties();
+			properties.Headers = headers;
+			channel.BasicPublish(exchange: "", routingKey: queueName, basicProperties: properties, body: body);
 		}
 	}
 

@@ -81,7 +81,7 @@ public class RegisterCommandHandler
             LastName = request.LastName,
         };
 
-        _rabbitMQSender.SendMessage(message, "email-queue");
+        //_rabbitMQSender.SendMessage(message, "email-queue");
 
         var token = _jwtTokenGenerator.GenerateToken(user);
 

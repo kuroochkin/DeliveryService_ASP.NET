@@ -15,7 +15,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\DeliveryService.Services.ProductAPI.App\DeliveryService.Services.ProductAPI.App.csproj" />
-    <ProjectReference Include="..\DeliveryService.Services.OrderAPI.Contracts\DeliveryService.Services.OrderAPI.Contracts.csproj" />
     <ProjectReference Include="..\DeliveryService.Services.OrderAPI.Domain\DeliveryService.Services.OrderAPI.Domain.csproj" />
   </ItemGroup>
 
