@@ -23,7 +23,7 @@ public static class DependencyInjection
 		services.AddScoped<ISectionRepository, SectionRepository>();
 		services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-		//services.AddAuth(configuration);
+		services.AddAuth(configuration);
 
 		services.AddDbContext<ApplicationDbContext>(options =>
 		{
@@ -42,19 +42,32 @@ public static class DependencyInjection
 
 		services.AddSingleton<IJwtTokenGenerator, JwtTokenGenerator>();
 
-		services.AddAuthentication(defaultScheme: JwtBearerDefaults.AuthenticationScheme)
-			.AddJwtBearer(options => options.TokenValidationParameters = new TokenValidationParameters
+		//services.AddAuthentication(defaultScheme: JwtBearerDefaults.AuthenticationScheme)
+		//	.AddJwtBearer(options => options.TokenValidationParameters = new TokenValidationParameters
+		//	{
+		//		ValidateIssuer = true,
+		//		ValidateAudience = true,
+		//		ValidateLifetime = true,
+		//		ValidateIssuerSigningKey = true,
+		//		ValidIssuer = jwtSettings.Issuer,
+		//		ValidAudience = jwtSettings.Audience,
+		//		IssuerSigningKey = new SymmetricSecurityKey(
+		//			Encoding.UTF8.GetBytes(jwtSettings.Secret))
+		//	});
+
+        services.AddAuthentication(config =>
+        {
+            config.DefaultAuthenticateScheme =
+                JwtBearerDefaults.AuthenticationScheme;
+            config.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        })
+		.AddJwtBearer("Bearer", options =>
 			{
-				ValidateIssuer = true,
-				ValidateAudience = true,
-				ValidateLifetime = true,
-				ValidateIssuerSigningKey = true,
-				ValidIssuer = jwtSettings.Issuer,
-				ValidAudience = jwtSettings.Audience,
-				IssuerSigningKey = new SymmetricSecurityKey(
-					Encoding.UTF8.GetBytes(jwtSettings.Secret))
+				options.Authority = "http://localhost:5007";
+				options.Audience = "ProductAPI";
+				options.RequireHttpsMetadata = false;
 			});
 
-		return services;
+        return services;
 	}
 }

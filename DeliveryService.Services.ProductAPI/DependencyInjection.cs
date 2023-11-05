@@ -10,6 +10,7 @@ public static class DependencyInjection
 	{
 		services.AddControllers();
 		services.AddEndpointsApiExplorer();
+
         services.AddSwaggerGen(c =>
         {
             c.SwaggerDoc("v1", new OpenApiInfo { Title = "TestWebAPI", Version = "v1" });
@@ -40,19 +41,6 @@ public static class DependencyInjection
 
                 });
         });
-
-        services.AddAuthentication(config =>
-        {
-            config.DefaultAuthenticateScheme =
-                JwtBearerDefaults.AuthenticationScheme;
-            config.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-        })
-		.AddJwtBearer("Bearer", options =>
-		{
-			options.Authority = "https://localhost:5007/";
-			options.Audience = "ProductAPI";
-			options.RequireHttpsMetadata = false;
-		});
 
         services.AddMappings();
 		return services;
