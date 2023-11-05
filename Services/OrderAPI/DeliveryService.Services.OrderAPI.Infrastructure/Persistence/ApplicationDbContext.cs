@@ -1,4 +1,5 @@
-﻿using DeliveryService.Services.OrderAPI.Domain.Order;
+﻿using DeliveryService.Services.OrderAPI.Domain.Customer;
+using DeliveryService.Services.OrderAPI.Domain.Order;
 using DeliveryService.Services.OrderAPI.Domain.OrderItem;
 using DeliveryService.Services.OrderAPI.Infrastructure.Persistence.EntityTypeConfiguration;
 using Microsoft.EntityFrameworkCore;
@@ -7,6 +8,7 @@ namespace DeliveryService.Services.OrderAPI.Infrastructure.Persistence;
 
 public class ApplicationDbContext : DbContext
 { 
+	public DbSet<CustomerEntity> Customers { get; set; }
 	public DbSet<OrderEntity> Orders { get; set; }
 	public DbSet<OrderItemEntity> OrderItems { get; set; }
 
@@ -16,6 +18,7 @@ public class ApplicationDbContext : DbContext
 
 	protected override void OnModelCreating(ModelBuilder builder)
 	{
+		builder.ApplyConfiguration(new CustomerConfiguration());
 		builder.ApplyConfiguration(new OrderConfiguration());
 		builder.ApplyConfiguration(new OrderItemConfiguration());
 
