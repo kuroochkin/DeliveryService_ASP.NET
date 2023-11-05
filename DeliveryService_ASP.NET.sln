@@ -67,15 +67,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{9CE77916-27AF-4155-9F6F-A385343EBB70}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeliveryService.Services.OrderAPI.App", "Services\OrderAPI\DeliveryService.Services.OrderAPI.App\DeliveryService.Services.OrderAPI.App.csproj", "{4F1884ED-9EBD-410B-94E9-25846FC5C066}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeliveryService.Services.OrderAPI.App", "Services\OrderAPI\DeliveryService.Services.OrderAPI.App\DeliveryService.Services.OrderAPI.App.csproj", "{4F1884ED-9EBD-410B-94E9-25846FC5C066}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeliveryService.Services.OrderAPI.Domain", "Services\OrderAPI\DeliveryService.Services.OrderAPI.Domain\DeliveryService.Services.OrderAPI.Domain.csproj", "{A08B308C-8DC9-4F68-ADB7-EC4B2297E526}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeliveryService.Services.OrderAPI.Domain", "Services\OrderAPI\DeliveryService.Services.OrderAPI.Domain\DeliveryService.Services.OrderAPI.Domain.csproj", "{A08B308C-8DC9-4F68-ADB7-EC4B2297E526}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeliveryService.Services.OrderAPI.Infrastructure", "Services\OrderAPI\DeliveryService.Services.OrderAPI.Infrastructure\DeliveryService.Services.OrderAPI.Infrastructure.csproj", "{6941245E-8036-4706-98D1-8871C07D9FE5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeliveryService.Services.OrderAPI.Infrastructure", "Services\OrderAPI\DeliveryService.Services.OrderAPI.Infrastructure\DeliveryService.Services.OrderAPI.Infrastructure.csproj", "{6941245E-8036-4706-98D1-8871C07D9FE5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeliveryService.Services.OrderAPI", "Services\OrderAPI\DeliveryService.Services.OrderAPI\DeliveryService.Services.OrderAPI.csproj", "{8D56EC3B-6DD2-4E3D-979D-74ACAB9EF347}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeliveryService.Services.OrderAPI", "Services\OrderAPI\DeliveryService.Services.OrderAPI\DeliveryService.Services.OrderAPI.csproj", "{8D56EC3B-6DD2-4E3D-979D-74ACAB9EF347}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeliveryService.Services.OrderAPI.Contracts", "Services\OrderAPI\DeliveryService.Services.OrderAPI.Contracts\DeliveryService.Services.OrderAPI.Contracts.csproj", "{D3842394-ED10-4EB4-802C-2D4AFB950FA5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeliveryService.Services.OrderAPI.Contracts", "Services\OrderAPI\DeliveryService.Services.OrderAPI.Contracts\DeliveryService.Services.OrderAPI.Contracts.csproj", "{D3842394-ED10-4EB4-802C-2D4AFB950FA5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IdentityServer", "IdentityServer", "{82AA7637-48AC-4AFA-BD11-D287B6EBBBCD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeliveryService.IdentityServer", "IdentityServer\DeliveryService.IdentityServer\DeliveryService.IdentityServer.csproj", "{61311019-7982-4140-9C08-69160E21E10F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -167,6 +171,10 @@ Global
 		{D3842394-ED10-4EB4-802C-2D4AFB950FA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D3842394-ED10-4EB4-802C-2D4AFB950FA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D3842394-ED10-4EB4-802C-2D4AFB950FA5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61311019-7982-4140-9C08-69160E21E10F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61311019-7982-4140-9C08-69160E21E10F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61311019-7982-4140-9C08-69160E21E10F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61311019-7982-4140-9C08-69160E21E10F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -204,6 +212,7 @@ Global
 		{6941245E-8036-4706-98D1-8871C07D9FE5} = {1914547E-0E96-4377-B0E2-CC5D0F99B0B9}
 		{8D56EC3B-6DD2-4E3D-979D-74ACAB9EF347} = {9CE77916-27AF-4155-9F6F-A385343EBB70}
 		{D3842394-ED10-4EB4-802C-2D4AFB950FA5} = {9CE77916-27AF-4155-9F6F-A385343EBB70}
+		{61311019-7982-4140-9C08-69160E21E10F} = {82AA7637-48AC-4AFA-BD11-D287B6EBBBCD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8C515027-DD6A-4FB2-A343-04CC8DDFD87E}
