@@ -24,13 +24,12 @@ namespace DeliveryService.IdentityServer
                 new ApiScope("scope2"),
             };
 
-
         public static IEnumerable<ApiResource> ApiResources =>
-            new List<ApiResource>
+            new ApiResource[]
             {
-                new ApiResource("ProductAPI", "Web API", new [] {JwtClaimTypes.Name})
+                new ApiResource("ProductAPI", "Web API")
                 {
-                    Scopes = { "scope1" }
+                    Scopes = { "scope1"}
                 }
             };
 
@@ -43,7 +42,8 @@ namespace DeliveryService.IdentityServer
                     ClientId = "m2m.client",
                     ClientName = "Client Credentials Client",
 
-                    AllowedGrantTypes = GrantTypes.ClientCredentials,
+                    AllowedGrantTypes = GrantTypes.ResourceOwnerPasswordAndClientCredentials,
+
                     ClientSecrets = { new Secret("511536EF-F270-4058-80CA-1C89C192F69A".Sha256()) },
 
                     AllowedScopes = { "scope1" }
