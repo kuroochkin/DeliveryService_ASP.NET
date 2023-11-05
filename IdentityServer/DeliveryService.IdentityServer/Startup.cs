@@ -5,6 +5,7 @@
 using DeliveryService.IdentityServer.Data;
 using DeliveryService.IdentityServer.Models;
 using IdentityServer4;
+using IdentityServer4.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -37,6 +38,8 @@ namespace DeliveryService.IdentityServer
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
+            //services.AddTransient<IProfileService, ProfileService>();
+
             var builder = services.AddIdentityServer(options =>
             {
                 options.Events.RaiseErrorEvents = true;
@@ -52,6 +55,7 @@ namespace DeliveryService.IdentityServer
                 .AddInMemoryApiScopes(Config.ApiScopes)
                 .AddInMemoryClients(Config.Clients)
                 .AddAspNetIdentity<ApplicationUser>()
+                .AddProfileService<CustomProfileService>()
                 .AddJwtBearerClientAuthentication();
 
             // not recommended for production - you need to store your key material somewhere secure

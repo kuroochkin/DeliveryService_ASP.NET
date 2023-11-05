@@ -5,6 +5,7 @@
 using IdentityModel;
 using IdentityServer4.Models;
 using System.Collections.Generic;
+using System.Security.Claims;
 
 namespace DeliveryService.IdentityServer
 {
@@ -15,6 +16,7 @@ namespace DeliveryService.IdentityServer
                    {
                 new IdentityResources.OpenId(),
                 new IdentityResources.Profile(),
+                new IdentityResource("roles", new[] { "role" })
                    };
 
         public static IEnumerable<ApiScope> ApiScopes =>
@@ -29,7 +31,8 @@ namespace DeliveryService.IdentityServer
             {
                 new ApiResource("ProductAPI", "Web API")
                 {
-                    Scopes = { "scope1"}
+                    Scopes = { "scope1"},
+                    UserClaims = { JwtClaimTypes.Role }
                 }
             };
 
@@ -46,7 +49,7 @@ namespace DeliveryService.IdentityServer
 
                     ClientSecrets = { new Secret("511536EF-F270-4058-80CA-1C89C192F69A".Sha256()) },
 
-                    AllowedScopes = { "scope1" }
+                    AllowedScopes = { "openid", "profile", "scope1", "roles" }
                 },
 
                 // interactive client using code flow + pkce
