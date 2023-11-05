@@ -4,12 +4,14 @@ using DeliveryService.Services.ProductAPI.App.Product.Queries.GetProductsDetails
 using DeliveryService.Services.ProductAPI.Contracts.Product.Get;
 using MapsterMapper;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DeliveryService.Services.ProductAPI.Controllers;
 
 [ApiController]
 [Route("api/product")]
+[Authorize]
 public class ProductController : Controller
 {
 	private readonly ISender _mediator;

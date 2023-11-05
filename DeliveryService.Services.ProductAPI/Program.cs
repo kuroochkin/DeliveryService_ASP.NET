@@ -1,6 +1,7 @@
 using DeliveryService.Services.ProductAPI.App;
 using DeliveryService.Services.ProductAPI.Infrastructure;
 using DeliveryService.Services.ProductAPI;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 var builder = WebApplication.CreateBuilder(args);
 {
@@ -35,10 +36,10 @@ var app = builder.Build();
 
 	app.UseCors("AllowAllHeaders");
 
-	//app.UseHttpsRedirection();
+	app.UseHttpsRedirection();
 
-	//app.UseAuthentication();
-	//app.UseAuthorization();
+	app.UseAuthentication();
+	app.UseAuthorization();
 
 	app.MapControllers();
 

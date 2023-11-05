@@ -2,6 +2,7 @@
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
 
+using IdentityModel;
 using IdentityServer4.Models;
 using System.Collections.Generic;
 
@@ -21,6 +22,16 @@ namespace DeliveryService.IdentityServer
             {
                 new ApiScope("scope1"),
                 new ApiScope("scope2"),
+            };
+
+
+        public static IEnumerable<ApiResource> ApiResources =>
+            new List<ApiResource>
+            {
+                new ApiResource("ProductAPI", "Web API", new [] {JwtClaimTypes.Name})
+                {
+                    Scopes = { "scope1" }
+                }
             };
 
         public static IEnumerable<Client> Clients =>
