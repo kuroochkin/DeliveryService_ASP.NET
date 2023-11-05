@@ -12,6 +12,5 @@ public class ManagerConfiguration : IEntityTypeConfiguration<ManagerEntity>
 		builder.Property(manager => manager.LastName);
 		builder.Property(manager => manager.FirstName);
 		builder.Property(manager => manager.CountOrder);
-		builder.Property(manager => manager.Restaurant);
 	}
 }

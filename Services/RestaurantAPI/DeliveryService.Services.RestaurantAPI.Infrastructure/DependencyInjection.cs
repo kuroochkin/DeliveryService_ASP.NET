@@ -1,17 +1,17 @@
 ﻿using DeliveryService.App.Common.Interfaces.Auth;
 using DeliveryService.infrastructure.Auth;
-using DeliveryService.Services.OrderAPI.App.Common.Interfaces.Persistence;
-using DeliveryService.Services.OrderAPI.Infrastructure.Persistence;
-using DeliveryService.Services.OrderAPI.Infrastructure.Persistence.Repositories;
+using DeliveryService.Services.RestaurantAPI.App.Common.Interfaces;
+using DeliveryService.Services.RestaurantAPI.Infrastructure.Persistence.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using DeliveryService.Services.RestaurantAPI.Infrastructure.Persistence;
 using System.Text;
+using Microsoft.Extensions.Configuration;
 
-namespace DeliveryService.Services.OrderAPI.Infrastructure;
+namespace DeliveryService.Services.RestaurantAPI.Infrastructure;
 
 public static class DependencyInjection
 {
@@ -19,14 +19,13 @@ public static class DependencyInjection
 		this IServiceCollection services,
 		ConfigurationManager configuration)
 	{
-		services.AddScoped<ICustomerRepository, CustomerRepository>();
-		services.AddScoped<IOrderRepository, OrderRepository>();
-		services.AddScoped<IOrderItemRepository, OrderItemRepository>();
+		services.AddScoped<IRestaurantRepository, RestaurantRepository>();
+		services.AddScoped<IManagerRepository, ManagerRepository>();
 		services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-		//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		//!!!!!!!!!!!!!!!!!!!!!!!!!
 		//services.AddAuth(configuration);
-		//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		//!!!!!!!!!!!!!!!!!!!!!!!!!
 
 		services.AddDbContext<ApplicationDbContext>(options =>
 		{

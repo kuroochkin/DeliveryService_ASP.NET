@@ -50,6 +50,23 @@ services:
     ports:
       - 5002:80
 
+  deliveryservice.services.restaurantapi:
+    image: ${DOCKER_REGISTRY-}deliveryserviceservicesrestaurantapi
+    build:
+      context: .
+      dockerfile: Services/RestaurantAPI/DeliveryService.Services.RestaurantAPI/Dockerfile
+    ports:
+      - 5003:80
+
+  deliveryservice.services.orderapi:
+    image: ${DOCKER_REGISTRY-}deliveryserviceservicesorderapi
+    build:
+      context: .
+      dockerfile: Services/OrderAPI/DeliveryService.Services.OrderAPI/Dockerfile
+    ports:
+      - 5004:80
+
+
   # emailservice:
   #   image: hiddenviki/emailservice2-app:latest-amd642-another-one
   #   ports:
@@ -76,6 +93,8 @@ volumes:
 
 
   
+
+
 
 
 
