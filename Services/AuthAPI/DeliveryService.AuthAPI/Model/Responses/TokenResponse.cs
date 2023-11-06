@@ -1,8 +1,6 @@
-﻿using Newtonsoft.Json;
-
-namespace DeliveryService.AuthAPI.Model
+﻿namespace DeliveryService.AuthAPI.Model.Responses
 {
-    public class AuthResponse
+    public class TokenResponse
     {
         public string AccessToken { get; set; }
 

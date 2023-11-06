@@ -1,4 +1,4 @@
-﻿namespace DeliveryService.AuthAPI.Model
+﻿namespace DeliveryService.AuthAPI.Model.Requests
 {
     public class LoginRequest
     {
