@@ -75,7 +75,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeliveryService.Services.Or
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeliveryService.Services.OrderAPI", "Services\OrderAPI\DeliveryService.Services.OrderAPI\DeliveryService.Services.OrderAPI.csproj", "{8D56EC3B-6DD2-4E3D-979D-74ACAB9EF347}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeliveryService.Services.OrderAPI.Contracts", "Services\OrderAPI\DeliveryService.Services.OrderAPI.Contracts\DeliveryService.Services.OrderAPI.Contracts.csproj", "{D3842394-ED10-4EB4-802C-2D4AFB950FA5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeliveryService.Services.OrderAPI.Contracts", "Services\OrderAPI\DeliveryService.Services.OrderAPI.Contracts\DeliveryService.Services.OrderAPI.Contracts.csproj", "{D3842394-ED10-4EB4-802C-2D4AFB950FA5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RestaurantAPI", "RestaurantAPI", "{E493A820-9DEC-4926-85AE-07282B4D5D65}"
 EndProject
@@ -111,7 +111,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentatio
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeliveryService.Services.CourierAPI.Contracts", "Services\CourierAPI\DeliveryService.Services.CourierAPI.Contracts\DeliveryService.Services.CourierAPI.Contracts.csproj", "{3073BE4B-41E7-4E87-9289-5C014F064248}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeliveryService.Services.CourierAPI", "Services\CourierAPI\DeliveryService.Services.CourierAPI\DeliveryService.Services.CourierAPI.csproj", "{0615BB07-258F-444C-916D-CAED870A014C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeliveryService.Services.CourierAPI", "Services\CourierAPI\DeliveryService.Services.CourierAPI\DeliveryService.Services.CourierAPI.csproj", "{0615BB07-258F-444C-916D-CAED870A014C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AuthAPI", "AuthAPI", "{D602E2F2-3A5A-483C-A55E-6F65E5597EAC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeliveryService.AuthAPI", "Services\AuthAPI\DeliveryService.AuthAPI\DeliveryService.AuthAPI.csproj", "{65BFA16E-4839-4F88-988B-D922EB90AE6C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -243,6 +247,10 @@ Global
 		{0615BB07-258F-444C-916D-CAED870A014C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0615BB07-258F-444C-916D-CAED870A014C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0615BB07-258F-444C-916D-CAED870A014C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65BFA16E-4839-4F88-988B-D922EB90AE6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65BFA16E-4839-4F88-988B-D922EB90AE6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65BFA16E-4839-4F88-988B-D922EB90AE6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65BFA16E-4839-4F88-988B-D922EB90AE6C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -298,6 +306,8 @@ Global
 		{91CB81BB-753A-492E-A07F-A89284D5F090} = {732FEDD8-E2FE-4643-AA87-5C8D0C3A134A}
 		{3073BE4B-41E7-4E87-9289-5C014F064248} = {91CB81BB-753A-492E-A07F-A89284D5F090}
 		{0615BB07-258F-444C-916D-CAED870A014C} = {91CB81BB-753A-492E-A07F-A89284D5F090}
+		{D602E2F2-3A5A-483C-A55E-6F65E5597EAC} = {E6E51EE1-41B2-4693-BFCF-2ECDA6A48655}
+		{65BFA16E-4839-4F88-988B-D922EB90AE6C} = {D602E2F2-3A5A-483C-A55E-6F65E5597EAC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8C515027-DD6A-4FB2-A343-04CC8DDFD87E}
