@@ -32,6 +32,7 @@ services.AddAutoMapper(typeof(Program));
 
 services.AddScoped<AuthService>();
 services.AddScoped<IdentityServerService>();
+services.AddScoped<JwtService>();
 
 var app = builder.Build();
 

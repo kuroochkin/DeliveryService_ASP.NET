@@ -1,7 +1,10 @@
 ﻿using DeliveryService.AuthAPI.Constants;
 using DeliveryService.AuthAPI.Model;
 using DeliveryService.AuthAPI.Model.Requests;
+using DeliveryService.AuthAPI.Model.Responses;
+using IdentityModel.Client;
 using Microsoft.AspNetCore.Identity;
+using System.Data;
 
 namespace DeliveryService.AuthAPI.Services
 {
@@ -14,17 +17,20 @@ namespace DeliveryService.AuthAPI.Services
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IdentityServerService _identityServerService;
+        private readonly JwtService _jwtService;
 
         public AuthService(
             UserManager<ApplicationUser> userManager, 
             RoleManager<IdentityRole> roleManager,
             SignInManager<ApplicationUser> signInManager,
-            IdentityServerService identityServerService)
+            IdentityServerService identityServerService,
+            JwtService jwtService)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _signInManager = signInManager;
             _identityServerService = identityServerService;
+            _jwtService = jwtService;
         }
 
         public async Task<ResultService> Login(LoginRequest request)
@@ -51,8 +57,12 @@ namespace DeliveryService.AuthAPI.Services
                 };
             }
 
-            var token = await _identityServerService
-                .GetToken(new LoginRequest { Password = request.Password, Username = request.Username });
+            //var token = await _identityServerService
+            //    .GetToken(new LoginRequest { Password = request.Password, Username = request.Username });
+
+            var roles = await _userManager.GetRolesAsync(user);
+
+            var token = _jwtService.CreateToken(user, roles.FirstOrDefault());
 
             return new ResultService
             {
@@ -88,9 +98,20 @@ namespace DeliveryService.AuthAPI.Services
                 // Добавление пользователя в роль
                 await _userManager.AddToRoleAsync(newUser, RoleConstants.CUSTOMER);
             }
+            else
+            {
+                return new ResultService
+                {
+                    Success = false,
+                };
+            }
 
-            var token = await _identityServerService
-                .GetToken(new LoginRequest { Password = request.Password, Username = request.Username });
+            //var token = await _identityServerService
+            //    .GetToken(new LoginRequest { Password = request.Password, Username = request.Username });
+
+            var roles = await _userManager.GetRolesAsync(newUser);
+
+            var token = _jwtService.CreateToken(newUser, roles.FirstOrDefault());
 
             return new ResultService
             {
@@ -103,7 +124,7 @@ namespace DeliveryService.AuthAPI.Services
     public class ResultService
     {
         public bool Success { get; set; }
-        public TokenModel Token { get; set; }
+        public AuthTokenResponse Token { get; set; }
         public string Error { get; set; }
     }
 }

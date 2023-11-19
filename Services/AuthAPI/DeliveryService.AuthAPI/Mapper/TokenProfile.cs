@@ -8,7 +8,7 @@ namespace DeliveryService.AuthAPI.Mapper
     {
         public TokenProfile()
         {
-            CreateMap<TokenResponse, TokenModel>().ReverseMap();
+            CreateMap<TokenResponse, AuthTokenResponse>().ReverseMap();
         }
     }
 }
