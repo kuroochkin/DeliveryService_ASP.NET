@@ -48,7 +48,7 @@ namespace DeliveryService.AuthAPI.Services
 
         private Claim[] CreateClaims(IdentityUser user, string role) =>
             new[] {
-                new Claim(JwtRegisteredClaimNames.Sub, "subject"),
+                new Claim(JwtRegisteredClaimNames.Sub, user.Id),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()),
                 new Claim(ClaimTypes.NameIdentifier, user.Id),

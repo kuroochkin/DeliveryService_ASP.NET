@@ -1,4 +1,6 @@
-﻿using DeliveryService.Services.ProductAPI.Mapping;
+﻿using DeliveryService.Services.ProductAPI.App.Common.Interfaces;
+using DeliveryService.Services.ProductAPI.Authentication;
+using DeliveryService.Services.ProductAPI.Mapping;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.OpenApi.Models;
 
@@ -43,6 +45,9 @@ public static class DependencyInjection
         });
 
         services.AddMappings();
+        services.AddHttpContextAccessor();
+        services.AddScoped<IUserContext, UserContext>();
+
 		return services;
 	}
 }
