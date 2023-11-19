@@ -1,6 +1,8 @@
 using DeliveryService.Services.OrderAPI.Infrastructure;
 using DeliveryService.Services.OrderAPI.App;
 using DeliveryService.Services.OrderAPI;
+using DeliveryService.Services.OrderAPI.App.Common.Messaging;
+using DeliveryService.Services.PaymentAPI.Messaging;
 
 var builder = WebApplication.CreateBuilder(args);
 {
@@ -21,8 +23,9 @@ var builder = WebApplication.CreateBuilder(args);
 		});
 }
 
-//builder.Services.AddSingleton<IRabbitMQMessageSender, RabbitMQMessageSender>();
-//builder.Services.AddHostedService<RabbitMQCheckoutConsumer>();
+builder.Services.AddHostedService<RabbitMQConfirmRestaurantOrderConsumer>();
+builder.Services.AddHostedService<RabbitMQChangePaymentStatusConsumer>();
+builder.Services.AddHostedService<RabbitMQCompleteRestaurantOrderConsumer>();
 
 var app = builder.Build();
 {

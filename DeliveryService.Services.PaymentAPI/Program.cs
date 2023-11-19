@@ -1,8 +1,8 @@
 using DeliveryService.Services.PaymentAPI.Infrastructure;
 using DeliveryService.Services.PaymentAPI;
-using DeliveryService.App.Common.RabbitMQSender;
 using DeliveryService.Services.PaymentAPI.App;
 using DeliveryService.Services.PaymentAPI.App.Common.Messaging;
+using DeliveryService.Services.PaymentAPI.App.Common.RabbitMQSender;
 
 var builder = WebApplication.CreateBuilder(args);
 {
@@ -23,8 +23,8 @@ var builder = WebApplication.CreateBuilder(args);
 		});
 }
 
-builder.Services.AddSingleton<IRabbitMQMessageSender, RabbitMQMessageSender>();
-builder.Services.AddHostedService<RabbitMQCheckoutConsumer>();
+builder.Services.AddSingleton<IRabbitMQPaymentMessageSender, RabbitMQPaymentMessageSender>();
+builder.Services.AddHostedService<RabbitMQPaymentCheckoutConsumer>();
 
 var app = builder.Build();
 {

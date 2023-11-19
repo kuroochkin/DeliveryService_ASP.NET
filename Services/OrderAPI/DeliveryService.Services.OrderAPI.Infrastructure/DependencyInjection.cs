@@ -19,12 +19,14 @@ public static class DependencyInjection
 		this IServiceCollection services,
 		ConfigurationManager configuration)
 	{
+		services.AddScoped<ICustomerRepository, CustomerRepository>();
 		services.AddScoped<IOrderRepository, OrderRepository>();
 		services.AddScoped<IOrderItemRepository, OrderItemRepository>();
 		services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-
+		//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		//services.AddAuth(configuration);
+		//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 		services.AddDbContext<ApplicationDbContext>(options =>
 		{

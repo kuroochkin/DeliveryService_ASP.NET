@@ -6,7 +6,9 @@
       "serviceActions": {
         "deliveryservice.api": "StartDebugging",
         "deliveryservice.services.paymentapi": "StartDebugging",
-        "deliveryservice.services.productapi": "StartDebugging"
+        "deliveryservice.services.productapi": "StartDebugging",
+        "deliveryservice.services.restaurantapi": "StartDebugging",
+        "deliveryservice.services.orderapi": "StartDebugging"
       }
     }
   }

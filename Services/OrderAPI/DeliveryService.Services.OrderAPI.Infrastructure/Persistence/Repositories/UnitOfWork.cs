@@ -8,13 +8,16 @@ public class UnitOfWork : IUnitOfWork, IDisposable
 
 	public UnitOfWork(ApplicationDbContext context,
 		IOrderRepository orders,
-		IOrderItemRepository orderItems)
+		IOrderItemRepository orderItems,
+		ICustomerRepository customers)
 	{
 		_context = context;
 		Orders = orders;
 		OrderItems = orderItems;
+		Customers = customers;
 	}
 
+	public ICustomerRepository Customers { get; }
 	public IOrderRepository Orders { get; }
 	public IOrderItemRepository OrderItems { get; }
 
