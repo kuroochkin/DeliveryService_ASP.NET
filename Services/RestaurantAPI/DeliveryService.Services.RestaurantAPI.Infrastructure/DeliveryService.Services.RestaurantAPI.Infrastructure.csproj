@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.23" />
+    <PackageReference Include="Microsoft.IdentityModel.Protocols" Version="6.10.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\DeliveryService.App\DeliveryService.App.csproj" />
+    <ProjectReference Include="..\..\..\DeliveryService.infrastructure\DeliveryService.infrastructure.csproj" />
+    <ProjectReference Include="..\..\..\DeliveryService.Services.ProductAPI\DeliveryService.Services.ProductAPI.csproj" />
+    <ProjectReference Include="..\DeliveryService.Services.RestaurantAPI.App\DeliveryService.Services.RestaurantAPI.App.csproj" />
+    <ProjectReference Include="..\DeliveryService.Services.RestaurantAPI.Domain\DeliveryService.Services.RestaurantAPI.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

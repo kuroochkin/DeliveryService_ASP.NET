@@ -10,7 +10,6 @@ public class OrderConfiguration : IEntityTypeConfiguration<OrderEntity>
 	{
 		builder.HasKey(order => order.Id);
 
-		builder.Property(order => order.CustomerId);
 		builder.Property(order => order.CourierId);
 		builder.Property(order => order.ManagerId);
 

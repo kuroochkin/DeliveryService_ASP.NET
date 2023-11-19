@@ -8,7 +8,7 @@ namespace DeliveryService.Services.PaymentAPI.Controllers;
 
 [ApiController]
 [Route("api/payment")]
-public class PaymentController : ApiController
+public class PaymentController : Controller
 {
 	private readonly ISender _mediator;
 	private readonly IMapper _mapper;

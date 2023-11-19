@@ -56,7 +56,7 @@ public class CheckoutPaymentCommandHandler
 			CartTotalItems = request.CartTotalItems,
 		};
 
-		_rabbitMessageSender.SendMessage(checkout, "checkoutqueue");
+		//_rabbitMessageSender.SendMessage(checkout, "checkoutqueue");
 
 		return true;
 	}

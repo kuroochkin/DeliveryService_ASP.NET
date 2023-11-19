@@ -2,6 +2,7 @@
 
 public interface IUnitOfWork
 {
+	ICustomerRepository Customers { get; }
 	IOrderRepository Orders { get; }
 	IOrderItemRepository OrderItems { get; }
 

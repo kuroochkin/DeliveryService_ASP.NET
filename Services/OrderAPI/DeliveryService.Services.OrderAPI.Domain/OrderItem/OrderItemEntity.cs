@@ -14,8 +14,6 @@ public class OrderItemEntity
 
 	public int ProductId { get; set; }
 
-	public Guid OrderId { get; set; }
-
 	public OrderItemEntity(
 		int count, 
 		double totalPrice, 
