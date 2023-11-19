@@ -1,5 +1,7 @@
 using DeliveryService.Services.RestaurantAPI;
 using DeliveryService.Services.RestaurantAPI.App;
+using DeliveryService.Services.RestaurantAPI.App.Common.RabbitMQSender;
+using DeliveryService.Services.RestaurantAPI.App.Common.RabbitMQSender.Interfases;
 using DeliveryService.Services.RestaurantAPI.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,6 +22,9 @@ var builder = WebApplication.CreateBuilder(args);
 			});
 		});
 }
+
+builder.Services.AddSingleton<IRabbitMQConfirmOrderByRestaurantSender, RabbitMQConfirmOrderByRestaurantSender>();
+builder.Services.AddSingleton<IRabbitMQCompleteOrderByRestaurantSender, RabbitMQCompleteOrderByRestaurantSender>();
 
 var app = builder.Build();
 {

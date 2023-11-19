@@ -23,7 +23,7 @@ public class OrderRepository : GenericRepository<OrderEntity>, IOrderRepository
 	{
 		return await _context.Orders
 			.Include(order => order.OrderItems)
-			.Where(order => order.CustomerId == id)
+			.Where(order => order.Customer.Id == id)
 			.ToListAsync();
 	}
 
@@ -33,7 +33,7 @@ public class OrderRepository : GenericRepository<OrderEntity>, IOrderRepository
 	{
 		return await _context.Orders
 			.Include(order => order.OrderItems)
-			.Where(order => order.CustomerId == id)
+			.Where(order => order.Customer.Id == id)
 			.Where(order => order.Status == orderStatus)
 			.ToListAsync();
 	}

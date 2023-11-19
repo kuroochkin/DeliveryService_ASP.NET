@@ -14,7 +14,7 @@ public class RabbitMQPaymentMessageSender : IRabbitMQPaymentMessageSender
 
 	public RabbitMQPaymentMessageSender()
 	{
-		_hostname = "dockercompose10352310043466506766-rabbitmq-1";
+		_hostname = "rabbitmq";
 		_password = "rmpassword";
 		_username = "rmuser";
 	}

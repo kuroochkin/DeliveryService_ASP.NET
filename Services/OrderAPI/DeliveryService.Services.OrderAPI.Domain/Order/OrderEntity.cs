@@ -1,4 +1,5 @@
-﻿using DeliveryService.Services.OrderAPI.Domain.OrderItem;
+﻿using DeliveryService.Services.OrderAPI.Domain.Customer;
+using DeliveryService.Services.OrderAPI.Domain.OrderItem;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DeliveryService.Services.OrderAPI.Domain.Order;
@@ -55,9 +56,9 @@ public class OrderEntity
 		return "";
 	}
 
-	public Guid CourierId { get; set; }
+	public CustomerEntity Customer { get; set; }
 
-	public Guid CustomerId { get; set; }
+	public Guid CourierId { get; set; }
 
 	public Guid ManagerId { get; set; }
 

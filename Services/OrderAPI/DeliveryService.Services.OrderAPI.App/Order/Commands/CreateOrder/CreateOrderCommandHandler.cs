@@ -13,14 +13,14 @@ public class CreateOrderCommandHandler
 	: IRequestHandler<CreateOrderCommand, ErrorOr<bool>>
 {
 	private readonly IUnitOfWork _unitOfWork;
-	private readonly IRabbitMQMessageSender _rabbitMessageSender;
+	//private readonly IRabbitMQMessageSender _rabbitMessageSender;
 
 	public CreateOrderCommandHandler(
-		IUnitOfWork unitOfWork,
-		IRabbitMQMessageSender rabbitMessageSender)
+		IUnitOfWork unitOfWork
+		/*IRabbitMQMessageSender rabbitMessageSender*/)
 	{
 		_unitOfWork = unitOfWork;
-		_rabbitMessageSender = rabbitMessageSender;
+		//_rabbitMessageSender = rabbitMessageSender;
 	}
 
 	public async Task<ErrorOr<bool>> Handle(
@@ -52,7 +52,7 @@ public class CreateOrderCommandHandler
 		{
 			Description = request.Description,
 			Status = OrderStatus.Create,
-			CustomerId = customerId,
+			Customer = customer,
 			OrderItems = orderItems,
 		};
 

@@ -64,9 +64,6 @@ namespace DeliveryService.Services.OrderAPI.Infrastructure.Migrations
                     b.Property<DateTime>("Created")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<Guid?>("CustomerEntityId")
-                        .HasColumnType("uuid");
-
                     b.Property<Guid>("CustomerId")
                         .HasColumnType("uuid");
 
@@ -91,7 +88,7 @@ namespace DeliveryService.Services.OrderAPI.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CustomerEntityId");
+                    b.HasIndex("CustomerId");
 
                     b.ToTable("Orders");
                 });
@@ -106,9 +103,6 @@ namespace DeliveryService.Services.OrderAPI.Infrastructure.Migrations
                         .HasColumnType("integer");
 
                     b.Property<Guid?>("OrderEntityId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("OrderId")
                         .HasColumnType("uuid");
 
                     b.Property<int>("ProductId")
@@ -134,9 +128,13 @@ namespace DeliveryService.Services.OrderAPI.Infrastructure.Migrations
 
             modelBuilder.Entity("DeliveryService.Services.OrderAPI.Domain.Order.OrderEntity", b =>
                 {
-                    b.HasOne("DeliveryService.Services.OrderAPI.Domain.Customer.CustomerEntity", null)
+                    b.HasOne("DeliveryService.Services.OrderAPI.Domain.Customer.CustomerEntity", "Customer")
                         .WithMany("Orders")
-                        .HasForeignKey("CustomerEntityId");
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Customer");
                 });
 
             modelBuilder.Entity("DeliveryService.Services.OrderAPI.Domain.OrderItem.OrderItemEntity", b =>

@@ -17,10 +17,12 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
-	  <PackageReference Include="FluentValidation.AspNetCore" Version="11.2.2" />   
+	  <PackageReference Include="FluentValidation.AspNetCore" Version="11.2.2" />
+	  <PackageReference Include="RabbitMQ.Client" Version="6.5.0" />   
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\DeliveryService.App\DeliveryService.App.csproj" />
     <ProjectReference Include="..\DeliveryService.Services.RestaurantAPI.Domain\DeliveryService.Services.RestaurantAPI.Domain.csproj" />
   </ItemGroup>
 

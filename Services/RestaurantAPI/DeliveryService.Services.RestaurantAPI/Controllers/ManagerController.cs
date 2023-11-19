@@ -1,4 +1,5 @@
-﻿using DeliveryService.Services.RestaurantAPI.App.Manager.Commands.JoinRestaurant;
+﻿using DeliveryService.Services.RestaurantAPI.App.Manager.Commands.CompleteOrder;
+using DeliveryService.Services.RestaurantAPI.App.Manager.Commands.ConfirmOrder;
 using DeliveryService.Services.RestaurantAPI.Contracts.Manager;
 using MapsterMapper;
 using MediatR;
@@ -22,8 +23,8 @@ public class ManagerController : Controller
 	/// <summary>
 	/// Привязка менеджера к ресторану
 	/// </summary>
-	/// <param name="request"></param>
-	/// <returns></returns>
+	/// <param name = "request" ></ param >
+	/// < returns ></ returns >
 	//[HttpPost("addRestaurant")]
 	//[Authorize(Roles = "Manager")]
 	//public async Task<IActionResult> AddRestaurant(JoinRestaurantRequest request)
@@ -39,6 +40,39 @@ public class ManagerController : Controller
 	//		errors => Problem("Ошибка")
 	//		);
 	//}
+
+	/// <summary>
+	/// Подтверждение заказа менеджером ресторана
+	/// </summary>
+	/// <param name="request"></param>
+	/// <returns></returns>
+	[HttpPost("confirmRestaurant")]
+	//[Authorize(Roles = "Manager")]
+	public async Task<IActionResult> ConfirmOrderByRestaurant(ConfirmOrderRestaurantRequest request)
+	{
+		var command = _mapper.Map<ConfirmOrderRestaurantCommand>(request);
+
+		var result = await _mediator.Send(command);
+
+		return result.Match(
+			orderResult => Ok(result.Value),
+			errors => Problem("Ошибка")
+			);
+	}
+
+	[HttpPost("completeRestaurant")]
+	//[Authorize(Roles = "Manager")]
+	public async Task<IActionResult> CompleteOrderByRestaurant(CompleteOrderRestaurantRequest request)
+	{
+		var command = _mapper.Map<CompleteOrderRestaurantCommand>(request);
+
+		var result = await _mediator.Send(command);
+
+		return result.Match(
+			orderResult => Ok(result.Value),
+			errors => Problem("Ошибка")
+			);
+	}
 }
 
 

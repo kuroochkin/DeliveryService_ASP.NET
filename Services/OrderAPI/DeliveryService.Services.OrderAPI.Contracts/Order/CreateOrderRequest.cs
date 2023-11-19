@@ -1,11 +1,17 @@
 ﻿namespace DeliveryService.Services.OrderAPI.Contracts.Order;
 
 public record CreateOrderRequest(
+	string CustomerId,
 	string Description,
+	string Card,
+	decimal TotalPrice,
 	List<GetProductRequest> Products);
 
 public record CreateOrderResponse(
+	string CustomerId,
 	string Description,
+	string Card,
+	decimal TotalPrice,
 	List<GetProductResponse> Products);
 
 public record GetProductRequest(
