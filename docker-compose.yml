@@ -91,12 +91,34 @@ services:
   #   ports:
   #     - 8080:80
 
+  deliveryservice.services.courierapi:
+    image: ${DOCKER_REGISTRY-}deliveryserviceservicescourierapi
+    build:
+      context: .
+      dockerfile: Services/CourierAPI/DeliveryService.Services.CourierAPI/Dockerfile
+    ports:
+      - 5005:80
+    depends_on:
+     - rabbitmq
+
+  deliveryservice.authapi:
+    image: ${DOCKER_REGISTRY-}deliveryserviceauthapi
+    build:
+      context: .
+      dockerfile: Services/AuthAPI/DeliveryService.AuthAPI/Dockerfile
+    ports:
+      - 5006:80
+    depends_on:
+     - rabbitmq
+
 volumes:
   postgres-data:
 
 
 
   
+
+
 
 
 

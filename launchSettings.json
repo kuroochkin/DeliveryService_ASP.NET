@@ -8,7 +8,9 @@
         "deliveryservice.services.paymentapi": "StartDebugging",
         "deliveryservice.services.productapi": "StartDebugging",
         "deliveryservice.services.restaurantapi": "StartDebugging",
-        "deliveryservice.services.orderapi": "StartDebugging"
+        "deliveryservice.services.orderapi": "StartDebugging",
+        "deliveryservice.services.courierapi": "StartDebugging",
+        "deliveryservice.authapi": "StartDebugging"
       }
     }
   }
