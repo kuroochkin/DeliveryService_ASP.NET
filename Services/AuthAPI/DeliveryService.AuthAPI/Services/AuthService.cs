@@ -5,6 +5,8 @@ using DeliveryService.AuthAPI.Model.Responses;
 using IdentityModel.Client;
 using Microsoft.AspNetCore.Identity;
 using System.Data;
+using static Npgsql.PostgresTypes.PostgresCompositeType;
+using System.Reflection;
 
 namespace DeliveryService.AuthAPI.Services
 {
@@ -29,7 +31,6 @@ namespace DeliveryService.AuthAPI.Services
             _userManager = userManager;
             _roleManager = roleManager;
             _signInManager = signInManager;
-            _identityServerService = identityServerService;
             _jwtService = jwtService;
         }
 
@@ -87,16 +88,28 @@ namespace DeliveryService.AuthAPI.Services
             var newUser = new ApplicationUser { UserName = request.Username };
             var result = await _userManager.CreateAsync(newUser, request.Password);
 
+            var staticRoles = typeof(RoleConstants).GetFields(BindingFlags.Static | BindingFlags.Public);
+            var roleValues = staticRoles.Select(field => field.GetValue(null)?.ToString()).ToArray();
+
+            if (!roleValues.Contains(request.Role))
+            {
+                return new ResultService
+                {
+                    Success = false,
+                    Error = "Такой роли не существует"
+                };
+            }
+
             if (result.Succeeded)
             {
                 // Создание роли, если она не существует
-                if (!await _roleManager.RoleExistsAsync(RoleConstants.CUSTOMER))
+                if (!await _roleManager.RoleExistsAsync(request.Role))
                 {
-                    await _roleManager.CreateAsync(new IdentityRole(RoleConstants.CUSTOMER));
+                    await _roleManager.CreateAsync(new IdentityRole(request.Role));
                 }
 
                 // Добавление пользователя в роль
-                await _userManager.AddToRoleAsync(newUser, RoleConstants.CUSTOMER);
+                await _userManager.AddToRoleAsync(newUser, request.Role);
             }
             else
             {
@@ -105,9 +118,6 @@ namespace DeliveryService.AuthAPI.Services
                     Success = false,
                 };
             }
-
-            //var token = await _identityServerService
-            //    .GetToken(new LoginRequest { Password = request.Password, Username = request.Username });
 
             var roles = await _userManager.GetRolesAsync(newUser);
 
