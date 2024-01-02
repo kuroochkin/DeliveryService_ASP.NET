@@ -1,5 +1,7 @@
 using DeliveryService.AuthAPI.Data;
 using DeliveryService.AuthAPI.Model;
+using DeliveryService.AuthAPI.RabbitMQ.Senders;
+using DeliveryService.AuthAPI.RabbitMQ.Senders.Interfaces;
 using DeliveryService.AuthAPI.Services;
 using DeliveryService.AuthAPI.Settings;
 using Microsoft.AspNetCore.Identity;
@@ -34,6 +36,8 @@ services.AddAutoMapper(typeof(Program));
 services.AddScoped<AuthService>();
 services.AddScoped<IdentityServerService>();
 services.AddScoped<JwtService>();
+
+services.AddSingleton<IRabbitMQCreateUserWithRoleSender, RabbitMQCreateUserWithRoleSender>();
 
 var app = builder.Build();
 
