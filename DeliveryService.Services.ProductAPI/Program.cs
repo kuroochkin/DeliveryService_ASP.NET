@@ -1,7 +1,6 @@
 using DeliveryService.Services.ProductAPI.App;
 using DeliveryService.Services.ProductAPI.Infrastructure;
 using DeliveryService.Services.ProductAPI;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 var builder = WebApplication.CreateBuilder(args);
 {

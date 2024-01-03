@@ -18,7 +18,7 @@ public class OrderController : Controller
 		_mapper = mapper;
 	}
 
-	[HttpGet("{orderId}")]
+	[HttpGet("find/{orderId}")]
 	public async Task<IActionResult> FindOrderById(string orderId)
 	{
 		var query = new FindOrderByIdQuery(orderId);

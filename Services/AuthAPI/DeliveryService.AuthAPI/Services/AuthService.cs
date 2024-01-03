@@ -128,6 +128,23 @@ public class AuthService
         };
     }
 
+    public async Task<UserDetailsVm> GetUserById(string Id)
+    {
+        var user = await _userManager.FindByIdAsync(Id);
+
+        if (user == null) 
+            throw new ArgumentNullException(nameof(user), $"Пользователь с Id {Id} не найден");
+
+        var userVm = new UserDetailsVm
+        {
+            UserName = user.UserName,
+            Email = user.Email,
+            PhoneNumber = user.PhoneNumber
+        };
+
+        return userVm;
+    }
+
     private async Task<AuthTokenResponse> GetToken(ApplicationUser user)
     {
         var roles = await _userManager.GetRolesAsync(user);

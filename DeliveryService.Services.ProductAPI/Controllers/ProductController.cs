@@ -1,4 +1,5 @@
-﻿using DeliveryService.Services.ProductAPI.App.Product.Queries.GetAllProducts;
+﻿using DeliveryService.Services.ProductAPI.App.Common.Interfaces;
+using DeliveryService.Services.ProductAPI.App.Product.Queries.GetAllProducts;
 using DeliveryService.Services.ProductAPI.App.Product.Queries.GetProductsBySection;
 using DeliveryService.Services.ProductAPI.App.Product.Queries.GetProductsDetails;
 using DeliveryService.Services.ProductAPI.Contracts.Product.Get;
@@ -16,11 +17,13 @@ public class ProductController : Controller
 {
 	private readonly ISender _mediator;
 	private readonly IMapper _mapper;
+	private readonly IUserContext _userContext;
 
-	public ProductController(ISender mediator, IMapper mapper)
+	public ProductController(ISender mediator, IMapper mapper, IUserContext userContext)
 	{
 		_mediator = mediator;
 		_mapper = mapper;
+		_userContext = userContext;
 	}
 
 	[HttpGet("allProducts")]

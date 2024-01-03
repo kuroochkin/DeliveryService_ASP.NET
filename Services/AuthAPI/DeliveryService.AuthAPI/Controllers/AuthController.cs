@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using DeliveryService.AuthAPI.Data;
 using DeliveryService.AuthAPI.Model.Requests;
 using DeliveryService.AuthAPI.Model.Responses;
 using DeliveryService.AuthAPI.Services;
@@ -14,7 +15,7 @@ namespace DeliveryService.AuthAPI.Controllers;
 public class AuthController : Controller
 {
     private readonly AuthService _authService;
-    private IMapper _mapper;
+    private readonly IMapper _mapper;
 
     public AuthController(AuthService authService, IMapper mapper)
     {
@@ -36,5 +37,12 @@ public class AuthController : Controller
         var resService = await _authService.RegisterCustomer(request);
         var response = _mapper.Map<AuthResponse>(resService);
         return Ok(response);
+    }
+
+    [HttpGet("get-by-id/{Id}")]
+    public async Task<IActionResult> GetUserDetailsById(string Id)
+    {
+        var user = await _authService.GetUserById(Id);
+        return Ok(user);
     }
 }
