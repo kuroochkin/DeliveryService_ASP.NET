@@ -33,7 +33,7 @@ public class ConfirmOrderCourierCommandHandler
 		using (HttpClient httpClient = new HttpClient())
 		{
 			// Отправьте GET-запрос к другому микросервису
-			HttpResponseMessage response = await httpClient.GetAsync($"http://host.docker.internal:5004/api/order/{request.OrderId}");
+			HttpResponseMessage response = await httpClient.GetAsync($"http://host.docker.internal:5004/api/order/find/{request.OrderId}");
 
 			// Проверьте, получен ли успешный ответ
 			if (response.IsSuccessStatusCode)
@@ -69,5 +69,7 @@ public class ConfirmOrderCourierCommandHandler
 
 		return true;
 	}
+
+	
 }
 

@@ -1,44 +1,52 @@
-﻿using DeliveryService.Services.CourierAPI.Mapping;
+﻿using DeliveryService.Services.CourierAPI.App.Common.Interfaces;
+using DeliveryService.Services.CourierAPI.Authentication;
+using DeliveryService.Services.CourierAPI.Mapping;
 using Microsoft.OpenApi.Models;
 
 namespace DeliveryService.Services.CourierAPI;
 
 public static class DependencyInjection
 {
-	public static IServiceCollection AddPresentation(this IServiceCollection services)
-	{
-		services.AddControllers();
-		services.AddEndpointsApiExplorer();
+    public static IServiceCollection AddPresentation(this IServiceCollection services)
+    {
+        services.AddControllers();
+        services.AddEndpointsApiExplorer();
 
-		services.AddSwaggerGen(option =>
-		{
-			//option.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
-			//{
-			//	Name = "Authorization",
-			//	Type = SecuritySchemeType.ApiKey,
-			//	Scheme = "Bearer",
-			//	BearerFormat = "JWT",
-			//	In = ParameterLocation.Header,
-			//	Description = "JWT Authorization header using the Bearer scheme. \r\n\r\n Enter 'Bearer' [space] and then your token in the text input below.\r\n\r\nExample: \"Bearer 1safsfsdfdfd\"",
-			//});
-			//option.AddSecurityRequirement(new OpenApiSecurityRequirement
-			//{
-			//	{
-			//		new OpenApiSecurityScheme
-			//		{
-			//			Reference = new OpenApiReference
-			//			{
-			//				Type = ReferenceType.SecurityScheme,
-			//				Id = "Bearer"
-			//			}
-			//		},
-			//		new string[] {}
-			//	}
-			//});
-			option.SwaggerDoc("v1", new OpenApiInfo { Title = "DeliveryService.Services.CourierAPI", Version = "v1" });
-		});
+        services.AddSwaggerGen(c =>
+        {
+            c.SwaggerDoc("v1", new OpenApiInfo { Title = "DeliveryService.CourierAPI", Version = "v1" });
+            c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+            {
+                Description = @"Enter 'Bearer' [space] and your token",
+                Name = "Authorization",
+                In = ParameterLocation.Header,
+                Type = SecuritySchemeType.ApiKey,
+                Scheme = "Bearer"
+            });
 
-		services.AddMappings();
-		return services;
-	}
+            c.AddSecurityRequirement(new OpenApiSecurityRequirement {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type=ReferenceType.SecurityScheme,
+                                Id="Bearer"
+                            },
+                            Scheme="oauth2",
+                            Name="Bearer",
+                            In=ParameterLocation.Header
+                        },
+                        new List<string>()
+                    }
+
+                });
+        });
+
+        services.AddMappings();
+        services.AddHttpContextAccessor();
+        services.AddScoped<IUserContext, UserContext>();
+
+        return services;
+    }
 }

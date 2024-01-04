@@ -26,6 +26,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddHostedService<RabbitMQConfirmRestaurantOrderConsumer>();
 builder.Services.AddHostedService<RabbitMQChangePaymentStatusConsumer>();
 builder.Services.AddHostedService<RabbitMQCompleteRestaurantOrderConsumer>();
+builder.Services.AddHostedService<RabbitMQCreateCustomerConsumer>();
 
 var app = builder.Build();
 {

@@ -1,7 +1,6 @@
 ﻿using DeliveryService.Services.ProductAPI.App.Common.Interfaces;
 using DeliveryService.Services.ProductAPI.Authentication;
 using DeliveryService.Services.ProductAPI.Mapping;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.OpenApi.Models;
 
 namespace DeliveryService.Services.ProductAPI;
@@ -15,7 +14,7 @@ public static class DependencyInjection
 
         services.AddSwaggerGen(c =>
         {
-            c.SwaggerDoc("v1", new OpenApiInfo { Title = "TestWebAPI", Version = "v1" });
+            c.SwaggerDoc("v1", new OpenApiInfo { Title = "DeliveryService.ProductAPI", Version = "v1" });
             c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
             {
                 Description = @"Enter 'Bearer' [space] and your token",
@@ -40,7 +39,6 @@ public static class DependencyInjection
                         },
                         new List<string>()
                     }
-
                 });
         });
 

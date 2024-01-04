@@ -35,3 +35,17 @@ services:
     ports:
       - "80"
 
+
+  deliveryservice.services.courierapi:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "80"
+
+
+  deliveryservice.authapi:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "80"
+
