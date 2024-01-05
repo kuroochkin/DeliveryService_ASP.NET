@@ -6,4 +6,13 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+    <PackageReference Include="StackExchange.Redis" Version="2.7.10" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DeliveryService.Services.BacketAPI.Core\DeliveryService.Services.BasketAPI.Core\DeliveryService.Services.BasketAPI.Core.csproj" />
+  </ItemGroup>
+
 </Project>
