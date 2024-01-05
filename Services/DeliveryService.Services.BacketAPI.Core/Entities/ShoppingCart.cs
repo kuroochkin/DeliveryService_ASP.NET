@@ -1,4 +1,4 @@
-﻿namespace DeliveryService.Services.BacketAPI.Core.Entities;
+﻿namespace DeliveryService.Services.BasketAPI.Core.Entities;
 
 public class ShoppingCart
 {

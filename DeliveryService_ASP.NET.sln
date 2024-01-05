@@ -117,11 +117,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AuthAPI", "AuthAPI", "{D602
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeliveryService.AuthAPI", "Services\AuthAPI\DeliveryService.AuthAPI\DeliveryService.AuthAPI.csproj", "{65BFA16E-4839-4F88-988B-D922EB90AE6C}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BacketAPI", "BacketAPI", "{6EF1F7C5-8F9C-4A0A-868B-4E1C2FB1E8E1}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BasketAPI", "BasketAPI", "{6EF1F7C5-8F9C-4A0A-868B-4E1C2FB1E8E1}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{0C72ACCB-B634-42D0-A957-A1F57C75C11B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeliveryService.Services.BacketAPI.Core", "Services\DeliveryService.Services.BacketAPI.Core\DeliveryService.Services.BacketAPI.Core.csproj", "{422B30D8-7AAC-4BE8-A429-34147EA1BDA7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeliveryService.Services.BasketAPI.Core", "Services\DeliveryService.Services.BacketAPI.Core\DeliveryService.Services.BasketAPI.Core.csproj", "{422B30D8-7AAC-4BE8-A429-34147EA1BDA7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
